@@ -24,3 +24,7 @@ allow nvram_daemon wmt_prop:property_service set;
 allow nvram_daemon block_device:dir search;
 
 unix_socket_connect(nvram_daemon, property, init)
+
+allow nvram_daemon sysfs_boot_mode:file { read open };
+allow nvram_daemon sysfs:file { write };
+allow nvram_daemon system_prop:property_service { set };
