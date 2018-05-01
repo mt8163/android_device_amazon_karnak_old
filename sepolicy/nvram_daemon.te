@@ -28,3 +28,7 @@ unix_socket_connect(nvram_daemon, property, init)
 allow nvram_daemon sysfs_boot_mode:file { read open };
 allow nvram_daemon sysfs:file { write };
 allow nvram_daemon system_prop:property_service { set };
+
+allow nvram_daemon nvram_device:chr_file { read write open };
+allow nvram_daemon mmc_device:blk_file { read write open };
+allow nvram_daemon proinfo_device:chr_file { read write open ioctl };
