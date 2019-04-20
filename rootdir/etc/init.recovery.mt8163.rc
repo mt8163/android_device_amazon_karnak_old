@@ -1,0 +1,11 @@
+on init
+    # silent ota
+    chown system system /sys/class/leds/lcd-backlight/silent
+
+on fs
+    wait /dev/block/platform
+    mkdir /dev/block/platform/mtk-msdc.0
+    symlink ../soc/11230000.mmc /dev/block/platform/mtk-msdc.0/11230000.MSDC0
+# This is for preloader update
+on fs
+    write /sys/block/mmcblk0boot0/force_ro 0
