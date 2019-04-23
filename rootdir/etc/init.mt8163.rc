@@ -9,6 +9,8 @@ import init.fon.rc
 import init.rilproxy.rc
 import init.volte.rc
 import init.mal.rc
+import init.mt8163.usb.rc
+import init.recovery.mt8163.rc
 
 # init.modem.rc must be the LAST rc file because vold.post_fs_data_done is set in it
 import init.modem.rc
