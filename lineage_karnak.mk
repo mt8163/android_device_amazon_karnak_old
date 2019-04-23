@@ -104,4 +104,24 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vendor/mtk_omx_core.cfg:system/vendor/etc/mtk_omx_core.cfg \
     $(LOCAL_PATH)/vendor/radvd.conf:system/vendor/etc/radvd.conf \
     $(LOCAL_PATH)/vendor/throttle.sh:system/vendor/etc/throttle.sh
+    
+    
+    
+    
+ Create symlinks.
+LOCAL_POST_INSTALL_CMD := $(hide) mkdir -p $(TARGET_ROOT_OUT)/sbin; \
+    ln -sf ../init $(TARGET_ROOT_OUT)/sbin/ueventd; \
+    ln -sf ../init $(TARGET_ROOT_OUT)/sbin/watchdogd
+#libs
+PRODUCT_COPY_FILES += \
+   $(LOCAL_PATH)/lib/hw/audio.primary.mt8163.so:system/lib/hw/audio.primary.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/audio.usb.mt8163.so:system/lib/hw/audio.usb.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/camera.mt8163.so:system/lib/hw/camera.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/gatekeeper.mt8163.so:system/lib/hw/gatekeeper.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/gralloc.mt8163.so:system/lib/hw/gralloc.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/hwcomposer.mt8163.so:system/lib/hw/hwcomposer.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/keystore.mt8163.so:system/lib/hw/keystore.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/lights.mt8163.so:system/lib/hw/lights.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/lib/hw/memtrack.mt8163.so 
+   
 
