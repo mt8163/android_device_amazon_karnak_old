@@ -1,0 +1,1 @@
+allow system_server tkcore_systa_dir:dir r_file_perms;

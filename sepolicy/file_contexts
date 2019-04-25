@@ -1,0 +1,16 @@
+######################
+# TrustKernel add
+/dev/tkcoredrv u:object_r:tkcore_admin_device:s0
+/vendor/bin/teed u:object_r:tkcore_exec:s0
+/data/tee(/.*)? u:object_r:tkcore_data_file:s0
+/vendor/protect_f/tee(/.*)? u:object_r:tkcore_data_file:s0
+/vendor/app/t6(/.*)? u:object_r:tkcore_systa_dir:s0
+/data/tee/t6(/.*)? u:object_r:tkcore_spta_dir:s0
+/data/teec.log u:object_r:tkcore_log_file:s0
+/data/tee/tkcore.log u:object_r:tkcore_log_file:s0
+/dev/block/platform/mtk-msdc\.0/[0-9]+\.(msdc|MSDC)0/by-name/sdrpmb u:object_r:tkcore_block_device:s0
+
+/data/sCaMAH.dat u:object_r:battery_data_file:s0
+/data/fcc.dat u:object_r:battery_data_file:s0
+/data/ocv_flag.dat u:object_r:battery_data_file:s0
+
