@@ -1,6 +1,8 @@
 BOARD_VENDOR := amazon
 LOCAL_PATH := device/amazon/karnak
 DEVICE_PATH := device/amazon/karnak
+MTK_PROJECT_CONFIG ?= $(DEVICE_PATH)/ProjectConfig.mk
+include $(MTK_PROJECT_CONFIG)
 # MTK audio
 BOARD_USES_MTK_AUDIO := true
 BOARD_HAS_MTK_HARDWARE := true
@@ -47,19 +49,19 @@ TARGET_BOARD_PLATFORM_GPU := mali-t720 mp2
 #=================================================================================================
 #=================================================================================================
 # Partitions informations
+BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_CACHEIMAGE_PARTITION_SIZE := 524288000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3253731328
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11633933824
-BOARD_FLASH_BLOCK_SIZE := 131072
-#fixed flash size
-TARGET_USERIMAGES_USE_F2FS := false
+#=================================================================================================
 TARGET_BOARD_PLATFORM := mt8163
 # Partitions types
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := false
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun%d/file
-# Recovery
+#================================= Recovery========================================================
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 #=================================================================================================
@@ -83,7 +85,6 @@ TARGET_CPU_VARIANT:= cortex-a7
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
-
 #=====================================
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun0/file
@@ -94,16 +95,17 @@ include vendor/amazon/karnak/karnak-vendor.mk
 # extras
 WITHOUT_CHECK_API := true
 ALLOW_MISSING_DEPENDENCIES := true
-
+COMMON_GLOBAL_CFLAGS += $(MTK_INTERNAL_CDEFS)
+COMMON_GLOBAL_CPPFLAGS += $(MTK_INTERNAL_CDEFS)
 
 #kernel
 #TARGET_BOARD_SUFFIX := _64
 #KERNEL_ARCH := arm64
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 --second_offset 0x00e80000 --tags_offset 0x07f80000
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40080000
 BOARD_KERNEL_OFFSET := 0
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_FLASH_BLOCK_SIZE := 131072
 #TARGET_KERNEL_SOURCE := kernel/amazon/karnak
@@ -112,7 +114,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 #TARGET_KERNEL_ARCH := arm64
 #TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/kernel
+TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/zImage
 
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -124,23 +126,10 @@ PRODUCT_COPY_FILES += \
 
 
 
-PRODUCT_PACKAGES += \
-    fstab.mt8163 \
-    init.mt8163.rc \
-    init.mt8163.usb.rc \
-    init.project.rc \
-    init.trace.rc \
-    init.recovery.mt8163.rc \
-    ueventd.mt8163.rc \
-    multi_init.rc \
-    fstab.zram \
-    meta_init.rc \
-    meta_init_project.rc \
-    meta_init_modem.rc \
-    meta_init_connectivity.rc \
+    
 
 
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop	
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
@@ -156,29 +145,16 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-        $(DEVICE_PATH)/sepolicy-mtk/basic/non_plat \
-        $(DEVICE_PATH)/sepolicy-mtk/bsp/non_plat \
-        $(DEVICE_PATH)/sepolicy-mt8163/basic \
-        $(DEVICE_PATH)/sepolicy-mt8163/bsp \
-        $(DEVICE_PATH)/sepolicy
-
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR += \
-       $(DEVICE_PATH)/sepolicy-mtk/basic/plat_public \
-       $(DEVICE_PATH)/sepolicy-mtk/bsp/plat_public
-
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
-        $(DEVICE_PATH)/sepolicy-mtk/basic/plat_private \
-        $(DEVICE_PATH)/sepolicy-mtk/bsp/plat_private
 
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := $(LOCAL_PATH)prebuilt/kernel
+	LOCAL_KERNEL := $(LOCAL_PATH)prebuilt/zImage
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_KERNEL):kernel
+
+BLOCK_BASED_OTA := false
