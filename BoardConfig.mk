@@ -145,7 +145,8 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-
+BOARD_SEPOLICY_DIRS += 
+ $(LOCAL_PATH)/sepolicy
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
