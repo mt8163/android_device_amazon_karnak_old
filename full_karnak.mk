@@ -111,7 +111,6 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/hw/gatekeeper.mt8163.so:system/lib/hw/gatekeeper.mt8163.so \
    $(LOCAL_PATH)/lib/hw/gralloc.mt8163.so:system/lib/hw/gralloc.mt8163.so \
    $(LOCAL_PATH)/lib/hw/hwcomposer.mt8163.so:system/lib/hw/hwcomposer.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/keystore.mt8163.so:system/lib/hw/keystore.mt8163.so \
    $(LOCAL_PATH)/lib/hw/lights.mt8163.so:system/lib/hw/lights.mt8163.so \
    $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/lib/hw/memtrack.mt8163.so 
 
@@ -123,7 +122,6 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/hw/gatekeeper.mt8163.so:system/vendor/lib/hw/gatekeeper.mt8163.so \
    $(LOCAL_PATH)/lib/hw/gralloc.mt8163.so:system//vendor/lib/hw/gralloc.mt8163.so \
    $(LOCAL_PATH)/lib/hw/hwcomposer.mt8163.so:system/vendor/lib/hw/hwcomposer.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/keystore.mt8163.so:system/vendor/lib/hw/keystore.mt8163.so \
    $(LOCAL_PATH)/lib/hw/lights.mt8163.so:system/vendor/lib/hw/lights.mt8163.so \
    $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/vendor/lib/hw/memtrack.mt8163.so 
    
