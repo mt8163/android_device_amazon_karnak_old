@@ -1,0 +1,6 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+allow surfaceflinger mtee_device:chr_file { read write open ioctl };
+

@@ -33,6 +33,7 @@ MALLOC_SVELTE := true
 
 #=================================================================================================
 # Display
+TARGET_PROVIDES_LIBLIGHT := true
 BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -76,7 +77,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 # MTK Hardware
 BOARD_USES_MTK_HARDWARE := true
 BOARD_USES_LEGACY_MTK_AV_BLOB := true
-
+#ARCH
 TARGET_ARCH := arm
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -98,37 +99,21 @@ ALLOW_MISSING_DEPENDENCIES := true
 COMMON_GLOBAL_CFLAGS += $(MTK_INTERNAL_CDEFS)
 COMMON_GLOBAL_CPPFLAGS += $(MTK_INTERNAL_CDEFS)
 
-#kernel
-#TARGET_BOARD_SUFFIX := _64
-#KERNEL_ARCH := arm64
+
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 --second_offset 0x00e80000 --tags_offset 0x07f80000
+#KERNEL
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40080000
 BOARD_KERNEL_OFFSET := 0
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_FLASH_BLOCK_SIZE := 131072
-#TARGET_KERNEL_SOURCE := kernel/amazon/karnak
-#TARGET_KERNEL_CONFIG := karnak_defconfig
-#TARGET_KERNEL_HEADER_ARCH := arm64
-#TARGET_KERNEL_ARCH := arm64
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-
 TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/zImage
-
-TARGET_PROVIDES_LIBLIGHT := true
-
+BOARD_FLASH_BLOCK_SIZE := 131072
+#KERNEL MODULES
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/modules/br_netfilter.ko:system/lib/modules/lib/modules/br_netfilter.ko \
 	$(LOCAL_PATH)/modules/xt_physdev.ko:system/lib/modules/lib/modules/xt_physdev.ko \
-
-
-
-
-
-    
-
-
+#BUILD.PROP
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
@@ -148,7 +133,7 @@ PRODUCT_PACKAGES += \
 BOARD_SEPOLICY_DIRS += 
  $(LOCAL_PATH)/sepolicy
 
-
+#PREBUILT KERNEL
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := $(LOCAL_PATH)prebuilt/zImage
 else
@@ -159,3 +144,4 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_KERNEL):kernel
 
 BLOCK_BASED_OTA := false
+

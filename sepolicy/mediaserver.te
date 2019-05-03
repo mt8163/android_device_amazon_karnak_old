@@ -1,0 +1,16 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+
+# Date : WK15.40
+# Operation : Migration
+# Purpose: for Camera preview feature, allow mediaserver to mkdir
+allow mediaserver nvram_data_file:dir { add_name write search create};
+# Purpose : subtitle feature need to w/r /mny/subt/.
+allow mediaserver subtitle_data_file:dir { create open read write search add_name };
+allow mediaserver subtitle_data_file:file { create open read write setattr };
+allow mediaserver mtee_device:chr_file { read write open ioctl };
+
+#Purpose: hdcp for kisd(mtk94109)
+allow mediaserver kisd:unix_stream_socket {connectto};
