@@ -45,7 +45,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap
+    Snap \
+    multi_init
+
 
 
 
