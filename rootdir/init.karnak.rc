@@ -1,0 +1,12 @@
+# init rc for karnak only.
+on post-fs-data
+   # Update dm-verity state and set partition.*.verified properties
+   # verity_update_state
+
+service wipe_fos_flags /init.fosflags.sh wipe
+    class core
+    oneshot
+    disabled
+
+on property:amazon.fos_flags.wipe=1
+    start wipe_fos_flags

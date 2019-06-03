@@ -1,6 +1,4 @@
-
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
 
 LINEAGEOS_VERSION := 16.0
@@ -9,19 +7,49 @@ LOCAL_PATH := device/amazon/karnak
 DEVICE_FOLDER := device/amazon/karnak
 
 
-
 PRODUCT_NAME := full_karnak
 PRODUCT_DEVICE := karnak
 PRODUCT_BRAND := Fire
 PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
-PRODUCT_MANUFACTURER := amzn
+PRODUCT_MANUFACTURER := Amazon
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
+PRODUCT_PACKAGES += \
+    audio.r_submix.mt8163 \
+    audio.usb.default \
+    audio_policy.stub \
+    libaudioroute \
+    libtinyalsa \
+    libtinycompress \
+    libalsautils
 
+
+
+PRODUCT_PACKAGES += \
+	wifi2agps \
+
+
+PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
+
+# Ramdisk
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
+
+
+
+#audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -68,20 +96,19 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 
-
+TARGET_USE_BUILT_BOOTIMAGE := device/amazon/karnak/boot.img
 
 # SBIN
 #PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/sbin/crashreport:root/sbin/crashreport \
-#    $(LOCAL_PATH)/sbin/multi_init:root/sbin/multi_init
 #    $(LOCAL_PATH)/binary/md32_d.bin:root/md32_d.bin \
 #    $(LOCAL_PATH)/binary/md32_d.bin:root/md32_p.bin \
-TARGET_USE_BUILT_BOOTIMAGE := device/amazon/karnak/boot.img
+
 
 
 #KeyBoard
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
+    $(LOCAL_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
+    $(LOCAL_PATH)/keylayout/ACCDET.kl:system/usr/keylayout/ACCDET.kl
 
 #thermal
 PRODUCT_COPY_FILES += \
@@ -104,6 +131,19 @@ LOCAL_POST_INSTALL_CMD := $(hide) mkdir -p $(TARGET_ROOT_OUT)/sbin; \
     ln -sf ../init $(TARGET_ROOT_OUT)/sbin/ueventd; \
     ln -sf ../init $(TARGET_ROOT_OUT)/sbin/watchdogd
 
+#Camera
+PRODUCT_COPY_FILES += \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml \
+  $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+  $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+  $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml 
+
+
 #libs
 PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/hw/audio.primary.mt8163.so:system/vendor/lib/hw/audio.primary.mt8163.so \
@@ -113,5 +153,13 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/hw/gralloc.mt8163.so:system//vendor/lib/hw/gralloc.mt8163.so \
    $(LOCAL_PATH)/lib/hw/hwcomposer.mt8163.so:system/vendor/lib/hw/hwcomposer.mt8163.so \
    $(LOCAL_PATH)/lib/hw/lights.mt8163.so:system/vendor/lib/hw/lights.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/vendor/lib/hw/memtrack.mt8163.so 
+   $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/vendor/lib/hw/memtrack.mt8163.so \
+   $(LOCAL_PATH)/lib/hw/sensors.mt8163.so:system/vendor/lib/hw/sensors.mt8163.so
+
+
+#egl
+PRODUCT_COPY_FILES += \
+   $(LOCAL_PATH)/lib/egl/libGLES_mali.so:system/vendor/lib/egl/libGLES_mali.so
+
+
    
