@@ -1,18 +1,17 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
 
-LINEAGEOS_VERSION := 16.0
 PRODUCT_CHARACTERISTICS := tablet
 LOCAL_PATH := device/amazon/karnak
 DEVICE_FOLDER := device/amazon/karnak
 
 
-PRODUCT_NAME := full_karnak
 PRODUCT_DEVICE := karnak
-PRODUCT_BRAND := Fire
-PRODUCT_MODEL := KFKAWI
-PRODUCT_BOARD := karnak
-PRODUCT_MANUFACTURER := Amazon
+PRODUCT_NAME := full_karnak
+PRODUCT_BRAND := google
+PRODUCT_MODEL := Fire
+PRODUCT_MANUFACTURER := amzn
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
@@ -28,9 +27,18 @@ PRODUCT_PACKAGES += \
     libalsautils
 
 
+#su
+PRODUCT_PACKAGES += \
+	su
+
+
+#camera
+PRODUCT_PACKAGES += \
+    Snap
+
 
 PRODUCT_PACKAGES += \
-	wifi2agps \
+    wifi2agps \
 
 
 PRODUCT_PACKAGES += \
@@ -42,8 +50,8 @@ PRODUCT_PACKAGES += \
 
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
+#PRODUCT_COPY_FILES += \
+#    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
 
 
 
@@ -97,12 +105,6 @@ PRODUCT_COPY_FILES += \
 
 
 TARGET_USE_BUILT_BOOTIMAGE := device/amazon/karnak/boot.img
-
-# SBIN
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/binary/md32_d.bin:root/md32_d.bin \
-#    $(LOCAL_PATH)/binary/md32_d.bin:root/md32_p.bin \
-
 
 
 #KeyBoard
@@ -159,7 +161,13 @@ PRODUCT_COPY_FILES += \
 
 #egl
 PRODUCT_COPY_FILES += \
-   $(LOCAL_PATH)/lib/egl/libGLES_mali.so:system/vendor/lib/egl/libGLES_mali.so
+   $(LOCAL_PATH)/lib/egl/libGLES_mali.so:system/vendor/lib/egl/libGLES_mali.so \
+   $(LOCAL_PATH)/lib/libhal_effects.so:system/lib/libhal_effects.so
 
+# call dalvik heap config
+$(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
+
+# call hwui memory config
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
    
