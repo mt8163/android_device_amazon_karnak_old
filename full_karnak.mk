@@ -159,6 +159,11 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/hw/sensors.mt8163.so:system/vendor/lib/hw/sensors.mt8163.so
 
 
+
+#libshims
+PRODUCT_PACKAGES += \
+libshim_asp \
+
 #egl
 PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/lib/egl/libGLES_mali.so:system/vendor/lib/egl/libGLES_mali.so \
