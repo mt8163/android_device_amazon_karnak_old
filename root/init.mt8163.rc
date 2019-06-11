@@ -22,9 +22,17 @@ on early-init
     wait /dev/.coldboot_done 10
 
 on init
+
+
+    #audio libshims
+    
+    export LD_SHIM_LIBS "/system/lib/libasp.so|libshim_asp.so"
+
+
+
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
-
+     
     # if primary storage is physical, set ro.vold.primary_physical to 1
     # setprop ro.vold.primary_physical 1
 
