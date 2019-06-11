@@ -19,10 +19,10 @@ Display | 1280 x 800 pixels, 8.0"
 Rear Camera  | 2.0 MP
 Front Camera | 2.0 MP
 
-Kernel Source Code: https://github.com/488315/kernel_amazon_karnak
+Kernel Source Code: https://github.com/488315/android_kernel_amazon_karnak
 
 
 # Build instructions
 1. initialize repo
 2. pull the this device tree
-3. copy build.sh to the main directory and then type ./build.sh`
+3. copy build.sh to the main directory and then type ./build.sh
