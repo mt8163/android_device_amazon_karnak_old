@@ -21,11 +21,26 @@ PRODUCT_PACKAGES += \
     audio.r_submix.mt8163 \
     audio.usb.default \
     audio_policy.stub \
+    audio.a2dp.default \
     libaudioroute \
     libtinyalsa \
     libtinycompress \
     libalsautils
 
+
+
+#DRM
+# DRM
+PRODUCT_PACKAGES += \
+    libdrm \
+    libmockdrmcryptoplugin \
+    libdrmclearkeyplugin \
+
+#vendor_libs
+PRODUCT_PACKAGES += \
+ lights.mt8163 \
+ power.mt8163
+ 
 
 #su
 PRODUCT_PACKAGES += \
@@ -36,28 +51,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+   
 
-PRODUCT_PACKAGES += \
-    wifi2agps \
-
-
+#wifi
 PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf
-
+    wpa_supplicant.conf \
+    wifi2agps 
 
 # Ramdisk
-#PRODUCT_COPY_FILES += \
-#    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
 
-
-
-#audio
-PRODUCT_PACKAGES += \
-    audio.a2dp.default
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -104,34 +112,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 
-TARGET_USE_BUILT_BOOTIMAGE := device/amazon/karnak/boot.img
 
-
-#KeyBoard
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
-    $(LOCAL_PATH)/keylayout/ACCDET.kl:system/usr/keylayout/ACCDET.kl
-
-#thermal
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/thermal/thermal.conf:system/vendor/etc/.tp/thermal.conf \
-    $(LOCAL_PATH)/thermal/thermal.off.conf:system/vendor/etc/.tp/thermal.off.conf \
-    $(LOCAL_PATH)/thermal/.ht120.mtc:system/vendor/etc/.tp/.ht120.mtc
-
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/vendor/audio_device.xml:system/vendor/etc/audio_device.xml \
-    $(LOCAL_PATH)/vendor/audio_em.xml:system/vendor/etc/audio_em.xml \
-    $(LOCAL_PATH)/vendor/mtklog-config.prop:system/vendor/etc/mtklog-config.prop \
-    $(LOCAL_PATH)/vendor/mtk_omx_core.cfg:system/vendor/etc/mtk_omx_core.cfg \
-    $(LOCAL_PATH)/vendor/radvd.conf:system/vendor/etc/radvd.conf \
-    $(LOCAL_PATH)/vendor/throttle.sh:system/vendor/etc/throttle.sh
-
-
-# Create symlinks.
-LOCAL_POST_INSTALL_CMD := $(hide) mkdir -p $(TARGET_ROOT_OUT)/sbin; \
-    ln -sf ../init $(TARGET_ROOT_OUT)/sbin/ueventd; \
-    ln -sf ../init $(TARGET_ROOT_OUT)/sbin/watchdogd
 
 #Camera
 PRODUCT_COPY_FILES += \
@@ -146,28 +127,12 @@ PRODUCT_COPY_FILES += \
   frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml 
 
 
-#libs
-PRODUCT_COPY_FILES += \
-   $(LOCAL_PATH)/lib/hw/audio.primary.mt8163.so:system/vendor/lib/hw/audio.primary.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/audio.usb.mt8163.so:system/vendor/lib/hw/audio.usb.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/camera.mt8163.so:system/vendor/lib/hw/camera.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/gatekeeper.mt8163.so:system/vendor/lib/hw/gatekeeper.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/gralloc.mt8163.so:system//vendor/lib/hw/gralloc.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/hwcomposer.mt8163.so:system/vendor/lib/hw/hwcomposer.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/lights.mt8163.so:system/vendor/lib/hw/lights.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/memtrack.mt8163.so:system/vendor/lib/hw/memtrack.mt8163.so \
-   $(LOCAL_PATH)/lib/hw/sensors.mt8163.so:system/vendor/lib/hw/sensors.mt8163.so
-
 
 
 #libshims
 PRODUCT_PACKAGES += \
 libshim_asp \
 
-#egl
-PRODUCT_COPY_FILES += \
-   $(LOCAL_PATH)/lib/egl/libGLES_mali.so:system/vendor/lib/egl/libGLES_mali.so \
-   $(LOCAL_PATH)/lib/libhal_effects.so:system/lib/libhal_effects.so
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
