@@ -8,9 +8,10 @@ DEVICE_FOLDER := device/amazon/karnak
 
 
 PRODUCT_DEVICE := karnak
-PRODUCT_NAME := full_karnak
+PRODUCT_NAME := lineage_karnak
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Fire
+PRODUCT_BOARD := karnak
 PRODUCT_MANUFACTURER := amzn
 
 # Device uses high-density artwork where available
@@ -63,8 +64,8 @@ PRODUCT_PACKAGES += \
     wifi2agps 
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
+#PRODUCT_COPY_FILES += \
+#    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
 
 
 # Default.prop
