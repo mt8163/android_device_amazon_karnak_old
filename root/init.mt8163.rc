@@ -12,10 +12,15 @@ on early-init
     wait /dev/.coldboot_done 10
 
 on init
+
+# signed off by kaijones23
+# libshim
+ export LD_SHIM_LIBS "/system/lib/libasp.so|libshim_asp.so"
+
     service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
     disabled
-    
+
     service atci_service /system/bin/atci_service 
 	socket atci-service stream 660 radio system 
 	socket atci-serv-fw stream 660 radio system 
@@ -113,6 +118,10 @@ service logcat_log /system/bin/logcat_log.sh
 	oneshot
 	disabled
 
+
+
+
+
 on property:debug.log.thermal_qa.enable=y
     start thermal_qa
 
@@ -175,10 +184,6 @@ on property:sys.hwc.video_mode=0
     # if primary storage is physical, set ro.vold.primary_physical to 1
     # setprop ro.vold.primary_physical 1
 
-    #libshim
-    export LD_SHIM_LIBS"/system/lib/libasp.so|libshim_asp.so"
-    #or
-    export LD_PRELOAD libshim_asp.so
 
 
     # BATTERY proc

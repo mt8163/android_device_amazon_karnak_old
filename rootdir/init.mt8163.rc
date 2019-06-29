@@ -176,7 +176,7 @@ on property:sys.hwc.video_mode=0
     # setprop ro.vold.primary_physical 1
 
     #libshim
-    export LD_SHIM_LIBS"/system/lib/libasp.so|libshim_asp.so"
+    export LD_SHIM_LIBS "/system/lib/libasp.so|libshim_asp.so"
     #or
     export LD_PRELOAD libshim_asp.so
 

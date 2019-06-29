@@ -74,6 +74,9 @@ USE_XML_AUDIO_POLICY_CONF := 1
 MTK_HARDWARE := true
 MTK_APPENDED_DTB_SUPPORT := yes
 BOARD_USES_MTK_HARDWARE := true
+DOLBY_ENABLE := true
+TARGET_CPU_MEMCPY_OPT_DISABLE := true
+
 
 
 
@@ -107,16 +110,20 @@ MTK_HWC_SUPPORT := yes
 MTK_HWC_VERSION := 1.4.1
 TARGET_BOARD_PLATFORM_GPU := mali-t720 mp2
 
-#CFLAGS
-COMMON_GLOBAL_CFLAGS += $(MTK_INTERNAL_CDEFS)
-COMMON_GLOBAL_CPPFLAGS += $(MTK_INTERNAL_CDEFS)
 
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE:= karnak
 AB_OTA_UPDATER := false
-BLOCK_BASED_OTA := false
+
+# Flags
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -DMTK_HARDWARE -mfpu=neon -mfloat-abi=softfp
+COMMON_GLOBAL_CFLAGS += -DMTK_HARDWARE -DREFRESH_RATE=60
+COMMON_GLOBAL_CFLAGS += -DAMAZON_LOG -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
 
 
@@ -155,9 +162,15 @@ $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
 WITHOUT_CHECK_API := true
 ALLOW_MISSING_DEPENDENCIES := true
 
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-/system/lib/libasp.so|libshim_asp.so \
+/system/lib/libasp.so|libshim_asp.so 
+
+
+
+
 
 

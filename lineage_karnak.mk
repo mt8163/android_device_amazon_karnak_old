@@ -26,7 +26,8 @@ PRODUCT_PACKAGES += \
     libaudioroute \
     libtinyalsa \
     libtinycompress \
-    libalsautils
+    libalsautils \
+    libtinyxml \
 
 
 
@@ -40,8 +41,15 @@ PRODUCT_PACKAGES += \
 #vendor_libs
 PRODUCT_PACKAGES += \
  lights.mt8163 \
- power.mt8163
- 
+ power.mt8163 \
+ local_time.default \
+ audio.primary.default \
+ vibrator.default \
+ power.default \
+ gralloc.default \
+ librs_jni 
+
+
 
 #su
 PRODUCT_PACKAGES += \
@@ -68,8 +76,15 @@ PRODUCT_PACKAGES += \
 #    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/rootdir,root)
 
 
+
+#usb
+PRODUCT_PACKAGES += \
+ com.android.future.usb.accessory 
+
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.secure=0 \
+    ro.adb.secure=0 \
     persist.service.acm.enable=0 \
     persist.sys.dun.override=0 \
     camera.disable_zsl_mode=1 \
@@ -117,6 +132,7 @@ PRODUCT_COPY_FILES += \
 
 #Camera
 PRODUCT_COPY_FILES += \
+  $(LOCAL_PATH)/configs/media_codecs_dolby_audio.xml:system/etc/media_codecs_dolby_audio.xml \
   $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
   $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml \
   $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
