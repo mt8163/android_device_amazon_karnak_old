@@ -19,16 +19,17 @@ PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGES += \
-    audio.r_submix.mt8163 \
-    audio.usb.default \
-    audio_policy.stub \
     audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    audio_policy.default \
+    audio_policy.stub \
     libaudioroute \
-    libtinyalsa \
+    libaudio-resampler \
+    libaudiopolicymanagerdefault \
     libtinycompress \
     libalsautils \
-    libtinyxml \
-
+    libtinyxml
 
 
 #DRM
@@ -101,9 +102,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.service.adb.enable=1 \
     persist.service.debuggable=1
 
-#WARCHDOG
+#Display
 PRODUCT_PACKAGES += \
     libion \
+    libmtk_symbols 
+
+  
+# WallpaperPicker
+PRODUCT_PACKAGES += \
+    WallpaperPicker
+
 
 
 # Permissions
@@ -130,7 +138,11 @@ PRODUCT_COPY_FILES += \
 
 
 
-#Camera
+
+
+
+
+#CODECS
 PRODUCT_COPY_FILES += \
   $(LOCAL_PATH)/configs/media_codecs_dolby_audio.xml:system/etc/media_codecs_dolby_audio.xml \
   $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
@@ -138,6 +150,10 @@ PRODUCT_COPY_FILES += \
   $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
   $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
   $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+  frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
+  frameworks/av/services/audiopolicy/config/default_volume_tables.xml:/system/etc/default_volume_tables.xml \
+  frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
+  frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
