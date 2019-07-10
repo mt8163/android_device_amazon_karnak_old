@@ -1,3 +1,5 @@
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, device/amazon/mt8163-common/mt8163-common.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+$(call inherit-product-if-exists, vendor/amazon/karnak/karnak-vendor.mk)
+
+

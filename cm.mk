@@ -1,5 +1,7 @@
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
-$(call inherit-product, device/amazon/karnak/device.mk)
+# Inherit device configuration for mt8163-common
+$(call inherit-product, device/amazon/mt8163-common/cm.mk)
+
+# Inherit device configuration
 $(call inherit-product, device/amazon/karnak/lineage_karnak.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
