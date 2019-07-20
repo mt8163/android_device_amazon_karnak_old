@@ -1,8 +1,33 @@
 LOCAL_PATH := $(call my-dir)
 
+
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := asp.cpp
 LOCAL_MODULE := libshim_asp
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
+
+
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := egl.cpp
+LOCAL_MODULE := libshim_egl
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
+
+
+
+## libshim_ui
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := ui/mtk_ui.cpp
+
+LOCAL_SHARED_LIBRARIES := \
+	libbinder \
+	libui
+LOCAL_MODULE := libshim_ui
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
+
