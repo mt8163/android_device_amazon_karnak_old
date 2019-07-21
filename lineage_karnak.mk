@@ -61,7 +61,14 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf \
+	android.hardware.wifi@1.0-service
 
+
+
+# HIDL
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
 
 
 
@@ -71,7 +78,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl 
+    android.hardware.audio@2.0-impl \
+	android.hardware.power@1.0-service \
+	android.hardware.power@1.0-impl \
+	android.hardware.audio@4.0-service \
+	android.hardware.audio@4.0-impl 
 
 PRODUCT_PACKAGES += \
     audio.r_submix.mt8163 \
@@ -83,6 +94,7 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     libaudioroute \
     libtinyalsa \
+	libtinyxml \
     libalsautils \
 	libbluetooth_jni
 
@@ -95,7 +107,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-
+	android.hardware.light@2.0-service \
+	android.hardware.light@2.0-impl \
+	android.hardware.sensors@1.0-impl \
+	android.hardware.sensors@1.0-service
 
 # Net
 PRODUCT_PACKAGES += \
