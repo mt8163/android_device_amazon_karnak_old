@@ -1,5 +1,4 @@
 $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
 
@@ -12,14 +11,12 @@ DEVICE_FOLDER := device/amazon/karnak
 PRODUCT_DEVICE := karnak
 PRODUCT_NAME := lineage_karnak
 PRODUCT_BRAND := google
-PRODUCT_MODEL := Fire
+PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
 PRODUCT_MANUFACTURER := amzn
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -69,9 +66,17 @@ PRODUCT_PACKAGES += \
 
 
 # Audio
+
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio@2.0-service \
+    android.hardware.audio@2.0-impl 
+
 PRODUCT_PACKAGES += \
     audio.r_submix.mt8163 \
     audio.usb.default \
+	audio.a2dp.default \
     audio_policy.stub \
     audio.r_submix.default \
     audio.usb.default \
@@ -81,9 +86,21 @@ PRODUCT_PACKAGES += \
     libalsautils \
 	libbluetooth_jni
 
+# Display
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+
+
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
+
 
 
 # Ramdisk
@@ -94,13 +111,22 @@ PRODUCT_COPY_FILES += \
 # Light
 PRODUCT_PACKAGES += \
     lights.mt8163 \
+	android.hardware.light@2.0-impl-mediatek \
+    android.hardware.light@2.0-service-mediatek
 
 
+#CODECS
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
-
+  $(LOCAL_PATH)/configs/media_codecs_dolby_audio.xml:system/etc/media_codecs_dolby_audio.xml \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml \
+  $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+  $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+  $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml 
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -110,7 +136,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdrm \
     libmockdrmcryptoplugin \
-    libdrmclearkeyplugin 
+    libdrmclearkeyplugin \
+	android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
+
+
+# HIDL
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
+
+
+# Keymaster
+PRODUCT_PACKAGES += \
+   android.hardware.keymaster@3.0-impl \
+   android.hardware.keymaster@3.0-service
+
 
 
 

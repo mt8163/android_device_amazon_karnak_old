@@ -32,23 +32,18 @@ TARGET_BOOTLOADER_BOARD_NAME := mt8163
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
+TARGET_CPU_SMP := true
 
+#Arch
+TARGET_ARCH := arm
+TARGET_CPU_VARIANT := cortex-a7
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a7
+TARGET_CPU_VARIANT:= cortex-a7
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_USES_64_BIT_BINDER := true
-TARGET_IS_64_BIT := true
-
-
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := generic
-
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a7
-
 
 # Partitions informations
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -68,10 +63,13 @@ TARGET_USERIMAGES_USE_F2FS := false
 
 
 #Kernel
+#TARGET_KERNEL_ARCH := arm64
+#KERNEL_TOOLCHAIN_PREFIX ?= aarch64-linux-android-
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX = aarch64-linux-androidkernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_SOURCE := kernel/amazon/karnak
-TARGET_KERNEL_CONFIG := karnak_defconfig
-TARGET_KERNEL_VARIANT_CONFIG := karnak_defconfig
+#TARGET_KERNEL_SOURCE := kernel/amazon/karnak
+#TARGET_KERNEL_CONFIG := karnak_defconfig
+#TARGET_KERNEL_VARIANT_CONFIG := karnak_defconfig
 BOARD_KERNEL_BASE := 0x40080000
 BOARD_KERNEL_OFFSET := 0
 BOARD_KERNEL_PAGESIZE := 2048
@@ -81,7 +79,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 --second_offset 0x00e80000 --tags_offset 0x07f80000
 
 
-
+TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/Image.gz-dtb
+PRODUCT_COPY_FILES += \
+	$(TARGET_PREBUILT_KERNEL):kernel
 
 #wifi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
@@ -119,8 +119,8 @@ USE_CAMERA_STUB := true
 
 
 #bluetooth
-# BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
-# BOARD_HAS_BLUETOOTH := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+BOARD_HAS_BLUETOOTH := true
 
 # Display
 BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
@@ -137,9 +137,12 @@ MTK_HWC_SUPPORT := yes
 MTK_HWC_VERSION := 1.4.1
 TARGET_BOARD_PLATFORM_GPU := mali-t720 mp2
 
+BOARD_USE_SOFT_GATEKEEPER := true
+
 #CFLAGS
 # Flags
-
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
+DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/configs/compatibility_matrix.xml
 
 
 # OTA assert
@@ -186,9 +189,8 @@ WITHOUT_CHECK_API := true
 
 TARGET_LD_SHIM_LIBS := \
 /system/lib/libasp.so|libshim_asp.so \
-/system/vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
-/system/vendor/libgui_ext.so|libshim_ui.so \
-/system/vendor/hw/hwcomposer.mt8163.so|libshim_ui.so 
+/vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
+/vendor/libgui_ext.so|libshim_ui.so \
 
 
 

@@ -11,9 +11,6 @@ on early-init
     chmod 0755 /sys/kernel/debug
     wait /dev/.coldboot_done 10
 
-on init
-# libshim
-   export LD_SHIM_LIBS "/system/lib/libasp.so|libshim_asp.so:/system/vendor/lib/egl/libGLES_mali.so|libshim_egl.so:/system/vendor/lib/libgui_ext.so|libshim_ui.so:/system/vendor/hw/hwcomposer.mt8163.so|libshim_ui.so"
 
 service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
