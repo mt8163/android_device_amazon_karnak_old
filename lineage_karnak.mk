@@ -13,7 +13,7 @@ PRODUCT_NAME := lineage_karnak
 PRODUCT_BRAND := google
 PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
-PRODUCT_MANUFACTURER := amzn
+PRODUCT_MANUFACTURER := Amazon
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -21,8 +21,8 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
-	ro.secure=0 \
-	ro.debuggable=1 \
+    ro.secure=0 \
+    ro.debuggable=1 \
     persist.service.acm.enable=0 \
     persist.sys.dun.override=0 \
     camera.disable_zsl_mode=1 \
@@ -61,56 +61,28 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf \
-	android.hardware.wifi@1.0-service
+    libwifi-hal-mt66xx
 
 
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
 
 
 
 # Audio
-
-
-PRODUCT_PACKAGES += \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl \
-	android.hardware.power@1.0-service \
-	android.hardware.power@1.0-impl \
-	android.hardware.audio@4.0-service \
-	android.hardware.audio@4.0-impl 
-
 PRODUCT_PACKAGES += \
     audio.r_submix.mt8163 \
     audio.usb.default \
-	audio.a2dp.default \
+    audio.a2dp.default \
     audio_policy.stub \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
     libaudioroute \
     libtinyalsa \
-	libtinyxml \
+    libtinyxml \
     libalsautils \
-	libbluetooth_jni
+    libbluetooth_jni
 
-# Display
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-	android.hardware.light@2.0-service \
-	android.hardware.light@2.0-impl \
-	android.hardware.sensors@1.0-impl \
-	android.hardware.sensors@1.0-service
+
 
 # Net
 PRODUCT_PACKAGES += \
@@ -125,10 +97,7 @@ PRODUCT_COPY_FILES += \
 
 # Light
 PRODUCT_PACKAGES += \
-    lights.mt8163 \
-	android.hardware.light@2.0-impl-mediatek \
-    android.hardware.light@2.0-service-mediatek
-
+    lights.mt8163 
 
 #CODECS
 PRODUCT_COPY_FILES += \
@@ -151,21 +120,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdrm \
     libmockdrmcryptoplugin \
-    libdrmclearkeyplugin \
-	android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service
+    libdrmclearkeyplugin 
 
 
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
+# Wifi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
 
-# Keymaster
-PRODUCT_PACKAGES += \
-   android.hardware.keymaster@3.0-impl \
-   android.hardware.keymaster@3.0-service
+
 
 
 
@@ -201,6 +166,9 @@ PRODUCT_PACKAGES += \
 libshim_asp \
 libshim_egl \
 libshim_ui  
+
+include $(LOCAL_PATH)/hidl.mk
+
 
 
 # call dalvik heap config

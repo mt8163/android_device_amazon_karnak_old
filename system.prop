@@ -50,7 +50,7 @@ ro.boot.selinux=disable
 # Disable partial updates (formerly known as 'dirty region') for Mali
 debug.hwui.use_partial_updates=false
 
-ro.sf.lcd_density=160
+ro.sf.lcd_density=213
 
 #for mali
 ro.hardware.gralloc=mt8163.mali
@@ -64,7 +64,6 @@ ro.audio.hw_vol_devices=0x0C
 ro.recovery.wl.maxstore=524288
 # wifi rssi->bar thresholds
 persist.wifi.rssi.thresholds=-92,-79,-70,-60
-ro.sf.lcd_density=160
 ro.mediatek.chip_ver=S01
 ro.mediatek.version.release=ALPS.W10.24.p0
 ro.mediatek.platform=MT8163

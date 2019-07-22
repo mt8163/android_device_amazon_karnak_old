@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="Android">
+ <!-- All values are in mAh except as noted -->
+  <item name="none">0</item>
+  <item name="screen.on">55</item>
+  <item name="bluetooth.active">142</item>
+  <item name="bluetooth.on">1</item>
+  <item name="screen.full">115</item>
+  <item name="wifi.on">4</item>
+  <item name="wifi.active">130</item>
+  <item name="wifi.scan">104</item>
+  <item name="dsp.audio">75</item>
+  <item name="dsp.video">75</item>
+  <item name="radio.active">300</item>
+  <!-- The current consumed by the radio when it is scanning for a signal -->
+  <item name="radio.scanning">70</item>
+  <item name="gps.on">170</item>
+  <!-- Current consumed by the radio at different signal strengths, when paging -->
+  <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
+      <value>3</value>
+      <value>3</value>
+  </array>
+    <array name="cpu.clusters.cores">
+        <value>4</value>
+    </array>
+    <array name="cpu.speeds.cluster0">
+        <value>600000</value>
+        <value>624000</value>
+        <value>741000</value>
+        <value>871000</value>
+        <value>1050000</value>
+        <value>1133000</value>
+        <value>1216000</value>
+        <value>1300000</value>
+    </array>
+    <array name="cpu.active.cluster0">
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+        <value>0.1</value>
+    </array>
+    <item name="battery.capacity">4750</item>
+</device>
