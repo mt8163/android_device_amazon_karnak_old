@@ -65,6 +65,12 @@ PRODUCT_PACKAGES += \
 
 
 
+# Sensor
+PRODUCT_PACKAGES += \
+    libsensorndkbridge 
+
+
+
 
 
 # Audio
@@ -78,6 +84,8 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     libaudioroute \
     libtinyalsa \
+    libalsautils \
+    libtinycompress \
     libtinyxml \
     libalsautils \
     libbluetooth_jni
@@ -130,6 +138,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp-policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp-policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+
+
+# Net
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
+
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 
 
