@@ -21,9 +21,9 @@ include $(BUILD_SHARED_LIBRARY)
 
 ## libshim_ui
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := ui/mtk_ui.cpp
+LOCAL_SRC_FILES := gui.cpp
 LOCAL_SHARED_LIBRARIES :=libgui
-LOCAL_MODULE := libshim_ui
+LOCAL_MODULE := libshim_gui
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
 

@@ -207,7 +207,7 @@ WITHOUT_CHECK_API := true
 TARGET_LD_SHIM_LIBS := \
 /system/lib/libasp.so|libshim_asp.so \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
-/vendor/lib/libgui_ext.so|libshim_ui.so \
+/vendor/lib/libgui_ext.so|libshim_gui.so \
 
 
 
