@@ -173,11 +173,11 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 
-# extras
+# Extras
 WITHOUT_CHECK_API := true
 #ALLOW_MISSING_DEPENDENCIES := true
 
-
+# Libshims
 TARGET_LD_SHIM_LIBS := \
 /system/lib/libasp.so|libshim_asp.so \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
