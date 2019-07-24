@@ -38,23 +38,19 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
     persist.service.adb.enable=1 \
+
     persist.service.debuggable=1
 
 BOARD_SECCOMP_POLICY := \
     $(LOCAL_PATH)/seccomp-policy
 
 
-#HW
+# Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163.so
-  
 
 
-#wifi
-PRODUCT_PACKAGES += \
-	wifi2agps \
-
-#wpa 
+# Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
@@ -63,15 +59,9 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf \
     libwifi-hal-mt66xx
 
-
-
 # Sensor
 PRODUCT_PACKAGES += \
-    libsensorndkbridge 
-
-
-
-
+    libsensorndkbridge
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -87,25 +77,15 @@ PRODUCT_PACKAGES += \
     libalsautils \
     libtinycompress \
     libtinyxml \
-    libalsautils \
-    libbluetooth_jni
-
-
+    libalsautils
 
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
-
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/rootdir,root)
-
-
-# Light
-PRODUCT_PACKAGES += \
-    lights.mt8163 
 
 #CODECS
 PRODUCT_COPY_FILES += \
@@ -118,7 +98,7 @@ PRODUCT_COPY_FILES += \
   frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml 
+  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -128,7 +108,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdrm \
     libmockdrmcryptoplugin \
-    libdrmclearkeyplugin 
+    libdrmclearkeyplugin
 
 
 # Wifi
@@ -137,7 +117,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
-
+# Seccomp_policy
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp-policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp-policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
@@ -151,10 +131,6 @@ PRODUCT_PACKAGES += \
 # RenderScript HAL
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
-
-
-
-
 
 PRODUCT_PACKAGES += \
     libion \
@@ -182,12 +158,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 
 
-#libshims
+# Libshims
 PRODUCT_PACKAGES += \
 libshim_asp \
 libshim_egl \
-libshim_ui  
+libshim_ui
 
+
+# Hidl
 include $(LOCAL_PATH)/hidl.mk
 
 
@@ -197,5 +175,3 @@ $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap
 
 # call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-
-   
