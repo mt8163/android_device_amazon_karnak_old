@@ -1,40 +1,19 @@
 #CONTRIBUTORS
 #Kaijones23
 #R0rtiz2
-#
-# Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017-19 The LineageOS Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-
-
+#k4y0z
 BOARD_VENDOR := amazon
-KERNEL_COMMON := kernel/amazon/mt8163/common
 LOCAL_PATH := device/amazon/karnak
 DEVICE_PATH := device/amazon/karnak
+TARGET_BOOTLOADER_BOARD_NAME := mt8163
+# Project Config
 MTK_PROJECT_CONFIG ?= $(DEVICE_PATH)/ProjectConfig.mk
 include $(MTK_PROJECT_CONFIG)
-#LIBSHIMCONFIG := $(DEVICE_PATH)/mtk/libshims.mk
-TARGET_BOOTLOADER_BOARD_NAME := mt8163
-
-
+# Includes
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
-TARGET_CPU_SMP := true
 
-#Arch
+# Arch
 TARGET_ARCH := arm
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -46,20 +25,6 @@ TARGET_CPU_SMP := true
 TARGET_USES_64_BIT_BINDER := true
 
 
-
-
-
-
-
-
-
-
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-
-
-
-
-
 # Partitions informations
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -68,9 +33,12 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3253731328
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11633933824
 BOARD_VENDORIMAGE_PARTITION_SIZE := 235929600
+# Vendor Image
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_USES_VENDORIMAGE := true
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+# Userdata Format
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := false
 
@@ -92,7 +60,7 @@ TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/Image.gz-dtb
 PRODUCT_COPY_FILES += \
 	$(TARGET_PREBUILT_KERNEL):kernel
 
-#wifi
+# Wifi
 BOARD_WLAN_DEVICE := MediaTek
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_HOSTAPD_DRIVER := NL80211
@@ -111,10 +79,13 @@ WIFI_DRIVER_STATE_OFF := 0
 TARGET_BOARD_PLATFORM := mt8163
 BOARD_USES_MTK_AUDIO := true
 BOARD_HAS_MTK_HARDWARE := true
-USE_XML_AUDIO_POLICY_CONF := 1
 MTK_HARDWARE := true
-MTK_APPENDED_DTB_SUPPORT := yes
 BOARD_USES_LEGACY_MTK_AV_BLOB := true
+
+
+
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 
 
@@ -130,41 +101,37 @@ USE_CAMERA_STUB := true
 
 
 #bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
-BOARD_HAS_BLUETOOTH := true
+#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+#BOARD_HAS_BLUETOOTH := true
 
 # Display
 BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
-USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_OVERLAY := true
-PRESENT_TIME_OFFSET_FROM_VSYNC_NS := 0
 TARGET_USES_HWC2 := true
 TARGET_USES_HWC2ON1ADAPTER := false
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := false
-MAX_VIRTUAL_DISPLAY_DIMENSION := 1
-TARGET_DISPLAY_USE_RETIRE_FENCE := true
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 1024*1024
+
+# Panel vsync offsets
+PRESENT_TIME_OFFSET_FROM_VSYNC_NS := 0
 
 
-
-
+# Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
 
+# Charger
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
 
 
 
-# Flags
+
+# Manifest
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/configs/compatibility_matrix.xml
 
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE:= karnak
-AB_OTA_UPDATER := false
 
 
 
@@ -180,6 +147,13 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone2/temp
 DEVICE_RESOLUTION := 800x1280
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_USE_SYSTEM_VOLD := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_DEFAULT_BRIGHTNESS := 128
+TW_AMONET := true
+TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 
 
 #vold
