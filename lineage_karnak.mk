@@ -162,7 +162,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 libshim_asp \
 libshim_egl \
-libshim_ui
+libshim_gui
 
 
 # Hidl
