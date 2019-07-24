@@ -12,12 +12,19 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := egl.cpp
-LOCAL_SHARED_LIBRARIES := libm
+LOCAL_STATIC_LIBRARIES := libgcc
 LOCAL_MODULE := libshim_egl
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
 
 
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := camera.cpp
+LOCAL_SHARED_LIBRARIES := libgui libui
+LOCAL_C_INCLUDES := frameworks/native/include
+LOCAL_MODULE := libshim_camera
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
 
 ## libshim_GUI
 include $(CLEAR_VARS)
