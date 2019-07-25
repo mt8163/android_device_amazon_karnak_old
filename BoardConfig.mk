@@ -198,5 +198,6 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
+/system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
 /vendor/lib/mediadrm/libwvdrmengine.so|libshim_protobuf.so
