@@ -120,6 +120,10 @@ PRESENT_TIME_OFFSET_FROM_VSYNC_NS := 0
 BOARD_USE_SOFT_GATEKEEPER := true
 
 # Charger
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+BOARD_RED_LED_PATH := "/sys/class/leds/red"
+BOARD_GREEN_LED_PATH := "/sys/class/leds/green"
+BOARD_BLUE_LED_PATH := "/sys/class/leds/blue"
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
 
 
@@ -142,6 +146,11 @@ USE_MINIKIN := true
 MALLOC_SVELTE := true
 
 
+# Fix video autoscaling on old OMX decoders
+TARGET_OMX_LEGACY_RESCALING:= true
+
+
+
 #TWRP COMMON
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -155,8 +164,14 @@ TW_DEFAULT_BRIGHTNESS := 128
 TW_AMONET := true
 TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 
+# Camera
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
+TARGET_USES_NON_TREBLE_CAMERA := true
 
-#vold
+
+
+# Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun0/file
 
 
@@ -182,7 +197,8 @@ TARGET_LD_SHIM_LIBS := \
 /system/lib/libasp.so|libshim_asp.so \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
-/vendor/lib/libcam_utils.so|libshim_camera 
+/vendor/lib/libcam_utils.so|libshim_camera.so\
+/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so
 
 
 

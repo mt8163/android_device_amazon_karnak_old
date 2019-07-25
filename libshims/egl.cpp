@@ -1,3 +1,6 @@
-extern "C" long long __aeabi_d2lz_dummy(double var) {
-    return 0;
+#include <math.h>
+
+
+extern "C" long long __aeabi_d2lz(double var) {
+    return (long long)floor(var);
 }

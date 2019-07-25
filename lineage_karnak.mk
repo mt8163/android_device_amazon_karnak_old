@@ -38,7 +38,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
     persist.service.adb.enable=1 \
-
     persist.service.debuggable=1
 
 BOARD_SECCOMP_POLICY := \
@@ -47,7 +46,8 @@ BOARD_SECCOMP_POLICY := \
 
 # Lights
 PRODUCT_PACKAGES +=\
-    lights.mt8163.so
+    lights.mt8163.so \
+    libmtk_symbols
 
 
 # Wi-Fi
@@ -111,6 +111,13 @@ PRODUCT_PACKAGES += \
     libdrmclearkeyplugin
 
 
+#Camera Legacy
+PRODUCT_PROPERTY_OVERRIDES += \
+     media.stagefright.legacyencoder=true \
+     media.stagefright.less-secure=true
+
+
+
 # Wifi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
@@ -136,6 +143,17 @@ PRODUCT_PACKAGES += \
     libion \
     libcap
 
+# Other
+PRODUCT_PACKAGES += \
+    librs_jni \
+    libnl_2 \
+    com.android.future.usb.accessory
+
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbluetooth_mtk \
+    libbt-vendor
 
 
 # Permissions
@@ -163,7 +181,8 @@ PRODUCT_PACKAGES += \
 libshim_asp \
 libshim_egl \
 libshim_gui \
-libshim_camera
+libshim_camera \
+libshim_sensor 
 
 
 # Hidl
