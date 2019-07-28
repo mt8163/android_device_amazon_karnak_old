@@ -103,6 +103,7 @@ TARGET_SCREEN_HEIGHT := 1200
 
 # Display
 BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
+USE_OPENGL_RENDERER := true
 TARGET_USES_HWC2 := true
 TARGET_USES_HWC2ON1ADAPTER := false
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
@@ -175,6 +176,11 @@ USE_CAMERA_STUB := true
 
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun0/file
+
+
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 
 
 #include vendor stuff

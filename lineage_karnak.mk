@@ -1,5 +1,6 @@
 $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
@@ -15,8 +16,9 @@ PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
 PRODUCT_MANUFACTURER := Amazon
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal large
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+# TVDPI FROM AMAZON SPECS
+PRODUCT_AAPT_CONFIG := normal tvdpi hdpi
+PRODUCT_AAPT_PREF_CONFIG := tvdpi
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
