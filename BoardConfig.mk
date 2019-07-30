@@ -10,7 +10,7 @@ TARGET_BOOTLOADER_BOARD_NAME := mt8163
 MTK_PROJECT_CONFIG ?= $(DEVICE_PATH)/ProjectConfig.mk
 include $(MTK_PROJECT_CONFIG)
 # Includes
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := device/amazon/karnak/include
 
 
 # Arch
@@ -103,7 +103,6 @@ TARGET_SCREEN_HEIGHT := 1200
 
 # Display
 BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
-USE_OPENGL_RENDERER := true
 TARGET_USES_HWC2 := true
 TARGET_USES_HWC2ON1ADAPTER := false
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
@@ -178,11 +177,6 @@ USE_CAMERA_STUB := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun0/file
 
 
-# Fonts
-EXTENDED_FONT_FOOTPRINT := true
-
-
-
 #include vendor stuff
 include vendor/amazon/karnak/karnak-vendor.mk
 
@@ -210,5 +204,4 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
 /system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
-/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/vendor/lib/mediadrm/libwvdrmengine.so|libshim_protobuf.so
+/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so 

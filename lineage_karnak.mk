@@ -16,9 +16,9 @@ PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
 PRODUCT_MANUFACTURER := Amazon
 # Device uses high-density artwork where available
-# TVDPI FROM AMAZON SPECS
-PRODUCT_AAPT_CONFIG := normal tvdpi hdpi
-PRODUCT_AAPT_PREF_CONFIG := tvdpi
+PRODUCT_AAPT_CONFIG := normal large
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -58,7 +58,6 @@ BOARD_SECCOMP_POLICY := \
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163.so \
-    libmtk_symbols
 
 
 # Wi-Fi
@@ -116,6 +115,7 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES += \
     Snap
+
 
 # DRM
 PRODUCT_PACKAGES += \
