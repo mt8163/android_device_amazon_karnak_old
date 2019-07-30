@@ -57,8 +57,7 @@ BOARD_SECCOMP_POLICY := \
 
 # Lights
 PRODUCT_PACKAGES +=\
-    lights.mt8163.so \
-
+    lights.mt8163
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
