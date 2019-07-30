@@ -35,14 +35,14 @@ service atcid-daemon-e /system/bin/atcid
 	disabled
 	oneshot
 
-service amzn_drmprov /vendor/bin/amzn_drmprov_check
+service amzn_drmprov /system/bin/amzn_drmprov_check
 	class main
 	user root
 	group system drmrpc
 	oneshot
 	disabled
 
-service amzn_dha_hmac /vendor/bin/amzn_dha_hmac
+service amzn_dha_hmac /system/bin/amzn_dha_hmac
 	class main
 	user root
 	group system drmrpc
@@ -1761,6 +1761,9 @@ service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cach
 
 
 on post-fs
+    # Allow writing to the kernel trace log.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+
     mkdir /cache/logs 0775 system log
     start persistentLogging
 
