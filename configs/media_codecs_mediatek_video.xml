@@ -127,32 +127,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="concurrent-instances" max="1" />
             <Feature name="adaptive-playback"/>
         </MediaCodec>
-        <MediaCodec name="OMX.MTK.VIDEO.DECODER.DIVX" type="video/divx" >
-            <Limit name="size" min="16x16" max="1920x1088" />
-            <Quirk name="requires-allocate-on-input-ports" />
-            <Quirk name="requires-allocate-on-output-ports" />
-            <Limit name="concurrent-instances" max="20" />
-        </MediaCodec>
-        <MediaCodec name="OMX.MTK.VIDEO.DECODER.DIVX3" type="video/divx3" >
-            <Limit name="size" min="16x16" max="1920x1088" />
-            <Quirk name="requires-allocate-on-input-ports" />
-            <Quirk name="requires-allocate-on-output-ports" />
-            <Limit name="concurrent-instances" max="20" />
-        </MediaCodec>
-        <MediaCodec name="OMX.MTK.VIDEO.DECODER.XVID" type="video/xvid" >
-            <Limit name="size" min="16x16" max="1920x1088" />
-            <Quirk name="requires-allocate-on-input-ports" />
-            <Quirk name="requires-allocate-on-output-ports" />
-            <Limit name="concurrent-instances" max="20" />
-        </MediaCodec>
-        <MediaCodec name="OMX.MTK.VIDEO.DECODER.S263" type="video/flv1" >
-            <Limit name="size" min="16x16" max="1920x1088" />
-            <Quirk name="requires-allocate-on-input-ports" />
-            <Quirk name="requires-allocate-on-output-ports" />
-            <Limit name="concurrent-instances" max="20" />
-        </MediaCodec>
     </Decoders>
-
     <Encoders>
         <MediaCodec name="OMX.MTK.VIDEO.ENCODER.MPEG4" type="video/mp4v-es" >
             <Limit name="size" min="176x144" max="176x144" />
