@@ -23,6 +23,13 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl
 
+
+# Usb HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0 \
+    android.hardware.usb@1.0-service
+
+
 # USB
 PRODUCT_PACKAGES += \
    android.hardware.usb.gadget@1.0-impl \
