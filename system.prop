@@ -15,8 +15,10 @@ ro.mediatek.wlan.p2p=1
 # MTK, mtk03034, 20101213 {
 mediatek.wlan.ctia=0
 # MTK, mtk03034 20101213}
+#test
+#ro.opengles.version=196609
 
-ro.opengles.version=196609
+ro.opengles.version=196610
 
 # USB MTP WHQL
 ro.sys.usb.mtp.whql.enable=0
