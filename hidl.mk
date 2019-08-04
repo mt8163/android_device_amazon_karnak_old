@@ -16,6 +16,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-service
 
 
+
 # Light
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl-mediatek \
@@ -23,6 +24,12 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl
 
+# Power
+PRODUCT_PACKAGES += \
+    vendor.mediatek.hardware.power@1.1-impl \
+    vendor.mediatek.hardware.power@1.1-service \
+    android.hardware.power@1.0-impl-mediatek \
+    android.hardware.power@1.0-service-mediatek
 
 # Usb HAL
 PRODUCT_PACKAGES += \

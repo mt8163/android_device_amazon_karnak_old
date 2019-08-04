@@ -53,6 +53,12 @@ BOARD_SECCOMP_POLICY := \
 PRODUCT_PACKAGES +=\
     lights.mt8163
 
+
+# Power
+PRODUCT_PACKAGES +=\
+    power.mt8163
+
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
