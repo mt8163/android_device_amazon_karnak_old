@@ -1,9 +1,9 @@
-import init.connectivity.rc
-import init.mt8163.usb.rc
-import init.recovery.mt8163.rc
+import /vendor/etc/init/hw/init.connectivity.rc
+import /vendor/etc/init/hw/init.mt8163.usb.rc
+import /vendor/etc/init/hw/init.recovery.mt8163.rc
 
 # init.modem.rc must be the LAST rc file because vold.post_fs_data_done is set in it
-import init.modem.rc
+import /vendor/etc/init/hw/init.modem.rc
 # *** DO NOT import the new rc file after this line ***
 
 on early-init
@@ -230,7 +230,7 @@ on fs
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
-    swapon_all /fstab.zram
+    swapon_all /vendor/etc/init/hw/fstab.zram
     write /proc/sys/vm/page-cluster 0
     
     

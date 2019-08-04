@@ -88,7 +88,16 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/rootdir,root)
+    $(DEVICE_FOLDER)/rootdir/sbin:$(TARGET_ROOT_OUT)/sbin \
+    $(DEVICE_FOLDER)/rootdir/fstab.zram:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/fstab.zram \
+    $(DEVICE_FOLDER)/rootdir/init.connectivity.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.connectivity.rc \
+    $(DEVICE_FOLDER)/rootdir/init.modem.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.modem.rc \
+    $(DEVICE_FOLDER)/rootdir/init.mt8163.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.usb.rc \
+    $(DEVICE_FOLDER)/rootdir/recovery.fstab:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/recovery.fstab \
+    $(DEVICE_FOLDER)/rootdir/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/ueventd.mt8163.rc \
+    $(DEVICE_FOLDER)/rootdir/fstab.mt8163:$(TARGET_ROOT_OUT)/fstab.mt8163 \
+    $(DEVICE_FOLDER)/rootdir/md32_d.bin:$(TARGET_ROOT_OUT)/md32_d.bin \
+    $(DEVICE_FOLDER)/rootdir/md32_d.bin:$(TARGET_ROOT_OUT)/md32_p.bin \
 
 #CODECS
 
