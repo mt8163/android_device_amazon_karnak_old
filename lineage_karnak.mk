@@ -52,11 +52,7 @@ BOARD_SECCOMP_POLICY := \
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
-
-
-# Power
-PRODUCT_PACKAGES +=\
-    power.mt8163
+    
 
 
 # Wi-Fi
@@ -94,7 +90,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/rootdir,root) \
-    $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/hw,$(TARGET_COPY_OUT_VENDOR)/etc/init/hw)
+    $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/hw,$(TARGET_COPY_OUT_VENDOR)/etc/init/hw) \
+    $(DEVICE_FOLDER)/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc 
 
 
 # System
@@ -103,12 +100,12 @@ PRODUCT_COPY_FILES += \
   $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_audio.xml \
   $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_video.xml \
   $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-  $(LOCAL_PATH)/configs/media_profiles.xml:system/$(TARGET_COPY_OUT_VENDOR)/media_profiles.xml \
-  $(LOCAL_PATH)/configs/media_codecs.xml:system/$(TARGET_COPY_OUT_VENDOR)/media_codecs.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/media_codecs_google_audio.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/media_codecs_google_telephony.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/media_codecs_google_video_le.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/media_codecs_google_video.xml
+  $(LOCAL_PATH)/configs/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+  $(LOCAL_PATH)/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
 # Camera
 PRODUCT_PACKAGES += \
