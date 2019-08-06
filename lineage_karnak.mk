@@ -198,7 +198,8 @@ libshim_asp \
 libshim_egl \
 libshim_gui \
 libshim_camera \
-libshim_sensor 
+libshim_sensor \
+libshim_protobuf
 
 
 # Hidl
