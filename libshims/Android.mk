@@ -46,7 +46,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 ## libshim_drm
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := drm.cpp
+LOCAL_SRC_FILES := protobuf.cpp
 LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
 LOCAL_MODULE := libshim_protobuf
 LOCAL_PROPRIETARY_MODULE := true
