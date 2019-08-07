@@ -1,7 +1,9 @@
 $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
+
 
 PRODUCT_CHARACTERISTICS := tablet
 LOCAL_PATH := device/amazon/karnak
@@ -15,6 +17,8 @@ PRODUCT_BRAND := google
 PRODUCT_MODEL := KFKAWI
 PRODUCT_BOARD := karnak
 PRODUCT_MANUFACTURER := Amazon
+
+
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -30,13 +34,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.mtk_key_manager_kb_path=1 \
     persist.sys.debug.multi_window=true
 
-#Build.prop
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb \
-    persist.service.adb.enable=1 \
-    persist.service.debuggable=1
-
-
 
 
 #Camera Legacy
@@ -44,7 +41,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
      media.stagefright.less-secure=true
 
-
+# Media Extractors
 BOARD_SECCOMP_POLICY := \
     $(LOCAL_PATH)/seccomp-policy
 
@@ -84,10 +81,17 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     libalsautils
 
+# EGL
+PRODUCT_PACKAGES += \
+  libGLES_android
+
+
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
+
+# Ramdisk
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_FOLDER)/rootdir,root) 
 
@@ -116,13 +120,13 @@ PRODUCT_PACKAGES += \
     libdrmclearkeyplugin
 
 
-#Camera Legacy
+# Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
      media.stagefright.less-secure=true
 
 
-
+# Audio Policy
 PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \

@@ -52,10 +52,12 @@ BOARD_KERNEL_OFFSET := 0
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_FLASH_BLOCK_SIZE := 131072
+
+# Bootimage Arguments
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 --second_offset 0x00e80000 --tags_offset 0x07f80000
 
 
+# Prebuilt Kernel
 TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/Image.gz-dtb
 PRODUCT_COPY_FILES += \
 	$(TARGET_PREBUILT_KERNEL):kernel
@@ -157,7 +159,7 @@ TARGET_FORCE_CPU_UPLOAD := true
 
 
 #TWRP COMMON
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone2/temp
 DEVICE_RESOLUTION := 800x1280
@@ -207,5 +209,4 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
 /system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
-/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/vendor/lib/mediadrm/libwvdrmengine.so|libshim_protobuf.so
+/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so 
