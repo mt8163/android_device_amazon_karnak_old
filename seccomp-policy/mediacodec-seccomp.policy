@@ -63,3 +63,4 @@ mlock: 1
 munlock: 1
 setsockopt: 1
 setrlimit: 1
+sysinfo: 1
