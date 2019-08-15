@@ -1,9 +1,6 @@
 import init.connectivity.rc
 import init.mt8163.usb.rc
 
-# init.modem.rc must be the LAST rc file because vold.post_fs_data_done is set in it
-import init.modem.rc
-# *** DO NOT import the new rc file after this line ***
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -11,29 +8,13 @@ on early-init
     wait /dev/.coldboot_done 10
 
 
+# USB OTG
 service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
     disabled
     
 
-service atci_service /system/bin/atci_service 
-	socket atci-service stream 660 radio system 
-	socket atci-serv-fw stream 660 radio system 
-	user root 
-        disabled
-	group radio system                         
-service atcid-daemon-u /system/bin/atcid
-	user system
-	group radio system media
-	disabled
-	oneshot
-
-service atcid-daemon-e /system/bin/atcid
-	user root
-	group radio system
-	disabled
-	oneshot
-
+# Amazon DRM
 service amzn_drmprov /system/bin/amzn_drmprov_check
 	class main
 	user root
@@ -48,116 +29,15 @@ service amzn_dha_hmac /system/bin/amzn_dha_hmac
 	oneshot
 	disabled
 
-on early_property:ro.build.type=eng
-start atci_service
-start atcid-daemon-e
-service audio-daemon /system/bin/audiocmdservice_atci
-    class main
-    socket atci-audio stream 660 media system
-    user media
-    group nvram media system sdcard_rw
-    disabled
-    oneshot
-
+# WMT Loader
 service wmtLoader /system/bin/wmt_loader
     user root
     group root
-   class core
+    class core
     oneshot
 
 
-service conn_launcher /system/bin/6620_launcher -p /system/etc/firmware/
-    user system
-    group system
-    class core
-
-service thermal_log /system/bin/thermal_log.sh
-        class late_start
-        user system
-        group system
-        oneshot
-        disabled
-
-service thermal_qa /system/bin/ThermalBenchmarkAutomation.sh
-       class late_start
-       user root
-       group root
-       oneshot
-       disabled
-
-service battery_log /system/bin/battery_log.sh
-	class main
-	user system
-	group system
-	oneshot
-	disabled
-
-service temperature_log /system/bin/temperature_log.sh
-	class main
-	user system
-	group system
-	oneshot
-	disabled
-
-service dmesg_log /system/bin/dmesg_log.sh
-	class main
-	user system
-	group system
-	oneshot
-	disabled
-
-service logcat_log /system/bin/logcat_log.sh
-	class main
-	user root
-	group system
-	oneshot
-	disabled
-
-
-
-
-
-
-
-on property:debug.log.thermal_qa.enable=y
-    start thermal_qa
-
-on property:vold.decrypt=trigger_restart_framework
-    start dmesg_log
-
-on property:debug.log.battery.enable=y
-    start battery_log
-
-on property:sys.battery_charging_cv_level=1
-    write /sys/devices/platform/battery/Custom_Charging_Mode 1
-
-on property:sys.battery_charging_cv_level=0
-    write /sys/devices/platform/battery/Custom_Charging_Mode 0
-
-on property:debug.log.temperature.enable=y
-    start temperature_log
-
-on property:debug.log.dmesg.enable=y
-    start dmesg_log
-
-on property:debug.log.logcat.enable=y
-    start logcat_log
-
-on property:persist.sys.uart.klog.enable=y
-    write /sys/mtuart/conse 1
-
-on property:persist.sys.uart.klog.enable=n
-    write /sys/mtuart/conse 0
-# CABC
-on property:sys.hwc.video_mode=1
-    write /sys/devices/soc/soc:mtkfb@0/backlight_mode "mov"
-
-on property:sys.hwc.video_mode=0
-    write /sys/devices/soc/soc:mtkfb@0/backlight_mode "off"
-#
-# Connectivity related services (End)
-#
-
+# USB OTG and media_rw
     mount tmpfs tmpfs /mnt/media_rw/ mode=0755,uid=1000,gid=1000
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
@@ -167,9 +47,6 @@ on property:sys.hwc.video_mode=0
     chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
     chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
 
-    # silent ota
-    chown system system /sys/class/leds/lcd-backlight/silent
-
     # Adjust minimum free memory space (default is 2.5M)
     write /proc/sys/vm/min_free_kbytes 16384
 
@@ -178,22 +55,11 @@ on property:sys.hwc.video_mode=0
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
 
-    # if primary storage is physical, set ro.vold.primary_physical to 1
-    # setprop ro.vold.primary_physical 1
-
-
-
     # BATTERY proc
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
 
-    mkdir /protect_f 0771 system system
-    mkdir /protect_s 0771 system system
-    #create mountpoint for persist partition
-    mkdir /persist 0771 system system
-# Create CIP mount point
-    mkdir /custom
-
+    # CD-ROM
     mkdir /mnt/cd-rom 0000 system system
 
 # Change ION driver permission
@@ -229,6 +95,8 @@ on fs
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
+
+# ZRAM
     swapon_all /fstab.zram
     write /proc/sys/vm/page-cluster 0
     
@@ -257,23 +125,21 @@ on post-fs
     chown root system /proc/mtprof/cputime
     chown root system /proc/mtprof/reboot_pid
 
-    chown system system /protect_f
-    chmod 0770 /protect_f
-
-    chown system system /protect_s
-    chmod 0770 /protect_s
 
 on post-fs-data
+
+# Amazon DRM
     start amzn_drmprov
     start amzn_dha_hmac
 
-    # Create directory for storing securely securetime data
+# Create directory for storing securely securetime data
     mkdir /data/securetime 0770 media mediadrm
 
-    #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
+#/dev/ttyMT2 for Connectivity BT/FM/GPS usage
     chmod 0660 /dev/ttyMT2
     chown system system /dev/ttyMT2
 
+# Wifi Driver
     mknod /dev/wmtWifi c 153 0
     chmod 0660 /dev/wmtWifi
     chown system system /dev/wmtWifi
@@ -374,38 +240,35 @@ on post-fs-data
 
 # -----------------------
 # Add by MTK
-    # dhcp server
+
+# dhcp server
     mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
 
-    # dhcpv6 server
+    
+
+# dhcpv6 server
     mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
     chown dhcp wifi /data/misc/wide-dhcpv6
 
-    # change key_provisioning
+# change key_provisioning
     mkdir /data/key_provisioning
     chmod 0770 /data/key_provisioning
     chown system system /data/key_provisioning
 
-    mkdir /persistbackup
-    chmod 0771 /persistbackup
-    chown system system /persistbackup
-
     start kisd
 
-    # radvd
+# radvd
     mkdir /data/misc/radvd 0770 system system
     chmod 444 /etc/radvd/radvd.conf
 
-    # Mali 3D GPU driver
-    #insmod /vendor/lib/modules/mali.ko
+# Mali 3D GPU driver
     chmod 666 /dev/mali0
     #chown system graphics /dev/mali
 
 
 
-    # Touch Panel
-    # chmod 0664 /dev/touch
+# Touch Panel
     chown root diag /sys/module/tpd_setting/parameters/tpd_calmat
     chown root diag /sys/module/tpd_setting/parameters/tpd_em_debounce_time
     chown root diag /sys/module/tpd_setting/parameters/tpd_mode
@@ -421,29 +284,25 @@ on post-fs-data
 
     chmod 0666 /dev/pmem_multimedia
 
-    # watch dog kicker
+# watch dog kicker
     write /proc/wdk "0 20 30"
 
-    # set ptmx group to non-root
+# set ptmx group to non-root
     chown root radio /dev/ptmx
 
-    # RTC
+# RTC
     mkdir /data/misc/rtc 0770 system system
 
-    # M4U
-    #insmod /vendor/lib/modules/m4u.ko
-    #mknod /dev/M4U_device c 188 0
+# M4U
     chmod 0444 /dev/m4u
-    #chown system media /dev/M4U_device
-
-    #set mlock limit to infinate (for m4u operation)
+#set mlock limit to infinate (for m4u operation)
     setrlimit 8 -1 -1
 
-    # CMDQ
+# CMDQ
     chmod 0640 /dev/mtk_cmdq
     chown system system /dev/mtk_cmdq
 
-    # Sensor
+# Sensor
     chmod 0660 /dev/hwmsensor
     chmod 0660 /dev/msensor
     chmod 0660 /dev/gsensor
@@ -501,7 +360,7 @@ on post-fs-data
     chown system system /sys/class/misc/m_batch_misc/batchbatch
     chown system system /sys/class/misc/m_batch_misc/batchflush
 
-	chmod 0660 /sys/class/misc/m_gyro_misc/gyroenablenodata
+    chmod 0660 /sys/class/misc/m_gyro_misc/gyroenablenodata
     chmod 0660 /sys/class/misc/m_gyro_misc/gyroactive
     chmod 0660 /sys/class/misc/m_gyro_misc/gyrodelay
     chmod 0660 /sys/class/misc/m_gyro_misc/gyrobatch
@@ -639,49 +498,46 @@ on post-fs-data
     chown system system /sys/class/misc/m_glg_misc/glgbatch
     chown system system /sys/class/misc/m_glg_misc/glgflush
 
-    #sensorhub
+#sensorhub
     chmod 0660 /dev/shf
     chown system system /dev/shf
 
-    #Accdet
+#Accdet
     chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
 
-    #VideoCodec
-    #insmod /vendor/lib/modules/vcodec_kernel_driver.ko
+#VideoCodec
     mknod /dev/Vcodec c 160 0
     chmod 0660 /dev/Vcodec
     chown media system /dev/Vcodec
 
-    #MJC
-    #insmod /vendor/lib/modules/mjc_kernel_driver.ko
-    #mknod /dev/MJC c 168 0
+#MJC
     chmod 0660 /dev/MJC
     chown media system /dev/MJC
 
-    #kpd
+#kpd
     chown radio radio /sys/devices/platform/mtk-kpd/driver/kpd_call_state
 
-    #Charging Battery
+#Charging Battery
     chown radio radio /sys/devices/platform/battery/Charging_CallState
 
-    # PMIC property
+# PMIC property
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_stop
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_ut
 
     mkdir /data/amit/ 0770 system system
-		mkdir /data/misc/sensor 0774 system system
+    mkdir /data/misc/sensor 0774 system system
     mkdir /data/misc/akmd 0770 system system
     mkdir /data/misc/s62x 0771 compass compass
     mkdir /data/acdapi/ 0770 system system
     chmod 0660 /data/misc/acdapi/calib.dat
     chmod 0660 /data/misc/acdapi/param.dat
     chmod 0660 /data/misc/acdapi/sensors.dat
+    mkdir /data/mcube 0664 system system
     chown system /sys/devices/platform/msensor/driver/cpsopmode
     chown system /sys/devices/platform/msensor/driver/cpsreptxy
     chown system /sys/devices/platform/msensor/driver/cpsreptz
     chown system /sys/devices/platform/gsensor/driver/cpsopmode
     chown system /sys/devices/platform/gsensor/driver/cpsrange
-    mkdir	/data/mcube 0664 system system
 
     chown system /sys/class/input/input1/enable
     chown system /sys/class/input/input1/delay
@@ -724,10 +580,10 @@ on post-fs-data
     chown system /sys/class/input/input10/wake
     chown system /sys/class/input/input10/offsets
 
-    #EM eint
+#EM eint
     chown root diag /sys/bus/platform/drivers/eint/current_eint
 
-    # Display
+# Display
     chmod 0660 /dev/graphics/fb0
     chown system graphics /dev/graphics/fb0
 
@@ -740,88 +596,27 @@ on post-fs-data
     chmod 0660 /dev/sw_sync
     chown system graphics /dev/sw_sync
 
-    # EM baseband file
-    chown root diag /vendor/bin/baseband_regdump
-    chmod 4750 /vendor/bin/baseband_regdump
-
-    #pmu
-    chown root radio /sys/devices/platform/mt-pmic/pmic_access_bank0
-    chown root radio /sys/devices/platform/mt-pmic/pmic_access_bank1
-    chown root radio /sys/devices/platform/mt6311-user/mt6311_access
-    chown root radio /sys/devices/platform/mt-pmic/pmic_access
-    chmod 0664 /sys/devices/platform/mt-pmic/pmic_access_bank0
-    chmod 0664 /sys/devices/platform/mt-pmic/pmic_access_bank1
-    chmod 0664 /sys/devices/platform/mt6311-user/mt6311_access
-    chmod 0664 /sys/devices/platform/mt-pmic/pmic_access
-
-    # EM CPU Speed Stress
-    chown root radio /proc/cpu_ss/cpu_ss_debug_mode
-    chown root radio /proc/cpu_ss/cpu_ss_mode
-    chown root radio /proc/cpu_ss/cpu_ss_period
-    chown root radio /proc/cpu_ss/cpu_ss_period_mode
-    chmod 0664 /proc/cpu_ss/cpu_ss_debug_mode
-    chmod 0664 /proc/cpu_ss/cpu_ss_mode
-    chmod 0664 /proc/cpu_ss/cpu_ss_period
-    chmod 0664 /proc/cpu_ss/cpu_ss_period_mode
-
-    #EM eint
-    chown root diag /sys/bus/platform/drivers/eint/current_eint
-
-    # for ppp options file
+ # for ppp options file
     mkdir /data/misc/ppp 0770 bluetooth net_bt
 
-    # Android SEC related device nodes
-    chmod 0660 /dev/sec
-    chown root system /dev/sec
-
-    # FM Radio device node
-    mknod /dev/fm     c 193 0;
-    chmod 0660 /dev/fm
-    chown media media /dev/fm
-
-    # device apc settings
-
-    # device info /proc interface
+# device info /proc interface
     mknod /dev/devmap c 196 0;
     chmod 0444 /dev/devmap
     chown root media /dev/devmap
 
-    # bluetooth
+# bluetooth
     mkdir /data/@btmtk 0770 bluetooth net_bt
     chown bluetooth bluetooth /dev/hid-keyboard
     chmod 0660 /dev/hid-keyboard
     #Use uinput's default permission
     chown system net_bt_admin /dev/uinput
 
-    # UIBC
+# UIBC
     chown system media /dev/uibc
     chmod 0660 /dev/uibc
 
-    #TV-out
-    chmod 0664 /dev/TV-out
 
-    #HDMI
-    chown media system /dev/hdmitx
-    chmod 0660 /dev/hdmitx
-
-    # JPEG
-    #chmod 0444 /dev/mtk_jpeg
-
-    # almk
-    chmod 0440 /dev/mtk_almk
-
-    # DISP
-    chmod 0444 /dev/mtk_disp
-
-    #VOW
-    chmod 0640 /dev/vow
-    chown media media /dev/vow
-
-	#RRC
-	chmod 0660 /dev/mtk_rrc
-	chown system media /dev/mtk_rrc
-
-    #Camera
+#Camera
     chmod 0660 /dev/camera-sysram
     chmod 0660 /dev/camera-isp
     chmod 0660 /dev/camera-fdvt
@@ -844,30 +639,15 @@ on post-fs-data
     chown system camera /dev/DW9718AF
     chown system camera /dev/CAM_CAL_DRV
 
-    #MATV
-    chmod 0660 /dev/MATV
-    chown system media /dev/MATV
-
-    # otg_test
+# otg_test
     chown root radio /dev/mt_otg_test
     chmod 0660 /dev/mt_otg_test
 
-    # MDP
-    chmod 0660 /dev/mt-mdp
-    chown system media /dev/mt-mdp
-
-    # G2D
-    chmod 0660 /dev/mtkg2d
-    chown system media /dev/mtkg2d
-
-    # SMI
+# SMI
     chmod 0666 /dev/MTK_SMI
     chown media media /dev/MTK_SMI
 
-    #for eng mode
-    chmod 0664 /dev/misc-sd
-
-   #change partition permission
+#change partition permission
 
     chmod 0640 /mtd@sec_ro
     chown root system /mtd@sec_ro
@@ -896,53 +676,27 @@ on post-fs-data
     chmod 0664 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
     chown media media /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
 
-    #mtk_sched
-    chmod 0660 /dev/mtk_sched
-    chown system media /dev/mtk_sched
-
-    #BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
+#BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
     chmod 0660 /dev/ebc
     chown media media /dev/ebc
 
-    chmod 0666 /dev/uio0
-
-    #otp
-    chmod 0660 /proc/driver/otp
-    chown root system /proc/driver/otp
-
-    #autok
-    chown root system /sys/autok/debug
-    chown root system /sys/autok/param_count
-    chown root system /sys/autok/ready
-    chown root system /sys/autok/ss_corner
-    chown root system /sys/autok/suggest_vol
-    chown root system /sys/autok/stage1/3/DONE
-    chown root system /sys/autok/stage1/3/PARAMS
-    chown root system /sys/autok/stage1/3/VOLTAGE
-    chown root system /sys/autok/stage1/3/LOG
-    chown root system /sys/autok/stage2/3
-
-    #sn
+#Serial Number
     chmod 0664 /sys/class/android_usb/android0/iSerial
     chown root system /sys/class/android_usb/android0/iSerial
     chmod 0664 /sys/devices/platform/mt_usb/cmode
     chown root system /sys/devices/platform/mt_usb/cmode
 
-    #usb
+    #USB
     chown system system /sys/class/android_usb/android0/f_acm/port_index
     chmod 0660 /sys/class/android_usb/android0/f_acm/port_index
 
-    # secure memory
-    chown system system /proc/secmem0
-
-    # AGPS
+# AGPS
     mkdir /data/agps_supl 0771 gps system
 
 #Thermal
     mkdir /data/.tp/ 0775 system system
 
-
-    #RPMB service
+#RPMB service
     start rpmb_svc
 
 # End of adding by MTK drivers
@@ -1077,15 +831,9 @@ service kisd /vendor/bin/kisd
 	user root
 	group system drmrpc
 
-service stop_modem /vendor/bin/md_ctrl 0
-    class main
-    disabled
-    oneshot
 
-service start_modem /vendor/bin/md_ctrl 1
-    class main
-    disabled
-    oneshot
+
+
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,524288,4096,16384,524288
@@ -1108,12 +856,9 @@ on property:persist.uartconsole.enable=1
 on property:dev.bootcomplete=1
     write /sys/power/pm_print_times 0
 
-service met_log_d /vendor/bin/met_log_d
-    class main
-
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
-        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+    -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
     disabled
     oneshot
@@ -1134,75 +879,6 @@ service nvram_daemon /vendor/bin/nvram_daemon
     user root
     group system
     oneshot
-
-# DFO (Begin)
-service featured /vendor/bin/featured
-    class core
-    user nvram
-    group system
-    socket dfo stream 660 nvram system
-# DFO (End)
-
-service atci_service /vendor/bin/atci_service
-    class main
-    socket atci-service stream 660 radio system
-    socket atci-serv-fw stream 660 radio system
-    user root
-    disabled
-    group radio system
-
-service atcid-daemon-u /vendor/bin/atcid
-    class main
-    socket adb_atci_socket stream 660 radio system
-    user system
-    group radio system media inet wifi net_admin
-    disabled
-    oneshot
-
-service atcid-daemon-e /vendor/bin/atcid
-    class main
-    socket adb_atci_socket stream 660 radio system
-    user root
-    group radio system
-    disabled
-    oneshot
-
-on property:ro.build.type=eng
-start atci_service
-start atcid-daemon-e
-
-on property:persist.service.atci.autostart=1
-start atci_service
-start atcid-daemon-u
-
-service audio-daemon /vendor/bin/audiocmdservice_atci
-    class main
-    socket atci-audio stream 660 root system
-    user root
-    disabled
-    oneshot
-
-service md_minilog_util /vendor/bin/md_minilog_util
-    user root
-    disabled
-    oneshot
-
-service pq /vendor/bin/pq
-    class main
-    user system
-    group system graphics
-
-service aal /vendor/bin/aal
-    class main
-    user system
-    group system graphics
-
-# FOTA upgrade
-service rbfota /vendor/bin/fota1
-    class main
-    disabled
-    oneshot
-
 #
 # MTK Wi-Fi related services (Begin)
 #
@@ -1214,141 +890,6 @@ on property:wlan.driver.status=ok
 on property:wlan.driver.status=unloaded
     write /dev/wmtWifi "0"
 
-
-service dhcpcd_bt-pan /system/bin/dhcpcd -BK -dd
-    class main
-    user dhcp
-    group net_admin net_raw
-    disabled
-    oneshot
-
-service dhcpcd_wlan0 /system/bin/dhcpcd -BK -dd
-    class main
-    user dhcp
-    group net_admin net_raw
-    disabled
-    oneshot
-
-service dhcpcd_p2p /system/bin/dhcpcd -BK -dd -A
-    class main
-    user dhcp
-    group net_admin net_raw
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    class main
-    user dhcp
-    group net_admin net_raw
-    disabled
-    oneshot
-
-service iprenew_p2p /system/bin/dhcpcd -n
-    class main
-    user dhcp
-    group net_admin net_raw
-    disabled
-    oneshot
-
-service dhcp_inform /system/bin/dhcpcd -s -BK -A
-    class main
-    user dhcp
-    group system radio dhcp
-    disabled
-    oneshot
-
-service dhcpv6_inform /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cSIP.conf" -Dfi
-    class main
-    user dhcp
-    group system radio dhcp
-    disabled
-    oneshot
-
-service dhcp6cDNS_wlan0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cDNS.conf" -Df wlan0
-    disabled
-    oneshot
-
-service dhcp6c_wlan0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6c.conf" -Df wlan0
-    disabled
-    oneshot
-
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-on property:service.dhcp6c_wlan0.enable=0
-    stop dhcp6c_wlan0
-
-on property:service.dhcp6c_wlan0.enable=1
-    start dhcp6c_wlan0
-
-service dhcp6c_PD /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cPD.conf" -Df
-    disabled
-    oneshot
-
-service pppoe_wlan0 /vendor/bin/launchpppoe
-    user root
-    group radio cache inet misc
-    disabled
-    oneshot
-
-on property:service.pppoe_wlan0.enable=0
-    stop pppoe_wlan0
-
-on property:service.pppoe_wlan0.enable=1
-    start pppoe_wlan0
-# write proc for test sim
-    on property:gsm.sim.ril.testsim=0
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
-    write /proc/sys/net/ipv4/tcp_rto_min 200
-    on property:gsm.sim.ril.testsim=1
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
-    write /proc/sys/net/ipv4/tcp_rto_min 400
-    on property:gsm.sim.ril.testsim.2=0
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
-    write /proc/sys/net/ipv4/tcp_rto_min 200
-    on property:gsm.sim.ril.testsim.2=1
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
-    write /proc/sys/net/ipv4/tcp_rto_min 400
-    on property:gsm.sim.ril.testsim.3=0
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
-    write /proc/sys/net/ipv4/tcp_rto_min 200
-    on property:gsm.sim.ril.testsim.3=1
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
-    write /proc/sys/net/ipv4/tcp_rto_min 400
-    on property:gsm.sim.ril.testsim.4=0
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
-    write /proc/sys/net/ipv4/tcp_rto_min 200
-    on property:gsm.sim.ril.testsim.4=1
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
-    write /proc/sys/net/ipv4/tcp_rto_min 400
-
-service DMAgent /vendor/bin/dm_agent_binder
-    class main
-    user root
-    group root cache
-
-# service vtservice /vendor/bin/vtservice
-#    class main
-#    socket soc_vt_tcv dgram 660 radio system
-#    socket soc_vt_stk dgram 660 radio system
-#    socket soc_vt_svc dgram 660 radio system
-#    user system
-#    group system camera graphics inet net_admin net_raw media sdcard_rw radio sdcard_r media_rw
-#    ioprio rt 4
-
-service cmmb /system/bin/cmmbsp
-    class main
-    user root
-    group system audio camera graphics inet net_bt net_bt_admin net_bw_acct media
-    ioprio rt 4
-
-service dbus /system/bin/dbus-daemon --system --nofork
-    class main
-    socket dbus stream 660 bluetooth bluetooth
-    user bluetooth
-    group bluetooth net_bt_admin
-
 service bluetoothd /system/bin/bluetoothd -n
     class main
     socket bluetooth stream 660 bluetooth bluetooth
@@ -1358,107 +899,6 @@ service bluetoothd /system/bin/bluetoothd -n
     group bluetooth net_bt_admin misc
     disabled
 
-#service dpfd /vendor/bin/dpfd
-#	user root
-#	group system media
-
-#
-#  External Modme control related services
-#
-
-#
-#  Modem related services (Begin)
-#
-service pppd_gprs /system/bin/pppd_dt /dev/ttyACM0 debug noauth refuse-eap usepeerdns nodetach
-    user root
-    group radio cache inet misc
-    disabled
-    oneshot
-
-##Add by T.Zh for ppp daemon
-#service pppd /system/bin/pppd file /data/misc/ppp/ppp_options
-#    user root
-#    disabled
-#    oneshot
-#
-##
-#
-#  Modem related services (End)
-#
-
-#service agpsdcainit /system/bin/agpscacertinit
-#    class main
-#    oneshot
-
-service agpsd /vendor/bin/mtk_agpsd
-    class main
-    socket agpsd stream 660 gps system
-    socket agpsd2 stream 660 gps inet
-    socket agpsd3 stream 660 gps inet
-    user gps
-    group gps radio inet sdcard_r sdcard_rw misc system
-
-service slpd /vendor/bin/slpd
-    class main
-    user gps
-    group gps inet
-
-service ipod /vendor/bin/ipod
-    user root
-    group root
-    disabled
-
-service extmdlogger /vendor/bin/extmdlogger
-    class main
-    user shell
-    group shell system radio sdcard_rw inet sdcard_r media_rw
-
-service GoogleOtaAgent /vendor/bin/GoogleOtaBinder
-    class main
-    user root
-    group root
-
-service mdlogger /vendor/bin/mdlogger
-    class main
-    user shell
-    group shell system radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
-
-service dualmdlogger /vendor/bin/dualmdlogger
-    class main
-    user shell
-    group shell system radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
-
-service emdlogger1 /vendor/bin/emdlogger1
-    class main
-    user shell
-    group system shell radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
-
-service emdlogger2 /vendor/bin/emdlogger2
-    class main
-    user shell
-    group system shell radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
-
-service emdlogger5 /vendor/bin/emdlogger5
-    class main
-    user shell
-    group system shell radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
-
-service emdlogger6 /vendor/bin/emdlogger6
-    class main
-    user shell
-    group system shell radio sdcard_rw inet sdcard_r media_rw
-    disabled
-    oneshot
 
 #
 #sensor service (begin)
@@ -1507,51 +947,16 @@ service akmd09911 /vendor/bin/akmd09911
     user system
     group system
     class main
+
+
 service bmm050d /vendor/bin/bmm050d
     disabled
     user system
     group system
     class main
 
-service bmm056d /vendor/bin/bmm056d
-    disabled
-    user system
-    group system
-    class main
+
 service mc6420d /vendor/bin/mc6420d
-    disabled
-    user system
-    group system
-    class main
-service qmc5983d /vendor/bin/qmc5983d
-     disabled
-	 user system
-    group system
-    class main
-
-service orientationd /vendor/bin/orientationd
-    disabled
-    user system
-    group system input
-    class main
-service AcdApiDaemon /vendor/bin/AcdApiDaemon
-    disabled
-    user system
-    group system
-    class main
-
-service geomagneticd /vendor/bin/geomagneticd
-    disabled
-    user system
-    group system input
-    class main
-
-service mpud6050 /vendor/bin/mpud6050
-    oneshot
-    user system
-    group system
-
-service mc64xxd /vendor/bin/mc64xxd
     disabled
     user system
     group system
@@ -1560,35 +965,6 @@ service mc64xxd /vendor/bin/mc64xxd
 #sensor service (end)
 #
 
-#
-#emsvr service (start)
-#
-on property:ro.build.type=eng
-    start emsvr
-
-on property:ro.build.type=user
-    start emsvr_user
-
-on property:ro.build.type=userdebug
-    start emsvr_user
-
-service emsvr_user /vendor/bin/em_svr
-    disabled
-    user system
-    group system radio diag
-
-service emsvr /vendor/bin/em_svr
-    disabled
-    user root
-
-#
-#emsvr service (end)
-#
-
-service shutdown /system/bin/shutdown
-    user root
-    group root
-    disabled
 
 service NvRAMAgent /vendor/bin/nvram_agent_binder
     class main
@@ -1601,137 +977,15 @@ service thermal_manager /vendor/bin/thermal_manager
     group system
     oneshot
 
-service thermal /vendor/bin/thermal
-    class main
-    user system
-    group system
-
-service thermald /vendor/bin/thermald
-    class main
-    user system
-    group system
-
-service sn /vendor/bin/sn
-    class main
-    user system
-    group system sdcard_rw
-    oneshot
-
-#add for power-off alarm
-service poad /vendor/bin/poad
-    class main
-    user system
-    group system
-    oneshot
-
-#monitor battery status
-service batterywarning /vendor/bin/batterywarning
-    class main
-    user shell
-    group shell
 
 
-#service BGW /vendor/xbin/BGW
-#	user system
-#	group gps system radio
-#	class main
-service MtkCodecService /vendor/bin/MtkCodecService
-    class main
-    user system
-    group audio media sdcard_r
-
-# GuiExt Server init
-service guiext-server /vendor/bin/guiext-server
-    class main
-    user system
-    group system graphics
-
-# OperaMax Service
-service OperaMaxSystem /system/bin/OperaMaxSystem
-    class main
-    user root
-    group root
-
-service kpoc_charger /vendor/bin/kpoc_charger
-    class charger
-
-###########add for 3Gdongle
-on boot
-#
-# change the right of ip-up ip-down scripts(begin)
-#
-chmod 777 /etc/ppp/ip-up
-chmod 777 /etc/ppp/ip-down
-#
-# change the right of ip-up ip-down scripts(end)
-#
-
-#
-# change the right of ip-up-ppp0 ip-down-ppp0 scripts(begin)
-#
-chmod 777 /etc/ppp/ip-up-ppp0
-chmod 777 /etc/ppp/ip-down-ppp0
-#
-# change the right of ip-up ip-down scripts(end)
-#
-
-#set the property of persiste.radio.reset_on_switch
-setprop persist.radio.reset_on_switch true
-#end
-
-#set the property of rild.mark_switchuser
-setprop rild.mark_switchuser 0
-#end
-
-chmod 0644 /vendor/lib/libzteevdo-ril.so
-chomd 0644 /vendor/lib/zterilPara
-chown root /system/bin/pppd
-chmod 4755 /system/bin/pppd
-chown root /vendor/bin/chat
-chmod 4755 /vendor/bin/chat
+# LEDS
 
 chmod 0664 /sys/class/leds/lcd-backlight/brightness
 chown system system /sys/class/leds/red/trigger
 chown system system /sys/class/leds/green/trigger
 chown system system /sys/class/leds/blue/trigger
-#
-#ril-daemon (begin)
-#
-service ril-3gddaemon /vendor/bin/rild_dongle
-    class main
-    socket rild-dongle stream 660 root radio
-    socket rild-dongle-debug stream 660 radio radio
-    user root
-    group radio cache inet misc audio log
-    disabled
 
-#
-#ril-daemon (end)
-#
-
-#
-#usbdongled(begin)
-#
-service usbdongled /vendor/bin/dongled
-    class main
-	user root
-	group radio cache inet misc
-	enable
-#
-#usbdongled(end)
-#
-
-#
-# add the service for call pppd(begin)
-#
-service zpppd_gprs /vendor/bin/init.gprs-pppd
-    user root
-	group radio cache inet misc
-	disabled
-	oneshot
-#
-# add the service for call pppd(end)
-#
 
 service rpmb_svc /vendor/bin/rpmb_svc
     class main

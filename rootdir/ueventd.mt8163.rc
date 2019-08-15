@@ -1,14 +1,12 @@
 #change partition permission
 /dev/block/platform/soc/11230000.mmc/by-name/boot      0640    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/recovery  0640    root    system
-/dev/block/platform/soc/11230000.mmc/by-name/secro     0640    root    system
-/dev/block/platform/soc/11230000.mmc/by-name/seccfg    0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/proinfo   0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/nvram     0660    root    system
-/dev/block/platform/soc/11230000.mmc/by-name/para      0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/MISC      0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/logo      0660    root    system
-/dev/block/platform/soc/11230000.mmc/by-name/frp       0660    root    system
+
+
 
 # Connectivity
 /dev/stpwmt               0660   system     system
@@ -46,6 +44,8 @@
 # RPMB
 /dev/block/mmcblk0rpmb    0660   root       system
 
+
+# Thermal
 /sys/devices/virtual/thermal/thermal_zone* mode 0660  system system
 /sys/devices/virtual/thermal/thermal_zone* trips 0660  system system
 /sys/devices/virtual/thermal/thermal_zone* policy 0660  system system
