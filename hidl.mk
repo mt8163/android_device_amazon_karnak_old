@@ -16,6 +16,10 @@ PRODUCT_PACKAGES += \
    android.hardware.keymaster@3.0-impl \
    android.hardware.keymaster@3.0-service
 
+#Thermal
+PRODUCT_PACKAGES += \
+   android.hardware.thermal@1.0-service.mtk\
+
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -82,13 +86,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl 
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio@2.0-service.mtk \
+    android.hardware.audio@2.0-impl.mtk
 
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service \
     android.hardware.bluetooth@1.0-service.mtk \
-    android.hardware.bluetooth@1.0-service-mediatek \
     android.hardware.bluetooth@1.0-impl
 
 # Wifi
