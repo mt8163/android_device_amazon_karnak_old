@@ -1,43 +1,11 @@
-import init.connectivity.rc
 import init.mt8163.usb.rc
-
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
     wait /dev/.coldboot_done 10
 
-
-# USB OTG
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
-    class late_start
-    disabled
-    
-
-# Amazon DRM
-service amzn_drmprov /system/bin/amzn_drmprov_check
-	class main
-	user root
-	group system drmrpc
-	oneshot
-	disabled
-
-service amzn_dha_hmac /system/bin/amzn_dha_hmac
-	class main
-	user root
-	group system drmrpc
-	oneshot
-	disabled
-
-# WMT Loader
-service wmtLoader /system/bin/wmt_loader
-    user root
-    group root
-    class core
-    oneshot
-
-
-# USB OTG and media_rw
+on init
     mount tmpfs tmpfs /mnt/media_rw/ mode=0755,uid=1000,gid=1000
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
@@ -46,6 +14,9 @@ service wmtLoader /system/bin/wmt_loader
     # Change dynamic_boost permission
     chown system system /sys/devices/platform/dynamic_boost/dynamic_boost
     chmod 0750 /sys/devices/platform/dynamic_boost/dynamic_boost
+
+    # silent ota
+    chown system system /sys/class/leds/lcd-backlight/silent
 
     # Adjust minimum free memory space (default is 2.5M)
     write /proc/sys/vm/min_free_kbytes 16384
@@ -59,17 +30,24 @@ service wmtLoader /system/bin/wmt_loader
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
 
+    mkdir /protect_f 0771 system system
+    mkdir /protect_s 0771 system system
+    
+    # create mountpoint for persist partition
+    mkdir /persist 0771 system system
+
+    # Create CIP mount point
+    mkdir /custom
+
     # CD-ROM
     mkdir /mnt/cd-rom 0000 system system
 
-# Change ION driver permission
+    # Change ION driver permission
     chmod 0666 /dev/ion
 
-# change lk_env permission
+    # change lk_env permission
     chown root system /proc/lk_env
     chmod 0660 /proc/lk_env
-
-# mount different fs start
 
 on charger
     mkdir /dev/block/platform/mtk-msdc.0
@@ -95,11 +73,8 @@ on fs
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
-
-# ZRAM
     swapon_all /fstab.zram
     write /proc/sys/vm/page-cluster 0
-    
     
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
@@ -120,33 +95,52 @@ on post-fs
     chown radio system /proc/freqhopping/status
     chown radio system /proc/freqhopping/userdef
 
-# change owner
+    # change owner
     chown system system /proc/bootprof
     chown root system /proc/mtprof/cputime
     chown root system /proc/mtprof/reboot_pid
 
 
 on post-fs-data
+    # WiFi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
 
-# Amazon DRM
+
+
+# WiFi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+
+# BT relayer mode used VCOM
+    chown bluetooth net_bt_stack /dev/ttyGS2
+    chmod 0660 /dev/ttyGS2
+    # BT relayer mode used VCOM
+    chown bluetooth net_bt_stack /dev/ttyGS2
+    chmod 0660 /dev/ttyGS2
+
+    # Amazon DRM
     start amzn_drmprov
     start amzn_dha_hmac
 
-# Create directory for storing securely securetime data
+   # Create directory for storing securely securetime data
     mkdir /data/securetime 0770 media mediadrm
 
-#/dev/ttyMT2 for Connectivity BT/FM/GPS usage
+    #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
     chmod 0660 /dev/ttyMT2
     chown system system /dev/ttyMT2
 
-# Wifi Driver
+    # Wifi Driver
     mknod /dev/wmtWifi c 153 0
     chmod 0660 /dev/wmtWifi
     chown system system /dev/wmtWifi
 
     chown shell system /proc/driver/wmt_aee
     chown shell system /proc/driver/wmt_dbg
-#Battery
+    
+    # Battery
     chown system system /sys/devices/platform/battery_meter/FG_Battery_Cycle
     chown system system /sys/devices/platform/battery_meter/FG_Max_Battery_Voltage
     chown system system /sys/devices/platform/battery_meter/FG_Min_Battery_Voltage
@@ -156,7 +150,7 @@ on post-fs-data
     chown system system /sys/devices/platform/battery_meter/FG_Min_Battery_Temperature
     chown system system /sys/devices/platform/battery_meter/FG_Aging_Factor
 
-#Camera
+    # Camera
     chmod 0660 /dev/GAF001AF
     chown system camera /dev/GAF001AF
    
@@ -172,24 +166,18 @@ on post-fs-data
     chmod 0660 /dev/FM50AF
     chown system camera /dev/FM50AF
 
-#SMB
+    # SMB
     chown system system /proc/smb/ScreenComm
     chmod 0660 /proc/smb/ScreenComm
 
-# GPS
+    # GPS
     chown gps gps /sys/class/gpsdrv/gps/pwrctl
     chown gps gps /sys/class/gpsdrv/gps/suspend
     chown gps gps /sys/class/gpsdrv/gps/state
     chown gps gps /sys/class/gpsdrv/gps/pwrsave
     chown gps gps /sys/class/gpsdrv/gps/status
 
-# WiFi
-   mkdir /data/misc/wifi 0770 wifi wifi
-   mkdir /data/misc/wifi/sockets 0770 wifi wifi
-   mkdir /data/misc/wpa_supplicant 0770 wifi wifi
-   chown wifi wifi /data/misc/wifi
-
-# Create the directories used by the Wireless subsystem
+    # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
@@ -199,13 +187,13 @@ on post-fs-data
 
 
 
-#Define device for ATCID
+   #Define device for ATCID
     chmod 660 /dev/ttyGS0 
     chown system /dev/ttyGS0 
     chmod 660 /dev/ttyGS1 
     chown system /dev/ttyGS1
 
-# Char device for BT 3.0 HS
+    # Char device for BT 3.0 HS
     mknod /dev/ampc0 c 151 0
     chown bluetooth bluetooth /dev/ampc0
     chmod 0660 /dev/ampc0
@@ -783,6 +771,22 @@ on boot
     chown shell system /proc/driver/wmt_dbg
     chown shell system /proc/driver/wmt_aee
 
+
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+    -puse_p2p_group_interface \
+    -O/data/vendor/wifi/wpa/sockets/ \
+    -g@android:wpa_wlan0
+    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+
+
+
+
 #Define device for ATCID
     chmod 0660 /dev/ttyGS0
     chown system /dev/ttyGS0
@@ -979,6 +983,31 @@ service thermal_manager /vendor/bin/thermal_manager
 
 
 
+service wmt_loader /vendor/bin/wmt_loader
+    class core
+    user root
+    group root system
+    oneshot
+
+service wmt_launcher /vendor/bin/wmt_launcher -p /vendor/firmware/
+    user system
+    group system
+    class core
+
+on property:service.wcn.coredump.mode=2
+start stp_dump
+
+service stp_dump /vendor/bin/stp_dump3
+    user root
+    group root
+    class core
+    disabled
+    oneshot
+
+
+
+
+
 # LEDS
 
 chmod 0664 /sys/class/leds/lcd-backlight/brightness
@@ -986,6 +1015,26 @@ chown system system /sys/class/leds/red/trigger
 chown system system /sys/class/leds/green/trigger
 chown system system /sys/class/leds/blue/trigger
 
+
+
+# Amazon DRM
+service amzn_drmprov /system/bin/amzn_drmprov_check
+	class main
+	user root
+	group system drmrpc
+	oneshot
+	disabled
+
+service amzn_dha_hmac /system/bin/amzn_dha_hmac
+	class main
+	user root
+	group system drmrpc
+	oneshot
+	disabled
+
+service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
+    class late_start
+    disabled
 
 service rpmb_svc /vendor/bin/rpmb_svc
     class main
