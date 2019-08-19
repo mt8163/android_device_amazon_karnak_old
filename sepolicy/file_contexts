@@ -1,5 +1,4 @@
 # Services
-/(system|system\/vendor|vendor)/bin/6620_launcher               u:object_r:conn_launcher_exec:s0
 /(system|system\/vendor|vendor)/bin/ccci_fsd                    u:object_r:ccci_fsd_exec:s0
 /(system|system\/vendor|vendor)/bin/ccci_mdinit                 u:object_r:ccci_mdinit_exec:s0
 /(system|system\/vendor|vendor)/bin/md_ctrl                     u:object_r:md_ctrl_exec:s0
@@ -24,7 +23,7 @@
 /(system|system\/vendor|vendor)/bin/mtkmal                      u:object_r:mtkmal_exec:s0
 /(system|system\/vendor|vendor)/bin/wifi2agps                   u:object_r:wifi2agps_exec:s0
 /(system|system\/vendor|vendor)/bin/wmt_loader                  u:object_r:wmt_loader_exec:s0
-/(system|system\/vendor|vendor)/bin/wmt_launcher                u:object_r:conn_launcher_exec:s0
+/(system|system\/vendor|vendor)/bin/wmt_launcher                u:object_r:mtk_wmt_launcher_exec:s0
 /(system|system\/vendor|vendor)/bin/em_svr                      u:object_r:em_svr_exec:s0
 /(system|system\/vendor|vendor)/bin/kpoc_charger                u:object_r:kpoc_charger_exec:s0
 /(system|system\/vendor|vendor)/bin/etsd                        u:object_r:etsd_exec:s0
