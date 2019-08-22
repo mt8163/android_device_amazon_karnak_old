@@ -29,15 +29,9 @@ on init
     # BATTERY proc
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
-
-    mkdir /protect_f 0771 system system
-    mkdir /protect_s 0771 system system
     
     # create mountpoint for persist partition
     mkdir /persist 0771 system system
-
-    # Create CIP mount point
-    mkdir /custom
 
     # CD-ROM
     mkdir /mnt/cd-rom 0000 system system
