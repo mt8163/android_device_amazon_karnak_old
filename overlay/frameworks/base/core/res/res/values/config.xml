@@ -139,6 +139,10 @@
 
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
+    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
+         it causes the device to wake up.
+         The default is false. -->
+    <bool name="config_lidControlsSleep">true</bool>
     
     <bool name="config_user_notification_of_restrictied_mobile_access">false</bool>
     <!-- Enable doze mode
