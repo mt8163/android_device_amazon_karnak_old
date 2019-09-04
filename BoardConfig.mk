@@ -164,6 +164,9 @@ ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 
+# Exclude AudioFx
+TARGET_EXCLUDES_AUDIOFX := true
+
 
 #TWRP COMMON
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
