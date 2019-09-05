@@ -4,11 +4,11 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0
 
 # Camera HAL
-PRODUCT_PACKAGES += \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
+#PRODUCT_PACKAGES += \
+#    camera.device@1.0-impl \
+#   camera.device@3.2-impl \
+#    android.hardware.camera.provider@2.4-impl \
+#    android.hardware.camera.provider@2.4-service
 
 
 # Keymaster
@@ -56,11 +56,16 @@ PRODUCT_PACKAGES += \
    android.hardware.usb.gadget@1.0-service
 
 
+# Configstore
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-service
+
+
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service
 
@@ -84,17 +89,21 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.effect@5.0-impl \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service.mtk \
-    android.hardware.audio@2.0-impl.mtk
+    android.hardware.audio@5.0-impl \
+    android.hardware.soundtrigger@2.1-impl \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service \
     android.hardware.bluetooth@1.0-service.mtk \
     android.hardware.bluetooth@1.0-impl
+
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-service
 
 # Wifi
 PRODUCT_PACKAGES += \
