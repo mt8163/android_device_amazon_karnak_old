@@ -1,3 +1,0 @@
-add_lunch_combo lineage_karnak-userdebug
-add_lunch_combo lineage_karnak-eng
-add_lunch_combo lineage_karnak-user
