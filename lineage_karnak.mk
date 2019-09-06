@@ -49,7 +49,17 @@ BOARD_SECCOMP_POLICY := \
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
-    
+
+
+#Rootdir
+PRODUCT_PACKAGES +=\
+    fstab.mt8163 \
+    fstab.zram \
+    init.mt8163.usb.rc \
+    init.mt8163.rc \
+    md32_package \
+    ueventd 
+
 
 
 # Wi-Fi
