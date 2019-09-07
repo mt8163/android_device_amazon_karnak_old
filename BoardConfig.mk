@@ -58,7 +58,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 -
 
 
 # Prebuilt Kernel
-TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/Image.gz-dtb
+TARGET_PREBUILT_KERNEL := device/amazon/prebuilts/kernel/Image.gz-dtb
 PRODUCT_COPY_FILES += \
 	$(TARGET_PREBUILT_KERNEL):kernel
 
@@ -193,7 +193,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto
 
 
 #include vendor stuff
-include vendor/amazon/karnak/karnak-vendor.mk
+include vendor/amazon/mt8163/BoardConfigVendor.mk
 
 #BACKLIGHTS
 TARGET_PROVIDES_LIBLIGHT := true
