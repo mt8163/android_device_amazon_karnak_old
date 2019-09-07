@@ -15,3 +15,5 @@ Finally, follow the instructions [here](https://wiki.lineageos.org/devices/bacon
 source ./build/envsetup.sh
 brunch lineage_karnak-userdebug
 ```
+
+Continue the instructions until the build is complete.
