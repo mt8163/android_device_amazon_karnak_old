@@ -1060,6 +1060,9 @@ on post-fs
     # Allow writing to the kernel trace log.
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
 
+    # fix permission with memtrack
+    chown system system /sys/kernel/debug/ion/heaps/ion_mm_heap
+    
     mkdir /cache/logs 0775 system log
     start persistentLogging
 
