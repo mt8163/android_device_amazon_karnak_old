@@ -103,10 +103,12 @@ PRODUCT_COPY_FILES += \
   $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
   $(LOCAL_PATH)/configs/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
   $(LOCAL_PATH)/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+  $(LOCAL_PATH)/configs/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
   frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
+
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -125,8 +127,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/md32_d.bin:root/md32_d.bin \
     $(LOCAL_PATH)/rootdir/fstab.mt8163:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.mt8163 \
     $(LOCAL_PATH)/rootdir/fstab.zram:$(TARGET_COPY_OUT_VENDOR)/etc/zram/fstab.zram \
-    $(LOCAL_PATH)/rootdir/init.mt8163.rc:$(TARGET_OUT_VENDOR_ETC)/init/hw/init.mt8163.rc \
-    $(LOCAL_PATH)/rootdir/init.mt8163.usb.rc:$(TARGET_OUT_VENDOR_ETC)/init/hw/init.mt8163.usb.rc \
+    $(LOCAL_PATH)/rootdir/init.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.rc \
+    $(LOCAL_PATH)/rootdir/init.mt8163.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.usb.rc \
     $(LOCAL_PATH)/rootdir/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
 
@@ -202,6 +204,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 
+# Shipping API level (for CTS backward compatibility)
+PRODUCT_SHIPPING_API_LEVEL := 25
 
 
 

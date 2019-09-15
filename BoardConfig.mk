@@ -43,6 +43,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := false
 
 
+USE_XML_AUDIO_POLICY_CONF := 1
+
+
 
 
 # Kernel
@@ -59,8 +62,6 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00000000 --ramdisk_offset 0x03400000 -
 
 # Prebuilt Kernel
 TARGET_PREBUILT_KERNEL := device/amazon/prebuilts/kernel/Image.gz-dtb
-PRODUCT_COPY_FILES += \
-	$(TARGET_PREBUILT_KERNEL):kernel
 
 # Wifi
 BOARD_WLAN_DEVICE := MediaTek
@@ -219,4 +220,5 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
 /system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
-/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so 
+/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
+/system/bin/amzn_drmprov_check|libshim_dha.so

@@ -17,6 +17,7 @@
             <name>ISoundTriggerHw</name>
             <instance>default</instance>
         </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport arch="32">passthrough</transport>
@@ -198,137 +199,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.camera.advcam</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IAdvCamControl</name>
-            <instance>internal/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.camera.callbackclient</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMtkBufferCallback</name>
-            <instance>internal/0</instance>
-        </interface>
-        <interface>
-            <name>IMtkCallbackClient</name>
-            <instance>internal/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.camera.ccap</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ICCAPControl</name>
-            <instance>internal/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.camera.lomoeffect</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ILomoEffect</name>
-            <instance>internal/0</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.imsa</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IImsa</name>
-            <instance>imsa</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.keymanage</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IKeymanage</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.keymaster_attestation</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IKeymasterDevice</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.mtkcodecservice</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IMtkCodecService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.netdagent</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>INetdagent</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.nvram</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>INvram</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.power</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IPower</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.wfo</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IWifiOffload</name>
-            <instance>wfo_hidl_service</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.wifi.hostapd</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IHostapd</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.wifi.supplicant</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>ISupplicant</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <sepolicy>
-        <version>27.0</version>
+        <version>29.0</version>
     </sepolicy>
 </manifest>
