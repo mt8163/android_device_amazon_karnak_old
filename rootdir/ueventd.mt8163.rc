@@ -2,7 +2,7 @@
 /dev/block/platform/soc/11230000.mmc/by-name/boot      0640    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/recovery  0640    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/proinfo   0660    root    system
-/dev/block/platform/soc/11230000.mmc/by-name/nvram     0660    root    system
+/dev/block/platform/soc/11230000.mmc/by-name/nvram     0777    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/MISC      0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/logo      0660    root    system
 
