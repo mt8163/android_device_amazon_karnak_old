@@ -172,6 +172,11 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 #SENSORS
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
+#Sepolicy
+
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal
+
+
 # Vendor Security Patch
 VENDOR_SECURITY_PATCH := 2019-09-01
 
