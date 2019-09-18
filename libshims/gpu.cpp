@@ -1,4 +1,3 @@
-//fixes 09-18 02:41:15.323  1547  1547 E vndksupport: Could not load /vendor/lib/hw/hwcomposer.mt8163.so from default namespace: dlopen failed: cannot locate symbol "_ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPv" referenced by "/vendor/lib/hw/hwcomposer.mt8163.so"....
 
 #include <stdint.h>
 

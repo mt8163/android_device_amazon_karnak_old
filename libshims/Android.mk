@@ -23,6 +23,7 @@ LOCAL_SRC_FILES += \
 	egl.cpp \
 	egl_2.cpp \
 	egl_3.cpp \
+	gpu.cpp
 
 LOCAL_STATIC_LIBRARIES := libgcc
 LOCAL_SHARED_LIBRARIES := libm libutils libutilscallstack libui libgui 
@@ -41,8 +42,11 @@ include $(BUILD_SHARED_LIBRARY)
 
 ## libshim_GUI
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := gui.cpp
-LOCAL_SHARED_LIBRARIES := libgui
+LOCAL_SRC_FILES := \
+	gui.cpp \
+	gui_ext.cpp 
+
+LOCAL_SHARED_LIBRARIES := libgui libui libutils
 LOCAL_MODULE := libshim_gui
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
