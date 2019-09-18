@@ -10,7 +10,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := dha.cpp
+LOCAL_SRC_FILES := dha.cpp 
 LOCAL_MODULE := libshim_dha
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_PROPRIETARY_MODULE := true
@@ -19,9 +19,13 @@ include $(BUILD_SHARED_LIBRARY)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := egl.cpp
+LOCAL_SRC_FILES += \
+	egl.cpp \
+	egl_2.cpp \
+	egl_3.cpp \
+
 LOCAL_STATIC_LIBRARIES := libgcc
-LOCAL_SHARED_LIBRARIES := libm
+LOCAL_SHARED_LIBRARIES := libm libutils libutilscallstack libui libgui 
 LOCAL_MODULE := libshim_egl
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
