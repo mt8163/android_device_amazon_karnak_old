@@ -211,7 +211,7 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-minimal
 
 
 # Vendor Security Patch
-VENDOR_SECURITY_PATCH := 2018-07-01
+VENDOR_SECURITY_PATCH := 2019-02-01
 
 
 # Extras
