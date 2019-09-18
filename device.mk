@@ -218,7 +218,8 @@ libshim_egl \
 libshim_gui \
 libshim_camera \
 libshim_sensor \
-libshim_protobuf
+libshim_protobuf \
+libshim_gpu 
 
 
 # Hidl

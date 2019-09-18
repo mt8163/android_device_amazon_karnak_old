@@ -63,3 +63,11 @@ LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
 LOCAL_MODULE := libshim_protobuf
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := gpu.cpp
+LOCAL_SHARED_LIBRARIES := libui libutils
+LOCAL_MODULE := libshim_gpu
+LOCAL_MODULE_TAGS := optional
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_SHARED_LIBRARY)
