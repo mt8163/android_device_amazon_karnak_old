@@ -37,6 +37,10 @@ ro.audio.silent=0
 ro.sf.lcd_density=213
 
 
+# Media Settings
+media.settings.xml=/system/vendor/etc/media_profiles_V1_0.xml
+persist.media.treble_omx=false
+
 service.wcn.driver.ready=no
 ro.mtk_key_manager_kb_path=1
 ro.mediatek.platform=MT8163
