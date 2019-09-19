@@ -110,8 +110,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap
-
+    Snap \
+    libcamera_parameters_mtk \
 
 # DRM
 PRODUCT_PACKAGES += \
