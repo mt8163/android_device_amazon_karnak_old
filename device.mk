@@ -220,6 +220,7 @@ libshim_gui \
 libshim_camera \
 libshim_sensor \
 libshim_protobuf \
+libshim_dha \
 libshim_gpu 
 
 

@@ -230,5 +230,6 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
 /system/bin/amzn_drmprov_check|libshim_dha.so \
 /vendor/lib/libcam.client.so|libshim_egl.so \
-/vendor/lib/libui_ext.so|libshim_gpu.so
+/vendor/lib/libui_ext.so|libshim_gpu.so \
+/vendor/lib/libaudiocomponentengine.so|libshim_egl.so
 
