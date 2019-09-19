@@ -25,6 +25,10 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
+# SurfaceFlinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.protected_contents=true
+
 #Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
