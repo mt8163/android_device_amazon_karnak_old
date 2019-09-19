@@ -194,7 +194,8 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto
 
 
 #include vendor stuff
-include vendor/amazon/karnak/karnak-vendor.mk
+include vendor/amazon/mt8163/BoardConfigVendor.mk
+include vendor/amazon/karnak/BoardConfigVendor.mk
 
 #BACKLIGHTS
 TARGET_PROVIDES_LIBLIGHT := true
