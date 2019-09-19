@@ -29,6 +29,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 
 
+# SurfaceFlinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.protected_contents=true
+
 #Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
