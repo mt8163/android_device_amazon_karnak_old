@@ -164,8 +164,8 @@ PRODUCT_PACKAGES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
-    libbt-vendor
-
+    libbt-vendor \
+    libmtk_symbols
 
 # Permissions
 PRODUCT_COPY_FILES += \
