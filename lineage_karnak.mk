@@ -6,8 +6,6 @@ $(call inherit-product, device/amazon/karnak/device.mk)
 
 
 PRODUCT_CHARACTERISTICS := tablet
-LOCAL_PATH := device/amazon/karnak
-DEVICE_FOLDER := device/amazon/karnak
 
 
 
