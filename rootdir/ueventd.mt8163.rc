@@ -13,7 +13,7 @@
 /dev/wmtdetect            0660   system     system
 
 # BT
-/dev/stpbt                0660   bluetooth  net_bt_stack
+/dev/stpbt                0660   bluetooth  bluetooth
 
 # GPS
 /dev/stpgps               0660   gps        gps
@@ -78,3 +78,8 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_10_hyst 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_11_temp 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_11_hyst 0660 system system
+
+# USB role switch
+/sys/class/dual_role_usb/*	data_role	0660	system	system
+/sys/class/dual_role_usb/*	power_role	0660	system	system
+/sys/class/dual_role_usb/*	mode		0660	system	system

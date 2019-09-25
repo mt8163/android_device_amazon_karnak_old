@@ -6,6 +6,9 @@ on early-init
     wait /dev/.coldboot_done 10
 
 on init
+  
+   export LD_PRELOAD "libmtk_symbols.so"
+    
     mount tmpfs tmpfs /mnt/media_rw/ mode=0755,uid=1000,gid=1000
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
@@ -96,7 +99,12 @@ on post-fs
 
 
 on post-fs-data
-    # WiFi
+#Processgroup
+    chown system system /acct/uid_*
+    chmod 0777 /acct/uid_*
+
+
+# WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wpa_supplicant 0770 wifi wifi
@@ -489,7 +497,7 @@ on post-fs-data
 
 #VideoCodec
     mknod /dev/Vcodec c 160 0
-    chmod 0660 /dev/Vcodec
+    chmod 0666 /dev/Vcodec
     chown media system /dev/Vcodec
 
 #MJC
