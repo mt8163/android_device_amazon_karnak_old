@@ -28,6 +28,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(COMMON_PATH)/overlay \
+    $(COMMON_PATH)/overlay-lineage
+
+
 #Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
