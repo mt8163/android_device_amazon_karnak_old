@@ -77,7 +77,12 @@ PRODUCT_PACKAGES += \
     libalsautils \
     libtinycompress \
     libtinyxml \
-    libalsautils
+    libalsautils \
+    tinymix \
+    tinypcminfo \
+    tinycap \
+    tinyplay
+
 
 # EGL
 PRODUCT_PACKAGES += \
