@@ -39,11 +39,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
      media.stagefright.less-secure=true
 
-# Media Extractors
-BOARD_SECCOMP_POLICY := \
-    $(LOCAL_PATH)/seccomp-policy
-
-
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
@@ -209,7 +204,8 @@ libshim_gui \
 libshim_camera \
 libshim_sensor \
 libshim_protobuf \
-libshim_dha
+libshim_dha \
+libshim_drm 
 
 
 # Hidl
