@@ -120,6 +120,7 @@ TARGET_LD_SHIM_LIBS := \
 /system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
 /system/bin/amzn_drmprov_check|libshim_dha.so \
+/system/lib/hw/amzn_dha.mt8163.so|libshim_drm.so
 
 
 # Software Gatekeeper
