@@ -36,6 +36,9 @@ ro.audio.silent=0
 
 ro.sf.lcd_density=213
 
+# Disable partial updates (formerly known as 'dirty region') for Mali
+debug.hwui.use_partial_updates=false
+
 
 # Media Settings
 media.settings.xml=/system/vendor/etc/media_profiles_V1_0.xml
