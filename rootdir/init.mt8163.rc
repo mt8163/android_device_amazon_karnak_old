@@ -728,6 +728,14 @@ on boot
     chmod 0660 /sys/kernel/debug/ged/hal/custom_upbound_gpu_freq
     chown system system /sys/kernel/debug/ged/hal/custom_boost_gpu_freq
     chmod 0660 /sys/kernel/debug/ged/hal/custom_boost_gpu_freq
+    chown system system /sys/kernel/debug/ged/hal/custom_dvfs_mode
+    chmod 0660 /sys/kernel/debug/ged/hal/custom_dvfs_mode
+    chown system system /sys/kernel/debug/ged/hal/systrace_gpu_info
+    chmod 0660 /sys/kernel/debug/ged/hal/systrace_gpu_info
+    chown media media /sys/kernel/debug/ged/hal/media_event
+    chmod 0660 /sys/kernel/debug/ged/hal/media_event
+    chmod 0660 /sys/kernel/debug/ged/ge
+    chmod 0660 /sys/kernel/debug/ged/gedlog
 
     # Permission for hibernation
     chown radio system /sys/power/tuxonice
@@ -773,7 +781,6 @@ on boot
     chown shell system /proc/driver/wmt_dbg
     chown shell system /proc/driver/wmt_aee
 
-
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -puse_p2p_group_interface \
     -O/data/vendor/wifi/wpa/sockets/ \
@@ -785,11 +792,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-
-
-
-
-#Define device for ATCID
+# Define device for ATCID
     chmod 0660 /dev/ttyGS0
     chown system /dev/ttyGS0
     chmod 0660 /dev/ttyGS1
