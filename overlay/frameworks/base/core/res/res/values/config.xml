@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-<bool name="config_automatic_brightness_available">true</bool>
     <bool name="config_automatic_brightness_available">true</bool>
 
-
-
-        <!-- List supported color modes. -->
     <string-array name="networkAttributes" translatable="false" >
         <item>wifi,1,1,2,-1,true</item>
         <item>bluetooth,7,7,0,-1,true</item>
@@ -18,7 +14,7 @@
         <item>1,1</item>
         <item>7,1</item>
         <item>9,1</item>
- </string-array>
+    </string-array>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N  1 zones as follows:
@@ -49,8 +45,6 @@
         <item>9500</item>
         <item>10240</item>
     </integer-array>
-
-
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
@@ -99,14 +93,8 @@
                cell broadcasting sms, and MMS. -->
     <bool name="config_sms_capable">false</bool>
 
-
-
-
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
-
-
-
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
@@ -124,19 +112,14 @@
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
 
-
-
-
     <bool name="config_enableWifiDisplay">true</bool>
-
-
+     
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tethering over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"rndis\\d"</item>
     </string-array>
-
 
     <string-array name="config_tether_wifi_regexs">
         <item>wlan\\d</item>
@@ -161,9 +144,15 @@
     <!-- If supported, are dreams enabled? (by default) -->
     <bool name="config_dreamsEnabledByDefault">true</bool>
 
+    <!-- Control the behavior when the user long presses the home button.
+            0 - Nothing
+            1 - Launch all apps intent
+            2 - Launch assist intent
+         This needs to match the constants in
+         policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+    -->
+    <integer name="config_longPressOnHomeBehavior">2</integer>
 
-
-    <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
@@ -172,7 +161,7 @@
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
-    <bool name="config_useDevInputEventForAudioJack">true</bool>
+    <bool name="config_useDevInputEventForAudioJack">false</bool>
 
 
 
@@ -185,15 +174,16 @@
 
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
-    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
+    
+   <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
          The default is false. -->
     <bool name="config_lidControlsSleep">true</bool>
     
-    <bool name="config_user_notification_of_restrictied_mobile_access">false</bool>
     <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    
     <!-- If true, the doze component is not started until after the screen has been turned off
          and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOff">true</bool>
@@ -201,8 +191,6 @@
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
     <!-- Auto Power Modes is required for Doze and App Standby -->
     <bool name="config_enableAutoPowerModes">true</bool>
-
-    <bool name="config_supportDoubleTapWake">true</bool>
     <!-- Whether to allow process with media UID to access CameraServiceProxy -->
     <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
