@@ -9,6 +9,11 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
 
+
+# Bootanimation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOARD_PLATFORM_GPU := mali-720mp2
