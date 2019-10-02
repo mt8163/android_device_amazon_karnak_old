@@ -11,8 +11,8 @@ include vendor/amazon/karnak/BoardConfigVendor.mk
 
 
 # Bootanimation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
+TARGET_SCREEN_WIDTH := 1280
+TARGET_SCREEN_HEIGHT := 800
 
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
@@ -68,6 +68,10 @@ TARGET_USES_64_BIT_BINDER := true
 
 BOARD_NO_SECURE_DISCARD := true
 
+# Bootanimation
+TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # WIFI
 BOARD_WLAN_DEVICE := MediaTek
@@ -125,7 +129,8 @@ TARGET_LD_SHIM_LIBS := \
 /system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
 /system/bin/amzn_drmprov_check|libshim_dha.so \
-/system/lib/hw/amzn_dha.mt8163.so|libshim_drm.so
+/system/lib/hw/amzn_dha.mt8163.so|libshim_drm.so \
+/vendor/lib/mediadrm/libwvdrmengine.so|libshim_protobuf.so
 
 
 # Software Gatekeeper
@@ -133,9 +138,6 @@ BOARD_USE_SOFT_GATEKEEPER := true
 
 # Charger
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
-BOARD_RED_LED_PATH := "/sys/class/leds/red"
-BOARD_GREEN_LED_PATH := "/sys/class/leds/green"
-BOARD_BLUE_LED_PATH := "/sys/class/leds/blue"
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
 
 # Manifest
