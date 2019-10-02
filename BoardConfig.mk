@@ -1,5 +1,3 @@
-#CONTRIBUTORS
-#Kaijones23,R0rtiz.K4y0z
 DEVICE_PATH := device/amazon/karnak
 
 # Headers

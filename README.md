@@ -1,9 +1,12 @@
-# android_device_amazon_karnak
-
 ## LineageOS 16.0 for the Kindle Fire HD 8 2018 (karnak) 
 
 An unofficial port of LineageOS 16.0 for the Kindle Fire HD 8 2018 (karnak). This project is currently a work in progress. When the build is stable enough, a flashable zip will be released.
-
+## Contributors
+```
+Kaijones23
+R0rtiz 
+K4y0z
+```
 ### Building
 
 The build process is quite long and requires fair knowledge of Linux and its command line.
