@@ -10,7 +10,6 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service
 
-
 # Keymaster
 PRODUCT_PACKAGES += \
    android.hardware.keymaster@3.0-impl \
@@ -20,14 +19,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
    android.hardware.thermal@1.0-service.mtk\
 
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.1-service.clearkey \
-
-
 
 # Light
 PRODUCT_PACKAGES += \
@@ -48,12 +44,10 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0 \
     android.hardware.usb@1.0-service.basic
 
-
 # USB
 PRODUCT_PACKAGES += \
    android.hardware.usb.gadget@1.0-impl \
    android.hardware.usb.gadget@1.0-service
-
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -62,7 +56,6 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service
-
 
 # Memtrack
 PRODUCT_PACKAGES += \
@@ -89,9 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-service \
-    android.hardware.bluetooth@1.0-service.mtk \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-service.mtk
 
 # Wifi
 PRODUCT_PACKAGES += \
