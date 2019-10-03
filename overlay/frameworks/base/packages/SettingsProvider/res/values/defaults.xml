@@ -24,4 +24,6 @@
     <integer name="def_screen_brightness">50</integer>
     <!-- 30 seconds for default screen timeout -->
     <integer name="def_screen_off_timeout">60000</integer>
+    <!-- Default for UI touch sounds enabled -->
+    <bool name="def_sound_effects_enabled">false</bool>
 </resources>
