@@ -84,7 +84,6 @@ vendor/lib/lib3a.so
 vendor/lib/libcam.metadataprovider.so
 vendor/lib/libcam.paramsmgr.so
 vendor/lib/libcam_utils.so
-vendor/lib/mediadrm
 vendor/lib/mediadrm/libmockdrmcryptoplugin.so
 vendor/lib/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/mediadrm/libplayreadydrmplugin.so
@@ -247,7 +246,6 @@ vendor/etc/.tp/ht120.mtc
 vendor/etc/init/securetime.rc
 vendor/etc/audio_policy.conf
 vendor/etc/partition_permission.sh
-vendor/etc/radvd
 vendor/etc/radvd/radvd.conf
 vendor/etc/custom.conf
 vendor/etc/dolby
