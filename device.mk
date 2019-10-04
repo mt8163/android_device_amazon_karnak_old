@@ -132,10 +132,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
+# etc
 PRODUCT_PACKAGES += \
     libion \
     libcap

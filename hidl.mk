@@ -80,6 +80,10 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service.mtk \
     android.hardware.audio@2.0-impl.mtk
 
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service.mtk
