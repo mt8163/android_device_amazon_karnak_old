@@ -84,7 +84,6 @@ vendor/lib/lib3a.so
 vendor/lib/libcam.metadataprovider.so
 vendor/lib/libcam.paramsmgr.so
 vendor/lib/libcam_utils.so
-vendor/lib/mediadrm
 vendor/lib/mediadrm/libmockdrmcryptoplugin.so
 vendor/lib/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/mediadrm/libplayreadydrmplugin.so
