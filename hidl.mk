@@ -91,3 +91,7 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service
+
+#livedisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service-mediatek
