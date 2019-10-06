@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-<bool name="config_automatic_brightness_available">true</bool>
+    <bool name="config_automatic_brightness_available">true</bool>
+    
+    <!-- Boolean indicating whether the wifi chipset supports background scanning mechanism.
+         This mechanism allows the host to remain in suspend state and the dongle to actively
+         scan and wake the host when a configured SSID is detected by the dongle. This chipset
+         capability can provide power savings when wifi needs to be always kept on. -->
+    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
 
 
@@ -88,6 +94,7 @@
 
 
     <bool name="config_enableWifiDisplay">true</bool>
+<<<<<<< HEAD
 
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -110,6 +117,8 @@
         <item>"bt-pan"</item>
         <item>"bt-dun"</item>
     </string-array>
+=======
+>>>>>>> fe7a9b8... karnak: overlay:allow the volume keys to be swapped
 
     <!-- Disable lockscreen rotation by default -->
     <bool name="config_enableLockScreenRotation">true</bool>
