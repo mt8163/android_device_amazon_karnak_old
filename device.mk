@@ -33,6 +33,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
+
+
+# Thermal
+PRODUCT_PACKAGES +=\
+    thermal.mt8163
     
 # Wi-Fi
 PRODUCT_PACKAGES += \
