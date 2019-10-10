@@ -34,15 +34,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES +=\
     lights.mt8163
 
-# Power
-PRODUCT_PACKAGES +=\
-    power.mt8163
-
 # Thermal
 PRODUCT_PACKAGES +=\
-    thermal.mt8163 \
-    thermal_manager
-
+    thermal.mt8163
+    
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
