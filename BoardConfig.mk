@@ -124,10 +124,10 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
-/system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
+/vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/system/bin/amzn_drmprov_check|libshim_dha.so \
-/system/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
+/vendor/bin/amzn_drmprov_check|libshim_dha.so \
+/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
 
 
 # Software Gatekeeper
