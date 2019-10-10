@@ -155,7 +155,7 @@ PRODUCT_PACKAGES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
-    libbt-vendor \
+    libbt-vendor 
 
 # Permissions
 PRODUCT_COPY_FILES += \
