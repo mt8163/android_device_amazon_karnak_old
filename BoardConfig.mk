@@ -125,12 +125,13 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/hw/hwcomposer.mt8163.so|libshim_egl.so \
 /vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
-/system/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
+/vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/system/bin/amzn_drmprov_check|libshim_dha.so \
+/vendor/bin/amzn_drmprov_check|libshim_dha.so \
 /vendor/lib/libcam.client.so|libshim_egl.so \
 /vendor/lib/libui_ext.so|libshim_gpu.so \
 /vendor/lib/libaudiocomponentengine.so|libshim_egl.so
+/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
 
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
