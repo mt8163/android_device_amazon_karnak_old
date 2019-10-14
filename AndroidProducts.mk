@@ -1,1 +1,1 @@
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/full_karnak.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/lineage_karnak.mk
