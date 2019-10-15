@@ -37,8 +37,9 @@ PRODUCT_PACKAGES +=\
 
 # Thermal
 PRODUCT_PACKAGES +=\
-    thermal.mt8163
-    
+    thermal.mt8163 \
+    thermal_manager
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
