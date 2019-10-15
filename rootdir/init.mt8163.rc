@@ -99,17 +99,6 @@ on post-fs
 
 
 on post-fs-data
-#Processgroup
-    chown system system /acct/uid_*
-    chmod 0777 /acct/uid_*
-
-
-# WiFi
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
-
-
 
 # WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
