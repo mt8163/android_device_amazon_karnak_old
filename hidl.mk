@@ -33,12 +33,7 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl
 
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl-mediatek \
-    android.hardware.power@1.0-service-mediatek
-
-# Usb HAL
+# USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0 \
     android.hardware.usb@1.0-service.basic
