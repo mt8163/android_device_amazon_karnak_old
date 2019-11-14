@@ -4,6 +4,8 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
     wait /dev/.coldboot_done 10
+    # Loading kernel modules in background
+    start insmod_sh
 
 on init
   
@@ -869,6 +871,13 @@ service bugreport /system/bin/dumpstate -d -p -B \
 # start ged_srv
 on property:sys.boot_completed=1
     start ged_srv
+
+service insmod_sh /vendor/bin/init.insmod.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
 
 service ged_srv /vendor/bin/ged_srv
     class core
