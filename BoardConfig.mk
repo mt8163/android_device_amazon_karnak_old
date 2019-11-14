@@ -46,8 +46,11 @@ BOARD_MKBOOTIMG_ARGS := \
     --second_offset $(BOARD_SECOND_OFFSET)   \
     --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 
-
-TARGET_PREBUILT_KERNEL := device/amazon/karnak/prebuilt/Image.gz-dtb
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_SOURCE := kernel/amazon/karnak
+TARGET_KERNEL_CONFIG := karnak_defconfig
+TARGET_KERNEL_VARIANT_CONFIG := karnak_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX :=  /build/android/lineage16/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
