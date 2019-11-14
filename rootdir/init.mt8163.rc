@@ -1,9 +1,9 @@
 import /vendor/etc/init/hw/init.mt8163.usb.rc
 
 on early-init
+    write /proc/bootprof "INIT:early-init"
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
-    wait /dev/.coldboot_done 10
     # Loading kernel modules in background
     start insmod_sh
 
@@ -107,6 +107,7 @@ on post-fs
 
 
 on post-fs-data
+    write /proc/bootprof "INIT:post-fs-data"
 
 # WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -686,6 +687,7 @@ on post-fs-data
 
 on boot
 
+    write /proc/bootprof "INIT:boot"
 
     write /proc/sys/vm/dirty_writeback_centisecs 300
     chmod 0660 /sys/power/autosleep
