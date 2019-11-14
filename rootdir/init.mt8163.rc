@@ -76,6 +76,7 @@ on fs
     mount_all /vendor/etc/fstab.mt8163 --early
     mount_all /vendor/etc/fstab.mt8163 --late
     write /proc/bootprof "INIT:Mount_END"
+    write /proc/sys/vm/swappiness 100
 
 on post-fs
     swapon_all /vendor/etc/zram/fstab.zram
