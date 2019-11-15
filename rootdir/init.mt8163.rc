@@ -1,7 +1,6 @@
 import /vendor/etc/init/hw/init.mt8163.usb.rc
 
 on early-init
-    write /proc/bootprof "INIT:early-init"
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
     # Loading kernel modules in background
@@ -79,7 +78,7 @@ on fs
     write /proc/sys/vm/swappiness 100
 
 on post-fs
-    swapon_all /vendor/etc/zram/fstab.zram
+    swapon_all /vendor/etc/fstab.zram
     write /proc/sys/vm/page-cluster 0
     
     # Support legacy paths
@@ -108,14 +107,18 @@ on post-fs
 
 
 on post-fs-data
-    write /proc/bootprof "INIT:post-fs-data"
-
-# WiFi
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
 
-# BT relayer mode used VCOM
+    # BT relayer mode used VCOM
     chown bluetooth bluetooth /dev/ttyGS2
     chmod 0660 /dev/ttyGS2
 
@@ -123,7 +126,7 @@ on post-fs-data
     start amzn_drmprov
     start amzn_dha_hmac
 
-   # Create directory for storing securely securetime data
+    # Create directory for storing securely securetime data
     mkdir /data/securetime 0770 media mediadrm
 
     #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
@@ -159,10 +162,6 @@ on post-fs-data
     chmod 0660 /dev/FM50AF
     chown system camera /dev/FM50AF
 
-    # SMB
-    chown system system /proc/smb/ScreenComm
-    chmod 0660 /proc/smb/ScreenComm
-
     # GPS
     chown gps gps /sys/class/gpsdrv/gps/pwrctl
     chown gps gps /sys/class/gpsdrv/gps/suspend
@@ -170,26 +169,11 @@ on post-fs-data
     chown gps gps /sys/class/gpsdrv/gps/pwrsave
     chown gps gps /sys/class/gpsdrv/gps/status
 
-    # Create the directories used by the Wireless subsystem
-    mkdir /data/vendor/wifi 0770 wifi wifi
-    mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
-
-
-
-
    #Define device for ATCID
     chmod 660 /dev/ttyGS0 
     chown system /dev/ttyGS0 
     chmod 660 /dev/ttyGS1 
     chown system /dev/ttyGS1
-
-    # Char device for BT 3.0 HS
-     exec /system/bin/mknod /dev/ampc0 c 151 0
-    chown bluetooth bluetooth /dev/ampc0
-    chmod 0660 /dev/ampc0
 
 #
 # Connectivity related device nodes & configuration (end)
@@ -206,8 +190,6 @@ on post-fs-data
     mkdir /data/nvram 0771 root system
     mkdir /data/nvram/media 0771 media audio
 
-    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
-
     #give system access to rfkill device node
     chmod 0660 /dev/rfkill
 
@@ -222,34 +204,31 @@ on post-fs-data
 # -----------------------
 # Add by MTK
 
-# dhcp server
+    # dhcp server
     mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
 
-    
-
-# dhcpv6 server
+    # dhcpv6 server
     mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
     chown dhcp wifi /data/misc/wide-dhcpv6
 
-# change key_provisioning
+    # change key_provisioning
     mkdir /data/key_provisioning
     chmod 0770 /data/key_provisioning
     chown system system /data/key_provisioning
 
     start kisd
+    start perms
 
-# radvd
+    # radvd
     mkdir /data/misc/radvd 0770 system system
     chmod 444 /etc/radvd/radvd.conf
 
-# Mali 3D GPU driver
+    # Mali 3D GPU driver
     chmod 666 /dev/mali0
     #chown system graphics /dev/mali
 
-
-
-# Touch Panel
+    # Touch Panel
     chown root diag /sys/module/tpd_setting/parameters/tpd_calmat
     chown root diag /sys/module/tpd_setting/parameters/tpd_em_debounce_time
     chown root diag /sys/module/tpd_setting/parameters/tpd_mode
@@ -265,25 +244,25 @@ on post-fs-data
 
     chmod 0666 /dev/pmem_multimedia
 
-# watch dog kicker
+    # watch dog kicker
     write /proc/wdk "0 20 30"
 
-# set ptmx group to non-root
+    # set ptmx group to non-root
     chown root radio /dev/ptmx
 
-# RTC
+    # RTC
     mkdir /data/misc/rtc 0770 system system
 
-# M4U
+    # M4U
     chmod 0444 /dev/m4u
-#set mlock limit to infinate (for m4u operation)
+    # set mlock limit to infinate (for m4u operation)
     setrlimit 8 -1 -1
 
-# CMDQ
+    # CMDQ
     chmod 0640 /dev/mtk_cmdq
     chown system system /dev/mtk_cmdq
 
-# Sensor
+    # Sensor
     chmod 0660 /dev/hwmsensor
     chmod 0660 /dev/msensor
     chmod 0660 /dev/gsensor
@@ -479,29 +458,28 @@ on post-fs-data
     chown system system /sys/class/misc/m_glg_misc/glgbatch
     chown system system /sys/class/misc/m_glg_misc/glgflush
 
-#sensorhub
+    # sensorhub
     chmod 0660 /dev/shf
     chown system system /dev/shf
 
-#Accdet
+    # Accdet
     chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
 
-#VideoCodec
-     exec /system/bin/mknod /dev/Vcodec c 160 0
-    chmod 0660 /dev/Vcodec
+    exec /system/bin/mknod /dev/Vcodec c 160 0
+    chmod 0666 /dev/Vcodec
     chown media system /dev/Vcodec
 
-#MJC
+    # MJC
     chmod 0660 /dev/MJC
     chown media system /dev/MJC
 
-#kpd
+    # kpd
     chown radio radio /sys/devices/platform/mtk-kpd/driver/kpd_call_state
 
-#Charging Battery
+    # Charging Battery
     chown radio radio /sys/devices/platform/battery/Charging_CallState
 
-# PMIC property
+    # PMIC property
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_stop
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_ut
 
@@ -561,10 +539,10 @@ on post-fs-data
     chown system /sys/class/input/input10/wake
     chown system /sys/class/input/input10/offsets
 
-#EM eint
+    # EM eint
     chown root diag /sys/bus/platform/drivers/eint/current_eint
 
-# Display
+    # Display
     chmod 0660 /dev/graphics/fb0
     chown system graphics /dev/graphics/fb0
 
@@ -577,11 +555,11 @@ on post-fs-data
     chmod 0660 /dev/sw_sync
     chown system graphics /dev/sw_sync
 
- # for ppp options file
+    # for ppp options file
     mkdir /data/misc/ppp 0770 bluetooth net_bt
 
-# device info /proc interface
-     exec /system/bin/mknod /dev/devmap c 196 0;
+    # device info /proc interface
+    exec system/bin/mknod /dev/devmap c 196 0;
     chmod 0444 /dev/devmap
     chown root media /dev/devmap
 
@@ -594,12 +572,12 @@ on post-fs-data
     #Use uinput's default permission
     chown system net_bt_admin /dev/uinput
 
-# UIBC
+    # UIBC
     chown system media /dev/uibc
     chmod 0660 /dev/uibc
 
 
-#Camera
+    # Camera
     chmod 0660 /dev/camera-sysram
     chmod 0660 /dev/camera-isp
     chmod 0660 /dev/camera-fdvt
@@ -622,15 +600,15 @@ on post-fs-data
     chown system camera /dev/DW9718AF
     chown system camera /dev/CAM_CAL_DRV
 
-# otg_test
+   # otg_test
     chown root radio /dev/mt_otg_test
     chmod 0660 /dev/mt_otg_test
 
-# SMI
+    # SMI
     chmod 0666 /dev/MTK_SMI
     chown media media /dev/MTK_SMI
 
-#change partition permission
+    # change partition permission
 
     chmod 0640 /mtd@sec_ro
     chown root system /mtd@sec_ro
@@ -659,11 +637,11 @@ on post-fs-data
     chmod 0664 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
     chown media media /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
 
-#BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
+    # BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
     chmod 0660 /dev/ebc
     chown media media /dev/ebc
 
-#Serial Number
+    # sn
     chmod 0664 /sys/class/android_usb/android0/iSerial
     chown root system /sys/class/android_usb/android0/iSerial
     chmod 0664 /sys/devices/platform/mt_usb/cmode
@@ -673,22 +651,19 @@ on post-fs-data
     chown system system /sys/class/android_usb/android0/f_acm/port_index
     chmod 0660 /sys/class/android_usb/android0/f_acm/port_index
 
-# AGPS
+    # AGPS
     mkdir /data/agps_supl 0771 gps system
 
-#Thermal
+    # Thermal
     mkdir /data/.tp/ 0775 system system
 
-#RPMB service
+   # RPMB service
     start rpmb_svc
 
 # End of adding by MTK drivers
 # -----------------------
 
 on boot
-
-    write /proc/bootprof "INIT:boot"
-
     write /proc/sys/vm/dirty_writeback_centisecs 300
     chmod 0660 /sys/power/autosleep
 
@@ -729,22 +704,21 @@ on boot
     chmod 0770 /sys/power/tuxonice
     chmod 0220 /sys/power/tuxonice/do_hibernate
 
-# Smartbook Handler Framework
+    # Smartbook Handler Framework
     chown system system /sys/power/sb_state
     chmod 0660 /sys/power/sb_state
 
-# HMP CPU hotplug strategy
+    # HMP CPU hotplug strategy
     chown system system /proc/hps/num_base_perf_serv
     chmod 0660 /proc/hps/num_base_perf_serv
 
-# CPU freq
     chown system system /proc/cpufreq/cpufreq_limited_by_hevc
     chmod 0660 /proc/cpufreq/cpufreq_limited_by_hevc
     chown system system /proc/cpufreq/cpufreq_limited_max_freq_by_user
     chmod 0660 /proc/cpufreq/cpufreq_limited_max_freq_by_user
 
-##Netlog tool
-   #change permissions about terminal
+    ##Netlog tool
+    #change permissions about terminal
     chown root radio /proc/net/vlan/config
     chmod 0640 /proc/net/vlan/config
     chown root radio /proc/net/ip6_tables_matches
@@ -763,7 +737,7 @@ on boot
     chown root radio /proc/net/netfilter/nfnetlink_log
     chown root radio /proc/net/netfilter/nfnetlink_queue
 
-# WMT proc
+    # WMT proc
     chown shell system /proc/driver/wmt_dbg
     chown shell system /proc/driver/wmt_aee
 
@@ -779,9 +753,6 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-
-
-
 
 on property:vold.decrypt=trigger_reset_main
     write /proc/bootprof "INIT:vold.decrypt=trigger_reset_main"
@@ -830,7 +801,7 @@ on property:dev.bootcomplete=1
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
-    -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
     disabled
     oneshot
@@ -868,16 +839,6 @@ on property:wlan.driver.status=ok
 
 on property:wlan.driver.status=unloaded
     write /dev/wmtWifi "0"
-
-service bluetoothd /system/bin/bluetoothd -n
-    class main
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
-    disabled
-
 
 #
 #sensor service (begin)
@@ -940,23 +901,16 @@ service mc6420d /vendor/bin/mc6420d
     user system
     group system
     class main
+
 #
 #sensor service (end)
 #
-
-
-service NvRAMAgent /vendor/bin/nvram_agent_binder
-    class main
-    user system
-    group system
 
 service thermal_manager /vendor/bin/thermal_manager
     class main
     user system
     group system
     oneshot
-
-
 
 service wmt_loader /vendor/bin/wmt_loader
     class core
@@ -979,15 +933,12 @@ service stp_dump /vendor/bin/stp_dump3
     disabled
     oneshot
 
-
 service perms /system/bin/sh /vendor/etc/init/hw/init.permissions.sh
     class late_start
     user root
     group root
     disabled
     oneshot
-
-
 
 # Amazon DRM
 service amzn_drmprov /vendor/bin/amzn_drmprov_check
@@ -1013,26 +964,17 @@ service rpmb_svc /vendor/bin/rpmb_svc
     group system drmrpc
     disabled
 
-service cameraserver /system/bin/cameraserver
-    class main
-    user cameraserver
-    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
-    ioprio rt 4
-    writepid /dev/cpuset/foreground/tasks
-
-service mediacodec /system/bin/mediacodec
-    class main
-    user mediacodec
-    group media system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm
-    ioprio rt 4
-
-
 service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cache/logs/log
     user system
     group system log
     disabled
 
-
+service cameraserver /system/bin/cameraserver
+		class main
+		user cameraserver
+		group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
+		ioprio rt 4
+		writepid /dev/cpuset/foreground/tasks
 
 on post-fs
     # Allow writing to the kernel trace log.
@@ -1042,4 +984,3 @@ on post-fs
 
     mkdir /cache/logs 0775 system log
     start persistentLogging
-
