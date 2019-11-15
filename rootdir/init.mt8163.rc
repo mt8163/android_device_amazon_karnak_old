@@ -190,6 +190,7 @@ on post-fs-data
     # create basic filesystem structure
     mkdir /data/nvram 0771 root system
     mkdir /data/nvram/media 0771 media audio
+    chmod 0777 /data/nvram/APCFG/APRDEB/BT_Addr
 
     #give system access to rfkill device node
     chmod 0660 /dev/rfkill
