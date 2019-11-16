@@ -1,9 +1,13 @@
 ## Device configuration for Fire HD 8 2018
-==============
 
 The Fire HD 8 2018 (codenamed _"karnak/KFKAWI"_) are mid-range tablet from Amazon.
 
 It was announced in September 2018. Release date was October 2018.
+
+## Device Picture
+
+![Fire HD 8 2018](https://images.frandroid.com/wp-content/uploads/2019/04/amazon-fire-hd-8-2018.png)
+
 
 Basic   | Spec Sheet
 -------:|:----------
@@ -38,18 +42,18 @@ Front Camera | 2.0 MP
 # limitations under the License.
 #
 ```
-
-> [*For Build Instructions*](https://github.com/mt8163/android_vendor_amazon_mt8163/blob/lineage-17.0/README.md)
-
+###### Maintainers
+```
+-[Kaijones23](https://forum.xda-developers.com/member.php?u=9605864)
+-[github](https://github.com/488315)
+```
 
 ###### Contributors
 ```
-R0rtiz 
-K4y0z
+-[R0rtiz](https://forum.xda-developers.com/member.php?u=8978978)
+-[github](https://github.com/R0rt1z2)
+-[K4y0z](https://forum.xda-developers.com/member.php?u=7104332)
+-[github](https://github.com/chaosmaster)
 ```
+> [*For Build Instructions*](https://github.com/mt8163/android_vendor_amazon_mt8163/blob/lineage-16.0/README.md)
 
-
-###### Maintainers
-```
-Kaijones23
-```
