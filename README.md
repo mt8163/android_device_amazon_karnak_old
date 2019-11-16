@@ -47,10 +47,15 @@ Front Camera | 2.0 MP
 -[github](https://github.com/488315)
 
 ###### Contributors
--[R0rtiz](https://forum.xda-developers.com/member.php?u=8978978)
+-[R0rtiz]
+-[xda](https://forum.xda-developers.com/member.php?u=8978978)
 -[github](https://github.com/R0rt1z2)
--[K4y0z](https://forum.xda-developers.com/member.php?u=7104332)
+
+
+-[K4y0z]
+-[xda](https://forum.xda-developers.com/member.php?u=7104332)
 -[github](https://github.com/chaosmaster)
+
 
 
 > [*For Build Instructions*](https://github.com/mt8163/android_vendor_amazon_mt8163/blob/lineage-16.0/README.md)
