@@ -7,7 +7,6 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
 
-
 # Bootanimation
 TARGET_SCREEN_WIDTH := 1280
 TARGET_SCREEN_HEIGHT := 800
@@ -29,7 +28,6 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_USES_64_BIT_BINDER := true
-
 
 # Kernel Config
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
@@ -55,9 +53,7 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX :=  /build/android/lineage16/prebuilts/gcc/li
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
-
 BOARD_HAS_MTK_HARDWARE := true
-
 
 # Build Vendor Image
 TARGET_COPY_OUT_VENDOR := vendor
@@ -132,7 +128,6 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/bin/amzn_drmprov_check|libshim_dha.so \
 /vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
 
-
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
 
@@ -201,4 +196,3 @@ MALLOC_SVELTE := true
 
 # Disable API check
 WITHOUT_CHECK_API := true
-
