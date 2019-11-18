@@ -1,5 +1,0 @@
-# Ignore the Prebuilt kernel now because it is updated during the build
-# the latest version is 3.18.140
-# for build instructions it will be in my Build Scripts
-prebuilt/
-*.gz-dtb
