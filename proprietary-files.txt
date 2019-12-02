@@ -232,7 +232,6 @@ vendor/bin/meta_tst
 vendor/bin/wmt_concurrency
 vendor/bin/akmd09911
 vendor/etc/recovery.fstab
-vendor/etc/audio_param
 vendor/etc/audio_param/AudioParamOptions.xml
 vendor/etc/audio_effects.conf
 vendor/etc/audio-algorithms
@@ -247,7 +246,6 @@ vendor/etc/.tp/ht120.mtc
 vendor/etc/init/securetime.rc
 vendor/etc/audio_policy.conf
 vendor/etc/partition_permission.sh
-vendor/etc/radvd
 vendor/etc/radvd/radvd.conf
 vendor/etc/custom.conf
 vendor/etc/dolby
