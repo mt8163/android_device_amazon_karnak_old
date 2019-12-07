@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ifeq ($(strip $(BOARD_USES_MTK_AUDIO)),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -40,5 +39,3 @@ else ifeq ($(strip $(TARGET_BUILD_VARIANT)),userdebug)
 endif
 
 include $(BUILD_SHARED_LIBRARY)
-
-endif
