@@ -29,13 +29,14 @@
 #include <sys/param.h>
 #include <sys/time.h>
 #include <sys/limits.h>
-
+#include <unistd.h>
 
 
 #include <cutils/compiler.h>
-#include <cutils/log.h>
 #include <cutils/properties.h>
 #include <cutils/str_parms.h>
+#include <log/log.h>
+#include <utils/String8.h>
 
 #include <hardware/audio.h>
 #include <hardware/hardware.h>
@@ -48,8 +49,6 @@
 
 #define MAX_UNREAD_COUNTS            50 //to print debug information
 
-#include <utils/String8.h>
-#include <unistd.h>
 
 #define MTK_AOSP_ENHANCEMENT
 #define LOG_STREAMS_TO_FILES 0
@@ -57,32 +56,13 @@
 #include <fcntl.h>
 #include <stdio.h>
 //#endif // LOG_STREAMS_TO_FILES
-
+#include <inttypes.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
-#ifdef ALOGG
-#undef ALOGG
-#endif
-#ifdef CONFIG_MT_ENG_BUILD
-#define ALOGG(...) ALOGD(__VA_ARGS__)
-#else
-#define ALOGG
-#endif
 
 extern "C" {
 
 namespace android {
-
-// Set to 1 to enable extremely verbose logging in this module.
-#define SUBMIX_VERBOSE_LOGGING 0
-#if SUBMIX_VERBOSE_LOGGING
-#define SUBMIX_ALOGV(...) ALOGV(__VA_ARGS__)
-#define SUBMIX_ALOGE(...) ALOGE(__VA_ARGS__)
-#else
-#define SUBMIX_ALOGV(...)
-#define SUBMIX_ALOGE(...)
-#endif // SUBMIX_VERBOSE_LOGGING
 
 // NOTE: This value will be rounded up to the nearest power of 2 by MonoPipe().
 #define DEFAULT_PIPE_SIZE_IN_FRAMES  (1024*4)
@@ -108,7 +88,7 @@ namespace android {
 // Whether channel conversion (16-bit signed PCM mono->stereo, stereo->mono) is enabled.
 #define ENABLE_CHANNEL_CONVERSION    1
 // Whether resampling is enabled.
-#define ENABLE_RESAMPLING            1
+#define ENABLE_RESAMPLING            0
 #if LOG_STREAMS_TO_FILES
 // Folder to save stream log files to.
 #define LOG_STREAM_FOLDER "/data/misc/audioserver"
@@ -234,7 +214,7 @@ struct submix_stream_in {
     int log_fd;
 #endif // LOG_STREAMS_TO_FILES
 
-    volatile int16_t read_error_count;
+    volatile uint16_t read_error_count;
 };
 
 // Determine whether the specified sample rate is supported by the submix module.
@@ -245,6 +225,39 @@ const char * r_submix_streamout = "/sdcard/mtklog/audio_dump/r_submix_streamout.
 const char * r_submix_streamin = "/sdcard/mtklog/audio_dump/r_submix_streamin.pcm";
 const char * streamout_propty = "streamout.pcm.dump";
 const char * streamin_propty = "streamin.pcm.dump";
+const char * submixlog_propty = "vendor.r_submix.log";
+
+#define MT_AUDIO_ENG_BUILD_LEVEL 3
+#define MT_AUDIO_USERDEBUG_BUILD_LEVEL 2
+#define MT_AUDIO_DEFAULT_BUILD_LEVEL 1
+
+#if defined(CONFIG_MT_ENG_BUILD) //eng load
+#define _BUILD_LOG_LEVEL MT_AUDIO_ENG_BUILD_LEVEL
+static int _log_level = MT_AUDIO_ENG_BUILD_LEVEL;
+#elif defined(CONFIG_MT_USERDEBUG_BUILD) // userdebug load
+#define _BUILD_LOG_LEVEL MT_AUDIO_USERDEBUG_BUILD_LEVEL
+static int _log_level = MT_AUDIO_USERDEBUG_BUILD_LEVEL;
+#else // user load
+#define _BUILD_LOG_LEVEL MT_AUDIO_DEFAULT_BUILD_LEVEL
+static int _log_level = MT_AUDIO_DEFAULT_BUILD_LEVEL;
+#endif // CONFIG_MT_ENG_BUILD
+
+static void InitializeMTKLogLevel(const char * property) {
+    char value[PROPERTY_VALUE_MAX];
+    property_get(property, value, "-1");
+    _log_level = atoi(value);
+
+    // If log level is not specified, use build config
+    if (_log_level == -1) {
+        _log_level = _BUILD_LOG_LEVEL;
+    }
+    ALOGD_IF(_log_level >= MT_AUDIO_USERDEBUG_BUILD_LEVEL,"%s: default level[%d]", __FUNCTION__, _log_level); // user/debug/eng
+};
+
+#define MTK_ALOGV(...) ALOGD_IF(_log_level >= MT_AUDIO_ENG_BUILD_LEVEL, __VA_ARGS__) // eng
+#define MTK_ALOGD(...) ALOGD_IF(_log_level >= MT_AUDIO_USERDEBUG_BUILD_LEVEL, __VA_ARGS__) // userdebug/eng
+#define MTK_ALOGI(...) ALOGD_IF(_log_level >= MT_AUDIO_DEFAULT_BUILD_LEVEL, __VA_ARGS__) // user/userdebug/eng
+#define MTK_ALOGS(level, ...) ALOGD_IF(_log_level >= level, __VA_ARGS__) // specified level
 
 int checkAndCreateDirectory(const char * pC)
 {
@@ -422,7 +435,7 @@ static bool audio_config_compare(const audio_config * const input_config,
         return false;
     }
 #endif // !ENABLE_CHANNEL_CONVERSION
-#if ENABLE_RESAMPLING
+#if  ENABLE_RESAMPLING
     if (input_config->sample_rate != output_config->sample_rate &&
            audio_channel_count_from_in_mask(input_config->channel_mask) != 1) {
 #else
@@ -537,7 +550,7 @@ static void submix_audio_device_create_pipe_l(struct submix_audio_device * const
         device_config->pipe_frame_size = (device_config->pipe_frame_size * pipe_channel_count) /
                 channel_count;
 #endif // ENABLE_CHANNEL_CONVERSION
-        SUBMIX_ALOGV("submix_audio_device_create_pipe_l(): pipe frame size %zd, pipe size %zd, "
+        MTK_ALOGV("submix_audio_device_create_pipe_l(): pipe frame size %zd, pipe size %zd, "
                      "period size %zd", device_config->pipe_frame_size,
                      device_config->buffer_size_frames, device_config->buffer_period_size_frames);
     }
@@ -563,7 +576,7 @@ static void submix_audio_device_release_pipe_l(struct submix_audio_device * cons
         rsxadev->routes[route_idx].rsxSource = 0;
     }
     memset(rsxadev->routes[route_idx].address, 0, AUDIO_DEVICE_MAX_ADDRESS_LEN);
-#ifdef ENABLE_RESAMPLING
+#if ENABLE_RESAMPLING
     memset(rsxadev->routes[route_idx].resampler_buffer, 0,
             sizeof(int16_t) * DEFAULT_PIPE_SIZE_IN_FRAMES);
 #endif
@@ -576,7 +589,6 @@ static void submix_audio_device_destroy_pipe_l(struct submix_audio_device * cons
                                              const struct submix_stream_in * const in,
                                              const struct submix_stream_out * const out)
 {
-    MonoPipe* sink;
     ALOGV("submix_audio_device_destroy_pipe_l()");
     int route_idx = -1;
     if (in != NULL) {
@@ -636,7 +648,7 @@ static bool submix_open_validate_l(const struct submix_audio_device * const rsxa
         return false;
     }
 
-    SUBMIX_ALOGV("submix_open_validate_l(): sample rate=%d format=%x "
+    MTK_ALOGV("submix_open_validate_l(): sample rate=%d format=%x "
                  "%s_channel_mask=%x", config->sample_rate, config->format,
                  opening_input ? "in" : "out", config->channel_mask);
 
@@ -711,7 +723,7 @@ static uint32_t out_get_sample_rate(const struct audio_stream *stream)
 #else
     const uint32_t out_rate = out->dev->routes[out->route_handle].config.common.sample_rate;
 #endif // ENABLE_RESAMPLING
-    SUBMIX_ALOGV("out_get_sample_rate() returns %u for addr %s",
+    MTK_ALOGV("out_get_sample_rate() returns %u for addr %s",
             out_rate, out->dev->routes[out->route_handle].address);
     return out_rate;
 }
@@ -733,7 +745,7 @@ static int out_set_sample_rate(struct audio_stream *stream, uint32_t rate)
         ALOGE("out_set_sample_rate(rate=%u) rate unsupported", rate);
         return -ENOSYS;
     }
-    SUBMIX_ALOGV("out_set_sample_rate(rate=%u)", rate);
+    MTK_ALOGV("out_set_sample_rate(rate=%u)", rate);
     out->dev->routes[out->route_handle].config.common.sample_rate = rate;
     return 0;
 }
@@ -750,7 +762,7 @@ static size_t out_get_buffer_size(const struct audio_stream *stream)
     const size_t buffer_size_frames = calculate_stream_pipe_size_in_frames(
         stream, config, config->buffer_period_size_frames, stream_frame_size);
     const size_t buffer_size_bytes = buffer_size_frames * stream_frame_size;
-    SUBMIX_ALOGV("out_get_buffer_size() returns %zu bytes, %zu frames",
+    MTK_ALOGV("out_get_buffer_size() returns %zu bytes, %zu frames",
                  buffer_size_bytes, buffer_size_frames);
     return buffer_size_bytes;
 }
@@ -761,7 +773,7 @@ static audio_channel_mask_t out_get_channels(const struct audio_stream *stream)
     const struct submix_stream_out * const out = audio_stream_get_submix_stream_out(
             const_cast<struct audio_stream *>(stream));
     uint32_t channel_mask = out->dev->routes[out->route_handle].config.output_channel_mask;
-    SUBMIX_ALOGV("out_get_channels() returns %08x", channel_mask);
+    MTK_ALOGV("out_get_channels() returns %08x", channel_mask);
     return channel_mask;
 }
 
@@ -771,7 +783,7 @@ static audio_format_t out_get_format(const struct audio_stream *stream)
     const struct submix_stream_out * const out = audio_stream_get_submix_stream_out(
             const_cast<struct audio_stream *>(stream));
     const audio_format_t format = out->dev->routes[out->route_handle].config.common.format;
-    SUBMIX_ALOGV("out_get_format() returns %x", format);
+    MTK_ALOGV("out_get_format() returns %x", format);
     return format;
 }
 
@@ -782,7 +794,7 @@ static int out_set_format(struct audio_stream *stream, audio_format_t format)
         ALOGE("out_set_format(format=%x) format unsupported", format);
         return -ENOSYS;
     }
-    SUBMIX_ALOGV("out_set_format(format=%x)", format);
+    MTK_ALOGV("out_set_format(format=%x)", format);
     return 0;
 }
 
@@ -813,7 +825,7 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
 {
     int exiting = -1;
     AudioParameter parms = AudioParameter(String8(kvpairs));
-    SUBMIX_ALOGV("out_set_parameters() kvpairs='%s'", kvpairs);
+    MTK_ALOGV("out_set_parameters() kvpairs='%s'", kvpairs);
 
     // FIXME this is using hard-coded strings but in the future, this functionality will be
     //       converted to use audio HAL extensions required to support tunneling
@@ -856,7 +868,7 @@ static uint32_t out_get_latency(const struct audio_stream_out *stream)
             &stream->common, config, config->buffer_size_frames, stream_frame_size);
     const uint32_t sample_rate = out_get_sample_rate(&stream->common);
     const uint32_t latency_ms = (buffer_size_frames * 1000) / sample_rate;
-    SUBMIX_ALOGV("out_get_latency() returns %u ms, size in frames %zu, sample rate %u",
+    MTK_ALOGV("out_get_latency() returns %u ms, size in frames %zu, sample rate %u",
                  latency_ms, buffer_size_frames, sample_rate);
     return latency_ms;
 }
@@ -873,7 +885,7 @@ static int out_set_volume(struct audio_stream_out *stream, float left,
 static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
                          size_t bytes)
 {
-    SUBMIX_ALOGV("out_write(bytes=%zd)", bytes);
+    MTK_ALOGV("out_write(bytes=%zd)", bytes);
     ssize_t written_frames = 0;
     const size_t frame_size = audio_stream_out_frame_size(stream);
     struct submix_stream_out * const out = audio_stream_out_get_submix_stream_out(stream);
@@ -889,7 +901,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
         if (sink->isShutdown()) {
             sink.clear();
             pthread_mutex_unlock(&rsxadev->lock);
-            SUBMIX_ALOGV("out_write(): pipe shutdown, ignoring the write.");
+            MTK_ALOGV("out_write(): pipe shutdown, ignoring the write.");
             // the pipe has already been shutdown, this buffer will be lost but we must
             //   simulate timing so we don't drain the output faster than realtime
             usleep(frames * 1000000 / out_get_sample_rate(&stream->common));
@@ -913,8 +925,8 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
             static uint8_t flush_buffer[64];
             const size_t flushBufferSizeFrames = sizeof(flush_buffer) / frame_size;
             size_t frames_to_flush_from_source = frames - availableToWrite;
-            SUBMIX_ALOGV("out_write(): flushing %d frames from the pipe to avoid blocking",
-                         frames_to_flush_from_source);
+            MTK_ALOGV("out_write(): flushing %llu frames from the pipe to avoid blocking",
+                    (unsigned long long)frames_to_flush_from_source);
             while (frames_to_flush_from_source) {
                 const size_t flush_size = min(frames_to_flush_from_source, flushBufferSizeFrames);
                 frames_to_flush_from_source -= flush_size;
@@ -962,7 +974,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
         return 0;
     }
     const ssize_t written_bytes = written_frames * frame_size;
-    SUBMIX_ALOGV("out_write() wrote %zd bytes %zd frames", written_bytes, written_frames);
+    MTK_ALOGD("out_write() wrote %zd bytes %zd frames", written_bytes, written_frames);
     return written_bytes;
 }
 
@@ -994,8 +1006,9 @@ static int out_get_presentation_position(const struct audio_stream_out *stream,
         clock_gettime(CLOCK_MONOTONIC, timestamp);
     }
 
-    SUBMIX_ALOGV("out_get_presentation_position() got frames=%llu timestamp sec=%ld",
-            frames ? *frames : 0, timestamp ? timestamp->tv_sec : 0);
+    MTK_ALOGV("out_get_presentation_position() got frames=%" PRIu64" timestamp sec=%" PRIu64,
+            frames ? (unsigned long long)*frames : -1ULL,
+            timestamp ? (unsigned long long)timestamp->tv_sec : -1ULL);
 
     return ret;
 }
@@ -1056,7 +1069,7 @@ static uint32_t in_get_sample_rate(const struct audio_stream *stream)
 #else
     const uint32_t rate = in->dev->routes[in->route_handle].config.common.sample_rate;
 #endif // ENABLE_RESAMPLING
-    SUBMIX_ALOGV("in_get_sample_rate() returns %u", rate);
+    MTK_ALOGV("in_get_sample_rate() returns %u", rate);
     return rate;
 }
 
@@ -1078,7 +1091,7 @@ static int in_set_sample_rate(struct audio_stream *stream, uint32_t rate)
         return -ENOSYS;
     }
     in->dev->routes[in->route_handle].config.common.sample_rate = rate;
-    SUBMIX_ALOGV("in_set_sample_rate() set %u", rate);
+    MTK_ALOGV("in_set_sample_rate() set %u", rate);
     return 0;
 }
 
@@ -1099,7 +1112,7 @@ static size_t in_get_buffer_size(const struct audio_stream *stream)
                                   (float)config->output_sample_rate);
 #endif // ENABLE_RESAMPLING
     const size_t buffer_size_bytes = buffer_size_frames * stream_frame_size;
-    SUBMIX_ALOGV("in_get_buffer_size() returns %zu bytes, %zu frames", buffer_size_bytes,
+    MTK_ALOGV("in_get_buffer_size() returns %zu bytes, %zu frames", buffer_size_bytes,
                  buffer_size_frames);
     return buffer_size_bytes;
 }
@@ -1110,7 +1123,7 @@ static audio_channel_mask_t in_get_channels(const struct audio_stream *stream)
             const_cast<struct audio_stream*>(stream));
     const audio_channel_mask_t channel_mask =
             in->dev->routes[in->route_handle].config.input_channel_mask;
-    SUBMIX_ALOGV("in_get_channels() returns %x", channel_mask);
+    MTK_ALOGV("in_get_channels() returns %x", channel_mask);
     return channel_mask;
 }
 
@@ -1119,7 +1132,7 @@ static audio_format_t in_get_format(const struct audio_stream *stream)
     const struct submix_stream_in * const in = audio_stream_get_submix_stream_in(
             const_cast<struct audio_stream*>(stream));
     const audio_format_t format = in->dev->routes[in->route_handle].config.common.format;
-    SUBMIX_ALOGV("in_get_format() returns %x", format);
+    MTK_ALOGV("in_get_format() returns %x", format);
     return format;
 }
 
@@ -1130,7 +1143,7 @@ static int in_set_format(struct audio_stream *stream, audio_format_t format)
         ALOGE("in_set_format(format=%x) format unsupported", format);
         return -ENOSYS;
     }
-    SUBMIX_ALOGV("in_set_format(format=%x)", format);
+    MTK_ALOGV("in_set_format(format=%x)", format);
     return 0;
 }
 
@@ -1199,11 +1212,11 @@ void in_update_frame_lost_info(struct audio_stream_in *stream)
         ((int64_t)(read_time_projected.tv_sec)*(int64_t)(u4sample_rate)) \
         + (int64_t)(read_time_projected.tv_nsec) * u4sample_rate/1000000000;
 
-    if(in->read_counter_frames < projected_frames){
+    if(in->read_counter_frames < (uint64_t)projected_frames){
         in->lost_counter_frames+= (projected_frames - in->read_counter_frames);
     }
 
-    ALOGD("Proj_frames %lld, read_frames %lld, lost_frames %d",projected_frames, in->read_counter_frames, in->lost_counter_frames);
+    ALOGD("Proj_frames %" PRIu64", read_frames %" PRIu64", lost_frames %d",projected_frames, in->read_counter_frames, in->lost_counter_frames);
  }
 #endif
 
@@ -1212,25 +1225,25 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 {
     struct submix_stream_in * const in = audio_stream_in_get_submix_stream_in(stream);
     struct submix_audio_device * const rsxadev = in->dev;
-    struct audio_config *format;
     const size_t frame_size = audio_stream_in_frame_size(stream);
     const size_t frames_to_read = bytes / frame_size;
 #ifdef MTK_AOSP_ENHANCEMENT
     static int unread_count = 0;
     static int read_count = 0;
 #endif
-    if( bytes != 0)
-    {
-        SUBMIX_ALOGV("in_read bytes=%zu", bytes);
+    if( bytes != 0) {
+        MTK_ALOGV("in_read bytes=%zu", bytes);
     }
     pthread_mutex_lock(&rsxadev->lock);
 
     const bool output_standby = rsxadev->routes[in->route_handle].output == NULL
             ? true : rsxadev->routes[in->route_handle].output->output_standby;
+           // ALOGD_IF(rsxadev->routes[in->route_handle].output != NULL ,"output_standby %d", output_standby);
     const bool output_standby_transition = (in->output_standby_rec_thr != output_standby);
     in->output_standby_rec_thr = output_standby;
 
     if (in->input_standby || output_standby_transition) {
+        ALOGD("in->input_standby %d,output_standby_transition %d", in->input_standby, output_standby_transition);
         in->input_standby = false;
         // keep track of when we exit input standby (== first read == start "real recording")
         // or when we start recording silence, and reset projected time
@@ -1248,6 +1261,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
             in->last_record_start_time.tv_nsec = in->record_start_time.tv_nsec;
 #endif
             in->read_counter_frames = 0;
+            ALOGD("reset in->read_counter_frames = 0");
         }
     }
 
@@ -1279,7 +1293,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         const uint32_t output_channels = audio_channel_count_from_out_mask(
             rsxadev->routes[in->route_handle].config.output_channel_mask);
         if (input_channels != output_channels) {
-            SUBMIX_ALOGV("in_read(): %d output channels will be converted to %d "
+            MTK_ALOGV("in_read(): %d output channels will be converted to %d "
                          "input channels", output_channels, input_channels);
             // Only support 16-bit PCM channel conversion from mono to stereo or stereo to mono.
             ALOG_ASSERT(rsxadev->routes[in->route_handle].config.common.format ==
@@ -1332,11 +1346,11 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
             }
 #endif // ENABLE_CHANNEL_CONVERSION
 
-            SUBMIX_ALOGV("in_read(): frames available to read %zd", source->availableToRead());
+            MTK_ALOGV("in_read(): frames available to read %zd", source->availableToRead());
 
             frames_read = source->read(buff, read_frames);
 
-            SUBMIX_ALOGV("in_read(): frames read %zd", frames_read);
+            MTK_ALOGV("in_read(): frames read %zd", frames_read);
 
 #if ENABLE_CHANNEL_CONVERSION
             // Perform in-place channel conversion.
@@ -1368,7 +1382,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 
 #if ENABLE_RESAMPLING
             if (resampler_ratio != 1.0f) {
-                SUBMIX_ALOGV("in_read(): resampling %zd frames", frames_read);
+                MTK_ALOGV("in_read(): resampling %zd frames", frames_read);
                 const int16_t * const data = (int16_t*)buff;
                 int16_t * const resampled_buffer = (int16_t*)saved_buff;
                 // Resample with *no* filtering - if the data from the ouptut stream was really
@@ -1382,7 +1396,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
                     resampled_buffer[input_stream_frame] = data[(size_t)output_stream_frame];
                 }
                 ALOG_ASSERT(input_stream_frame <= (ssize_t)resampler_buffer_size_frames);
-                SUBMIX_ALOGV("in_read(): resampler produced %zd frames", input_stream_frame);
+                MTK_ALOGV("in_read(): resampler produced %zd frames", input_stream_frame);
                 frames_read = input_stream_frame;
                 buff = saved_buff;
             }
@@ -1395,11 +1409,11 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 
                 remaining_frames -= frames_read;
                 buff += frames_read * frame_size;
-                SUBMIX_ALOGV("  in_read (att=%d) got %zd frames, remaining=%zu",
+                MTK_ALOGV("  in_read (att=%d) got %zd frames, remaining=%zu",
                              attempts, frames_read, remaining_frames);
             } else {
                 attempts++;
-                SUBMIX_ALOGV("  in_read read returned %zd", frames_read);
+                MTK_ALOGV(" sleep in_read read returned %zd",frames_read);
                 usleep(READ_ATTEMPT_SLEEP_MS * 1000);
             }
         }
@@ -1411,13 +1425,13 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
 
     if (remaining_frames > 0) {
         const size_t remaining_bytes = remaining_frames * frame_size;
-        SUBMIX_ALOGV("  clearing remaining_frames = %zu", remaining_frames);
+        MTK_ALOGV("  clearing remaining_frames = %zu", remaining_frames);
         memset(((char*)buffer)+ bytes - remaining_bytes, 0, remaining_bytes);
 #ifdef MTK_AOSP_ENHANCEMENT
         if(remaining_frames == frames_to_read){
             unread_count++;
             if(unread_count>=MAX_UNREAD_COUNTS){
-                ALOGD("  in_read unread data (%ld)/(%ld)", remaining_frames,frames_to_read);
+                ALOGD("  in_read unread data (%zu)/(%zu)", remaining_frames,frames_to_read);
                 unread_count = 0;
             }
         }
@@ -1451,33 +1465,31 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         // projected recording time, and the observed recording time.
         long projected_vs_observed_offset_us =
                 ((int64_t)(in->read_counter_frames
-                            - (record_duration.tv_sec*sample_rate)))
+                            - ((int64_t)record_duration.tv_sec*sample_rate)))
                         * 1000000 / sample_rate
                 - (record_duration.tv_nsec / 1000);
 
-        SUBMIX_ALOGV("  record duration %5lds %3ldms, will wait: %7ldus",
+        MTK_ALOGV("  record duration %5lds %3ldms, will wait: %7ldus",
                 record_duration.tv_sec, record_duration.tv_nsec/1000000,
                 projected_vs_observed_offset_us);
         if (projected_vs_observed_offset_us > 0) {
             usleep(projected_vs_observed_offset_us);
         }
 #ifdef MTK_AOSP_ENHANCEMENT
-#ifdef LOST_FRAME_DEBUG
         else{
-            SUBMIX_ALOGV("  record duration %5lds %3ldms, projected_vs_observed_offset_us %7ldus",
+            ALOGD("  record duration %5lds %3ldms, projected_vs_observed_offset_us %7ldus",
                 record_duration.tv_sec, record_duration.tv_nsec/1000000,
                 projected_vs_observed_offset_us);
         }
-#endif
         read_count++;
         if(read_count > 50){
             read_count = 0;
-            ALOGD("read_frames %lld, T_rec %fs, p_vs_o %7ldus",in->read_counter_frames, (float)in->read_counter_frames / sample_rate, projected_vs_observed_offset_us);
+            ALOGD("read_frames %" PRId64", T_rec %fs, p_vs_o %7ldus",in->read_counter_frames, (float)in->read_counter_frames / sample_rate, projected_vs_observed_offset_us);
         }
 #endif
     }
 
-    SUBMIX_ALOGV("in_read returns %zu", bytes);
+    MTK_ALOGV("in_read returns %zu", bytes);
     return bytes;
 
 }
@@ -1537,6 +1549,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
     (void)flags;
 
     *stream_out = NULL;
+    InitializeMTKLogLevel(submixlog_propty);
 
     // Make sure it's possible to open the device given the current audio config.
     submix_sanitize_config(config, false);
@@ -1731,7 +1744,7 @@ static size_t adev_get_input_buffer_size(const struct audio_hw_device *dev,
         const size_t frame_size_in_bytes = audio_channel_count_from_in_mask(config->channel_mask) *
                 audio_bytes_per_sample(config->format);
         const size_t buffer_size = max_buffer_period_size_frames * frame_size_in_bytes;
-        SUBMIX_ALOGV("adev_get_input_buffer_size() returns %zu bytes, %zu max frames",
+        MTK_ALOGV("adev_get_input_buffer_size() returns %zu bytes, %zu max frames",
                  buffer_size, max_buffer_period_size_frames);
         return buffer_size;
     }
@@ -1774,6 +1787,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         pthread_mutex_unlock(&rsxadev->lock);
         return -EINVAL;
     }
+    InitializeMTKLogLevel(submixlog_propty);
 
 #if ENABLE_LEGACY_INPUT_OPEN
     in = rsxadev->routes[route_idx].input;

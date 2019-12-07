@@ -11,13 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+ifeq ($(strip $(BOARD_USES_MTK_AUDIO)),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := audio.r_submix.$(TARGET_BOARD_PLATFORM)
 LOCAL_PROPRIETARY_MODULE := true
+LOCAL_MODULE_OWNER := mtk
 LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_HEADER_LIBRARIES  += libhardware_headers libaudio_system_headers libsystem_headers
 
 LOCAL_SRC_FILES := \
 	audio_hw.cpp
@@ -32,7 +35,10 @@ LOCAL_CFLAGS := -Wno-unused-parameter
 
 ifeq ($(strip $(TARGET_BUILD_VARIANT)),eng)
   LOCAL_CFLAGS += -DCONFIG_MT_ENG_BUILD
+else ifeq ($(strip $(TARGET_BUILD_VARIANT)),userdebug)
+  LOCAL_CFLAGS += -DCONFIG_MT_USERDEBUG_BUILD
 endif
 
 include $(BUILD_SHARED_LIBRARY)
 
+endif
