@@ -322,7 +322,7 @@ static int wpa_driver_nl80211_testmode(void *priv, const u8 *data, size_t data_l
     if (!msg)
         return -1;
 
-    wpa_printf(MSG_EXCESSIVE, "nl80211 test mode: ifindex=%d", drv->ifindex);
+    wpa_printf(MSG_DEBUG, "nl80211 test mode: ifindex=%d", drv->ifindex);
 
     nl80211_cmd(drv, msg, 0, NL80211_CMD_TESTMODE);
 
@@ -933,7 +933,7 @@ static int print_sta_statistics(struct wpa_supplicant *wpa_s, struct wpa_driver_
         pos += ret;
 
         if (((i + 1) % 4) == 0) {
-            ret = os_snprintf(pos, end - pos, " ", sta_stats->reserved[i]);
+            ret = os_snprintf(pos, end - pos, " ");
             if (ret < 0 || ret >= end - pos)
                 return 0;
             pos += ret;
@@ -955,7 +955,7 @@ static int print_sta_statistics(struct wpa_supplicant *wpa_s, struct wpa_driver_
         pos += ret;
 
         if (((i + 1) % 4) == 0) {
-            ret = os_snprintf(pos, end - pos, " ", sta_stats->reserved[i]);
+            ret = os_snprintf(pos, end - pos, " ");
             if (ret < 0 || ret >= end - pos)
                 return 0;
             pos += ret;
@@ -1116,12 +1116,12 @@ static int p2p_ctrl_iface_set_opps(struct wpa_supplicant *wpa_s, char *cmd, char
 
         ssid = wpa_config_parse_string(str, &ssid_len);
         if (ssid) {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%ld)%s\n",
+            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)%s\n",
                 CTWin, MAC2STR(addr), ssid_len, ssid);
             os_free(ssid);
         }
         else {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%ld)\n",
+            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)\n",
                 CTWin, MAC2STR(addr), ssid_len);
         }
     }
@@ -1170,12 +1170,12 @@ static int p2p_ctrl_iface_set_sleep(struct wpa_supplicant *wpa_s, char *cmd, cha
 
         ssid = wpa_config_parse_string(str, &ssid_len);
         if (ssid) {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_sleep "MACSTR" SSID(%ld)%s\n",
+            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_sleep "MACSTR" SSID(%zu)%s\n",
                 MAC2STR(addr), ssid_len, ssid);
             os_free(ssid);
         }
         else {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_sleep "MACSTR" SSID(%ld)\n",
+            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_sleep "MACSTR" SSID(%zu)\n",
                 MAC2STR(addr), ssid_len);
         }
     }
@@ -1606,7 +1606,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
         return -1;
     }
 
-    if (os_strcmp(bss->ifname, "ap0") == 0) {
+    if (bss->drv->nlmode == NL80211_IFTYPE_AP) {
         hapd = (struct hostapd_data *)(drv->ctx);
     }
     else {
@@ -1617,7 +1617,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
         }
     }
 
-    wpa_printf(MSG_EXCESSIVE, "%s: %s recv cmd %s", __func__, bss->ifname, cmd);
+    wpa_printf(MSG_INFO, "%s: %s recv cmd %s", __func__, bss->ifname, cmd);
     handled = 1;
 
     if (os_strncasecmp(cmd, "POWERMODE ", 10) == 0) {
@@ -1889,7 +1889,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
                 }
             }
 
-            wpa_printf(MSG_DEBUG, "mcc = %d wpa_s drv_flags 0x%lx", mcc, wpa_s->drv_flags);
+            wpa_printf(MSG_DEBUG, "mcc = %d", mcc);
             ret = 0;
         }
     } else if (os_strncmp(cmd, "p2p_set_opps ", 13) == 0) {
@@ -2017,7 +2017,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
             ret = snprintf(buf, buf_len, "%s\n", "FAIL");
         } else {
 
-            wpa_printf(MSG_EXCESSIVE, "%s: ret = %d used = %u total = %u",
+            wpa_printf(MSG_INFO, "%s: ret = %d used = %u total = %u",
                     __func__, ret , priv_cmd.used_len, priv_cmd.total_len);
 
             drv_errors = 0;
