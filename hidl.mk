@@ -29,9 +29,7 @@ PRODUCT_PACKAGES += \
 # Light
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl-mediatek \
-    android.hardware.light@2.0-service-mediatek \
-    android.hardware.light@2.0-service \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-service-mediatek 
 
 # USB HAL
 PRODUCT_PACKAGES += \
@@ -58,8 +56,6 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service \
     android.hardware.sensors@1.0-impl-mediatek \
     android.hardware.sensors@1.0-service-mediatek
 
@@ -73,9 +69,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio@2.0-service \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service.mtk \
-    android.hardware.audio@2.0-impl.mtk
+    android.hardware.audio@2.0-impl
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
