@@ -1,3 +1,14 @@
+
+# onn8 codec libs to fix hulu and netflix and prime video
+vendor/lib/libMtkOmxVdecEx.so|478d59a82c9108aa9f1485c227522cd48d28a2da
+vendor/lib/libMtkOmxCore.so|f6dc426bb7be19dd1b62e355825bec0dd3fcf89d
+vendor/lib/libMtkOmxVenc.so|5f1f4b7cf3ca195d61dabf0c9a7e290778aeb62f 
+vendor/lib/drm/libdrmmtkplugin.so|054a533ec5f3ad622fd9e71d7f66c13bcbcf1c6c 
+vendor/lib/drm/libdrmctaplugin.so|0a41a4d79bef9730f6eb028d8c64dc92da3ed209
+
+
+
+
 bin/amzn_dha_hmac
 bin/amzn_dha_tool
 bin/amzn_drmprov_tool
@@ -111,7 +122,6 @@ vendor/lib/libcvsd_mtk.so
 vendor/lib/libcam.utils.sensorlistener.so
 vendor/lib/libbluetooth_mtk.so
 vendor/lib/libcam.camadapter.so
-vendor/lib/libMtkOmxVdecEx.so
 vendor/lib/libvc1dec_sa.ca7.so
 vendor/lib/libcam.exif.v3.so
 vendor/lib/libaudiotoolkit.so
@@ -129,7 +139,6 @@ vendor/lib/libvp8dec_sa.ca7.so
 vendor/lib/libdrmmtkutil.so
 vendor/lib/libcam.halsensor.so
 vendor/lib/libaudiocustparam.so
-vendor/lib/libMtkOmxVenc.so
 vendor/lib/libcam.campipe.so
 vendor/lib/libcam.device3.so
 vendor/lib/libcustom_nvram.so
@@ -161,8 +170,6 @@ vendor/lib/libaudiosetting.so
 vendor/lib/libOpenCL.so
 vendor/lib/libcam_mmp.so
 vendor/lib/libdlbmemoryservice.so
-vendor/lib/drm/libdrmmtkplugin.so
-vendor/lib/drm/libdrmctaplugin.so
 vendor/lib/libnvramagentclient.so
 vendor/lib/libimageio_plat_drv_FrmB.so
 vendor/lib/libcam.iopipe_FrmB.so
@@ -183,7 +190,6 @@ vendor/lib/lib_uree_mtk_crypto.so
 vendor/lib/libvcodec_utility.so
 vendor/lib/liblic_divx.so
 vendor/lib/libvp8enc_sa.ca7.so
-vendor/lib/libMtkOmxCore.so
 vendor/lib/libdpframework.so
 vendor/lib/libm4u.so
 vendor/lib/libhevce_sb.ca7.android.so
