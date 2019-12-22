@@ -2,62 +2,46 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 LOCAL_PATH := device/amazon/karnak
 DEVICE_FOLDER := device/amazon/karnak
 
-
+# Build Date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
 
 PRODUCT_CHARACTERISTICS := tablet
-
-
-
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal large
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.service.acm.enable=0 \
-    persist.sys.dun.override=0 \
     camera.disable_zsl_mode=1 \
     sys.usb.ffs.aio_compat=1 \
     ro.mount.fs=EXT4 \
     ro.mtk_key_manager_kb_path=1 \
     persist.sys.debug.multi_window=true
 
-
-
-# SurfaceFlinger
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.protected_contents=true
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage
 
 #Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
      media.stagefright.legacyencoder=true \
      media.stagefright.less-secure=true
 
-# Media Extractors
-BOARD_SECCOMP_POLICY := \
-    $(LOCAL_PATH)/seccomp-policy
-
-
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
 
-
-#Rootdir
+# Power
 PRODUCT_PACKAGES +=\
-    fstab.mt8163 \
-    fstab.zram \
-    init.mt8163.usb.rc \
-    init.mt8163.rc \
-    md32_package \
-    ueventd 
+    power.mt8163
 
-
+# Thermal
+PRODUCT_PACKAGES +=\
+    thermal.mt8163 \
+    thermal_manager
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
@@ -86,44 +70,19 @@ PRODUCT_PACKAGES += \
     libalsautils \
     libtinycompress \
     libtinyxml \
-    libalsautils
+    libalsautils \
+    tinymix \
+    tinypcminfo \
+    tinycap \
+    tinyplay
 
 # EGL
 PRODUCT_PACKAGES += \
   libGLES_android
 
-
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
-
-
-
-
-# System
-PRODUCT_COPY_FILES += \
-  $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_audio.xml \
-  $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_video.xml \
-  $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-  $(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-  $(LOCAL_PATH)/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-  $(LOCAL_PATH)/configs/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
-  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
-
-
-# Camera
-PRODUCT_PACKAGES += \
-    Snap
-
-
-# DRM
-PRODUCT_PACKAGES += \
-    libdrm \
-    libmockdrmcryptoplugin \
-    libdrmclearkeyplugin
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -136,12 +95,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_PATH)/perm/init.permissions.sh:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.permissions.sh
 
-
-# Camera Legacy
-PRODUCT_PROPERTY_OVERRIDES += \
-     media.stagefright.legacyencoder=true \
-     media.stagefright.less-secure=true
-
+# Codecs
+PRODUCT_COPY_FILES += \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_audio.xml \
+  $(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_video.xml \
+  $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+  $(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+  $(LOCAL_PATH)/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
+  frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
 # Audio Policy
 PRODUCT_COPY_FILES += \
@@ -152,7 +116,12 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/hearing_aid_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/hearing_aid_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
 
+# Seccomp_policy
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp-policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp-policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
 # Wifi
 PRODUCT_COPY_FILES += \
@@ -160,21 +129,27 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
-# Seccomp_policy
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp-policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/seccomp-policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+# Camera
+PRODUCT_PACKAGES += \
+    Camera2 \
+    libcamera_parameters_mtk \
 
+# DRM
+PRODUCT_PACKAGES += \
+    libdrm \
+    libmockdrmcryptoplugin \
+    libdrmclearkeyplugin
+
+# Camera Legacy
+PRODUCT_PROPERTY_OVERRIDES += \
+     media.stagefright.legacyencoder=true \
+     media.stagefright.less-secure=true
 
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
+# etc
 PRODUCT_PACKAGES += \
     libion \
     libcap
@@ -185,12 +160,14 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     com.android.future.usb.accessory
 
+# Symbols
+PRODUCT_PACKAGES += \
+    libmtk_symbols
 
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
-    libbt-vendor
-
+    libbt-vendor 
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -211,31 +188,22 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 
-# Shipping API level (for CTS backward compatibility)
-PRODUCT_SHIPPING_API_LEVEL := 25
-
-
-
-
 # Libshims
 PRODUCT_PACKAGES += \
-libshim_asp \
-libshim_egl \
-libshim_gui \
-libshim_camera \
-libshim_sensor \
-libshim_protobuf \
-libshim_dha \
-libshim_gpu 
-
+     libshim_asp \
+     libshim_egl \
+     libshim_gui \
+     libshim_camera \
+     libshim_sensor \
+     libshim_protobuf \
+     libshim_dha \
+     libshim_gpu 
 
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
 
-
 include vendor/amazon/karnak/karnak-vendor.mk
 include vendor/amazon/mt8163/mt8163-vendor.mk
-
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
