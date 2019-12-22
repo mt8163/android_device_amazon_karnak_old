@@ -160,10 +160,6 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     com.android.future.usb.accessory
 
-# Symbols
-PRODUCT_PACKAGES += \
-    libmtk_symbols
-
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
