@@ -27,7 +27,10 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 # SurfaceFlinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.protected_contents=true
+    ro.surface_flinger.protected_contents=true \
+    ro.surface_flinger.running_without_sync_framework=true \
+    ro.surface_flinger.present_time_offset_from_vsync_ns=0 \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
 
 #Camera Legacy
 PRODUCT_PROPERTY_OVERRIDES += \
