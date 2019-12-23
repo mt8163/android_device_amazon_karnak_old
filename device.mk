@@ -96,7 +96,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/md32_p.bin:root/md32_p.bin \
     $(LOCAL_PATH)/rootdir/md32_d.bin:root/md32_d.bin \
     $(LOCAL_PATH)/rootdir/fstab.mt8163:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.mt8163 \
-    $(LOCAL_PATH)/rootdir/fstab.zram:$(TARGET_COPY_OUT_VENDOR)/etc/zram/fstab.zram \
     $(LOCAL_PATH)/rootdir/init.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.rc \
     $(LOCAL_PATH)/rootdir/init.mt8163.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.usb.rc \
     $(LOCAL_PATH)/rootdir/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
