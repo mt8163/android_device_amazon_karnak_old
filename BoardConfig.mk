@@ -124,7 +124,7 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/bin/amzn_drmprov_check|libshim_dha.so \
 /vendor/lib/libcam.client.so|libshim_egl.so \
 /vendor/lib/libui_ext.so|libshim_gpu.so \
-/vendor/lib/libaudiocomponentengine.so|libshim_egl.so
+/vendor/lib/libaudiocomponentengine.so|libshim_egl.so \
 /vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
 
 # Software Gatekeeper
