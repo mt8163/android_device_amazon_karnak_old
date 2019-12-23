@@ -195,5 +195,7 @@ TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 #Use dlmalloc instead of jemalloc for mallocs
 MALLOC_SVELTE := true
 
+BUILD_BROKEN_DUP_RULES := true
+
 # Disable API check
 WITHOUT_CHECK_API := true
