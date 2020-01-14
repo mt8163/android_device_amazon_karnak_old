@@ -43,6 +43,11 @@ PRODUCT_PACKAGES +=\
     thermal.mt8163 \
     thermal_manager
 
+# Audio Shim
+PRODUCT_PACKAGES += \
+   libaudio_shim \
+   audiofix
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
@@ -151,10 +156,6 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libnl_2 \
     com.android.future.usb.accessory
-
-# Symbols
-PRODUCT_PACKAGES += \
-    libmtk_symbols
 
 # Bluetooth
 PRODUCT_PACKAGES += \
