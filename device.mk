@@ -68,14 +68,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio_policy.stub \
     audio.r_submix.default \
-    audio.usb.default \
     libaudio-resampler \
     libaudioroute \
     libtinyalsa \
     libalsautils \
     libtinycompress \
     libtinyxml \
-    libalsautils \
     tinymix \
     tinypcminfo \
     tinycap \
@@ -84,6 +82,7 @@ PRODUCT_PACKAGES += \
 # EGL
 PRODUCT_PACKAGES += \
   libGLES_android
+
 
 # Net
 PRODUCT_PACKAGES += \
