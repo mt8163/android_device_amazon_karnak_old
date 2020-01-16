@@ -1,4 +1,4 @@
-import init.mt8163.usb.rc
+import /vendor/etc/init/hw/init.mt8163.usb.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -73,8 +73,8 @@ on fs
     write /proc/bootprof "INIT:Mount_START"
     mkdir /dev/block/platform/mtk-msdc.0
     symlink ../soc/11230000.mmc /dev/block/platform/mtk-msdc.0/11230000.MSDC0
-    mount_all /fstab.mt8163 --early
-    mount_all /fstab.mt8163 --late
+    mount_all /vendor/etc/fstab.mt8163 --early
+    mount_all /vendor/etc/fstab.mt8163 --late
     write /proc/bootprof "INIT:Mount_END"
 
 on post-fs
