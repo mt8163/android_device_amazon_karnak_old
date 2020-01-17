@@ -942,7 +942,7 @@ service mc6420d /vendor/bin/mc6420d
 
 service thermal_manager /vendor/bin/thermal_manager
     class main
-    user system
+    user root
     group system
     oneshot
 
