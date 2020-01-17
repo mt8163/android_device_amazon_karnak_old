@@ -657,7 +657,7 @@ on post-fs-data
     mkdir /data/agps_supl 0771 gps system
 
     # Thermal
-    mkdir /data/.tp/ 0775 system system
+    mkdir /data/vendor/.tp/ 0775 system system
 
    # RPMB service
     start rpmb_svc
