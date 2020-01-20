@@ -7,8 +7,9 @@
 # WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
 # FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.You should have 
 # received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+# the reason why the system has to use this because the init_verifier doesnt accept these anymore
 log -p i -t perms "Beginning of init.permissions.sh"
-log -p i -t perms "setting permissions for ATCID"
+log -p i -t perms "setting permissions for dev/ttyGS0"
 #Define device for ATCID
 chmod 0660 /dev/ttyGS0
 chown system:system /dev/ttyGS0
@@ -16,13 +17,13 @@ chmod 0660 /dev/ttyGS1
 chown system:system /dev/ttyGS1
 
 
-log -p i -t perms "setting permissions for EMCSMDLOGGER"
+log -p i -t perms "setting permissions for /dev/ttyGS3"
 # define device for EMCSMDLOGGER
 chmod 0660 /dev/ttyGS3
 chown system:radio /dev/ttyGS3
 
 # LEDS
-log -p i -t perms "setting permissions for LEDS"
+log -p i -t perms "setting permissions for /sys/class/leds/lcd-backlight/brightness"
 chmod 0664 /sys/class/leds/lcd-backlight/brightness
 chown system:system /sys/class/leds/red/trigger
 chown system:system /sys/class/leds/green/trigger
