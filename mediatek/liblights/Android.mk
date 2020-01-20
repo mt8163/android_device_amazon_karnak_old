@@ -30,6 +30,7 @@ LOCAL_SHARED_LIBRARIES := liblog
 
 LOCAL_MODULE := lights.mt8163
 LOCAL_PROPRIETARY_MODULE := true
+LOCAL_MODULE_OWNER := mtk
 
 include $(BUILD_SHARED_LIBRARY)
 include $(LOCAL_PATH)/2.0/default/Android.mk

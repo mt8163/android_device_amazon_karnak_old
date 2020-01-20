@@ -419,7 +419,6 @@ static int
 set_speaker_light_locked(__attribute__((__unused__)) struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int len;
     int alpha, red, green, blue;
     int onMS, offMS;
     unsigned int colorRGB;
