@@ -88,7 +88,7 @@ namespace android {
 // Whether channel conversion (16-bit signed PCM mono->stereo, stereo->mono) is enabled.
 #define ENABLE_CHANNEL_CONVERSION    1
 // Whether resampling is enabled.
-#define ENABLE_RESAMPLING            0
+#define ENABLE_RESAMPLING            1
 #if LOG_STREAMS_TO_FILES
 // Folder to save stream log files to.
 #define LOG_STREAM_FOLDER "/data/misc/audioserver"
@@ -221,10 +221,10 @@ struct submix_stream_in {
 
 /* Deump in/out stream functions */
 
-const char * r_submix_streamout = "/sdcard/mtklog/audio_dump/r_submix_streamout.pcm";
-const char * r_submix_streamin = "/sdcard/mtklog/audio_dump/r_submix_streamin.pcm";
-const char * streamout_propty = "streamout.pcm.dump";
-const char * streamin_propty = "streamin.pcm.dump";
+const char * r_submix_streamout = "/data/vendor/audiohal/audio_dump/r_submix_streamout.pcm";
+const char * r_submix_streamin = "/data/vendor/audiohal/audio_dump/r_submix_streamin.pcm";
+const char * streamout_propty = "vendor.streamout.pcm.dump";
+const char * streamin_propty = "vendor.streamin.pcm.dump";
 const char * submixlog_propty = "vendor.r_submix.log";
 
 #define MT_AUDIO_ENG_BUILD_LEVEL 3
@@ -569,14 +569,12 @@ static void submix_audio_device_release_pipe_l(struct submix_audio_device * cons
             rsxadev->routes[route_idx].address);
     if (rsxadev->routes[route_idx].rsxSink != 0) {
         rsxadev->routes[route_idx].rsxSink.clear();
-        rsxadev->routes[route_idx].rsxSink = 0;
     }
     if (rsxadev->routes[route_idx].rsxSource != 0) {
         rsxadev->routes[route_idx].rsxSource.clear();
-        rsxadev->routes[route_idx].rsxSource = 0;
     }
     memset(rsxadev->routes[route_idx].address, 0, AUDIO_DEVICE_MAX_ADDRESS_LEN);
-#if ENABLE_RESAMPLING
+#ifdef ENABLE_RESAMPLING
     memset(rsxadev->routes[route_idx].resampler_buffer, 0,
             sizeof(int16_t) * DEFAULT_PIPE_SIZE_IN_FRAMES);
 #endif
@@ -592,17 +590,26 @@ static void submix_audio_device_destroy_pipe_l(struct submix_audio_device * cons
     ALOGV("submix_audio_device_destroy_pipe_l()");
     int route_idx = -1;
     if (in != NULL) {
+        bool shut_down = false;
 #if ENABLE_LEGACY_INPUT_OPEN
         const_cast<struct submix_stream_in*>(in)->ref_count--;
         route_idx = in->route_handle;
         ALOG_ASSERT(rsxadev->routes[route_idx].input == in);
         if (in->ref_count == 0) {
             rsxadev->routes[route_idx].input = NULL;
+            shut_down = true;
         }
         ALOGV("submix_audio_device_destroy_pipe_l(): input ref_count %d", in->ref_count);
 #else
         rsxadev->input = NULL;
+        shut_down = true;
 #endif // ENABLE_LEGACY_INPUT_OPEN
+        if (shut_down) {
+            sp <MonoPipe> sink = rsxadev->routes[in->route_handle].rsxSink;
+            if (sink != NULL) {
+              sink->shutdown(true);
+            }
+        }
     }
     if (out != NULL) {
         route_idx = out->route_handle;
@@ -905,6 +912,11 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
             // the pipe has already been shutdown, this buffer will be lost but we must
             //   simulate timing so we don't drain the output faster than realtime
             usleep(frames * 1000000 / out_get_sample_rate(&stream->common));
+
+            pthread_mutex_lock(&rsxadev->lock);
+            out->frames_written += frames;
+            out->frames_written_since_standby += frames;
+            pthread_mutex_unlock(&rsxadev->lock);
             return bytes;
         }
     } else {
@@ -1775,7 +1787,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
 
     status_t res = submix_get_route_idx_for_address_l(rsxadev, address, &route_idx);
     if (res != OK) {
-        ALOGE("Error %d looking for address=%s in adev_open_output_stream", res, address);
+        ALOGE("Error %d looking for address=%s in adev_open_input_stream", res, address);
         pthread_mutex_unlock(&rsxadev->lock);
         return res;
     }
@@ -1814,10 +1826,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
 
     if (!in) {
         in = (struct submix_stream_in *)calloc(1, sizeof(struct submix_stream_in));
-        if (!in){
-            pthread_mutex_unlock(&rsxadev->lock);
-            return -ENOMEM;
-        }
+        if (!in) return -ENOMEM;
         in->ref_count = 1;
 
         // Initialize the function pointer tables (v-tables).
@@ -1864,6 +1873,10 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
     ALOGV("adev_open_input_stream(): about to create pipe");
     submix_audio_device_create_pipe_l(rsxadev, config, DEFAULT_PIPE_SIZE_IN_FRAMES,
                                     DEFAULT_PIPE_PERIOD_COUNT, in, NULL, address, route_idx);
+    sp <MonoPipe> sink = rsxadev->routes[route_idx].rsxSink;
+    if (sink != NULL) {
+        sink->shutdown(false);
+    }
 #if LOG_STREAMS_TO_FILES
     if (in->log_fd >= 0) close(in->log_fd);
     in->log_fd = open(LOG_STREAM_IN_FILENAME, O_CREAT | O_TRUNC | O_WRONLY,
@@ -1902,22 +1915,20 @@ static void adev_close_input_stream(struct audio_hw_device *dev,
 
 static int adev_dump(const audio_hw_device_t *device, int fd)
 {
-#if 0
     const struct submix_audio_device * rsxadev = //audio_hw_device_get_submix_audio_device(device);
             reinterpret_cast<const struct submix_audio_device *>(
                     reinterpret_cast<const uint8_t *>(device) -
                             offsetof(struct submix_audio_device, device));
     char msg[100];
-    int n = sprintf(msg, "\nReroute submix audio module:\n");
+    int n = snprintf(msg, sizeof(msg), "\nReroute submix audio module:\n");
     write(fd, &msg, n);
     for (int i=0 ; i < MAX_ROUTES ; i++) {
-        n = sprintf(msg, " route[%d] rate in=%d out=%d, addr=[%s]\n", i,
+        n = snprintf(msg, sizeof(msg), " route[%d] rate in=%d out=%d, addr=[%s]\n", i,
                 rsxadev->routes[i].config.input_sample_rate,
                 rsxadev->routes[i].config.output_sample_rate,
                 rsxadev->routes[i].address);
         write(fd, &msg, n);
     }
-#endif
     return 0;
 }
 
