@@ -33,7 +33,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := camera.cpp
+LOCAL_SRC_FILES := camera.cpp camera_symbols.cpp
 LOCAL_SHARED_LIBRARIES := libgui libui
 LOCAL_C_INCLUDES := frameworks/native/include
 LOCAL_MODULE := libshim_camera

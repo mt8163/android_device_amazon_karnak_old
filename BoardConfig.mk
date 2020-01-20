@@ -125,7 +125,8 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/libcam.client.so|libshim_egl.so \
 /vendor/lib/libui_ext.so|libshim_gpu.so \
 /vendor/lib/libaudiocomponentengine.so|libshim_egl.so \
-/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
+/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so \
+/vendor/lib/hw//vendor/lib/hw/camera.mt8163.so|libshim_camera.so
 
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
