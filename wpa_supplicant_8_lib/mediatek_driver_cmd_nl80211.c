@@ -10,7 +10,6 @@
  *
  */
 #include "includes.h"
-#include <linux/wireless.h>
 #include "netlink/genl/genl.h"
 
 #include "common.h"
@@ -341,14 +340,6 @@ static int wpa_driver_nl80211_testmode(void *priv, const u8 *data, size_t data_l
                            (struct wpa_driver_get_sta_statistics_params *)data;
             return send_and_recv_msgs(drv, msg, testmode_sta_statistics_handler, sta_params->buf);
         }
-#ifdef CONFIG_MTK_LTE_COEX
-        case 0x30:
-        {
-            struct wpa_driver_get_available_channel_params *chan_params =
-                           (struct wpa_driver_get_available_channel_params *)data;
-            return send_and_recv_msgs(drv, msg, testmode_available_channel_handler, chan_params->buf);
-        }
-#endif
         default:
         {
             int ret = send_and_recv_msgs(drv, msg, NULL, NULL);
@@ -387,140 +378,6 @@ static int wpa_driver_nl80211_driver_sw_cmd(void *priv, int set, u32 *adr, u32 *
     wpa_driver_nl80211_testmode(priv, (u8 *)&params, sizeof(struct wpa_driver_sw_cmd_params));
     return 0;
 }
-
-#ifdef CONFIG_HOTSPOT_MGR_SUPPORT
-static int wpa_driver_hotspot_block_list_update(void *priv, const u8 *bssid, int blocked)
-{
-    struct wpa_driver_hotspot_params params;
-
-    os_memset(&params, 0, sizeof(params));
-
-    if (bssid)
-        os_memcpy(params.bssid, bssid, ETH_ALEN);
-
-    params.blocked = (u8)blocked;
-
-    params.hdr.index = NL80211_TESTMODE_HS20;
-    params.hdr.index = params.hdr.index | (0x01 << 24);
-    params.hdr.buflen = sizeof(struct wpa_driver_hotspot_params);
-
-    return wpa_driver_nl80211_testmode(priv, (u8 *)&params,
-        sizeof(struct wpa_driver_hotspot_params));
-}
-
-static int wpa_driver_sta_block(void *priv, char *cmd)
-{
-    u8 bssid[ETH_ALEN] = {};
-    int blocked = 1;
-
-    /* Block client device */
-    if (hwaddr_aton(cmd, bssid)) {
-        wpa_printf(MSG_DEBUG, "STA block: invalid DEVICE ADDRESS '%s'", cmd);
-        return -1;
-    }
-
-    wpa_printf(MSG_DEBUG, "Block STA " MACSTR, MAC2STR(bssid));
-    return wpa_driver_hotspot_block_list_update(priv, bssid, blocked);
-}
-
-static int wpa_driver_sta_unblock(void *priv, char *cmd)
-{
-    u8 bssid[ETH_ALEN] = {};
-    int blocked = 0;
-
-    /* Unblock client device */
-    if (hwaddr_aton(cmd, bssid)) {
-        wpa_printf(MSG_DEBUG, "STA unblock : invalid DEVICE ADDRESS '%s'", cmd);
-        return -1;
-    }
-
-    wpa_printf(MSG_DEBUG, "Unblock STA " MACSTR, MAC2STR(bssid));
-    return wpa_driver_hotspot_block_list_update(priv, bssid, blocked);
-}
-
-static int wpa_driver_set_max_client(void *priv, char *cmd, char *buf, size_t buflen)
-{
-    char *str = NULL;
-    int len = 0;
-    int value = 0;
-    struct wpa_driver_hotspot_set_config_params params;
-
-    os_memset(&params, 0, sizeof(params));
-
-    value = atoi(cmd);
-
-    wpa_printf(MSG_DEBUG, "CTRL_IFACE set_max_connect value=%d\n", value);
-
-    params.hdr.index = NL80211_TESTMODE_HS_SET_CONFIG;
-    params.hdr.index = params.hdr.index | (0x01 << 24);
-    params.hdr.buflen = sizeof(struct wpa_driver_hotspot_set_config_params);
-
-    params.index = 1;
-    params.value = (u32)value;
-
-    return wpa_driver_nl80211_testmode(priv, (u8 *)&params,
-        sizeof(struct wpa_driver_hotspot_set_config_params));
-}
-#endif /* CONFIG_HOTSPOT_MGR_SUPPORT */
-
-#ifdef CONFIG_MTK_LTE_COEX
-int wpa_driver_get_lte_available_channels(void *priv, struct wpa_driver_available_chan_s *buf)
-{
-    struct wpa_driver_get_available_channel_params params;
-
-    os_memset(&params, 0, sizeof(params));
-
-    params.hdr.index = 0x30;
-    params.hdr.index = params.hdr.index | (0x01 << 24);
-    params.hdr.buflen = sizeof(struct wpa_driver_get_available_channel_params);
-    /* buffer for return structure */
-    params.buf = (u8 *)buf;
-    return wpa_driver_nl80211_testmode(priv, (u8 *)&params,
-        sizeof(struct wpa_driver_get_available_channel_params));
-}
-
-static u8 wpa_driver_do_mtk_acs(void *priv)
-{
-    struct wpa_driver_available_chan_s available_chans;
-    u8  ch[14];
-    int ch_num, i;
-    int wait_cnt = 0;
-
-    do {
-        os_memset(&available_chans, 0, sizeof(struct wpa_driver_available_chan_s));
-        wpa_driver_get_lte_available_channels(priv, &available_chans);
-
-        if (BIT(31) & available_chans.ch_2g_base1) {
-            wpa_printf(MSG_DEBUG, "2G Channel: 0x%08x", available_chans.ch_2g_base1);
-            break;
-        } else {
-            wpa_printf(MSG_DEBUG, "2G Channel: 0x%08x, waiting for scan complete",
-                available_chans.ch_2g_base1);
-            wait_cnt++;
-            if (wait_cnt > 5)
-                return 0;
-            os_sleep(0, 1000*350);
-        }
-    } while(1);
-
-    os_memset(ch, 0, sizeof(ch));
-    ch_num = 0;
-
-    for (i = 0; i < 14; i++) {
-        if (BIT(i) & available_chans.ch_2g_base1) {
-            ch[ch_num] = i + 1;
-            ch_num++;
-        } else
-            continue;
-    }
-
-    wpa_printf(MSG_DEBUG, "Driver report 2G available %d channel", ch_num);
-    for (i = 0; i < ch_num; i++)
-        wpa_printf(MSG_DEBUG,"Channel %d is fine", ch[i]);
-
-    return ch[0];
-}
-#endif /* CONFIG_MTK_LTE_COEX */
 
 #ifdef CONFIG_WAPI_SUPPORT
 int wpa_driver_nl80211_set_wapi_key(void *priv,
@@ -1108,21 +965,21 @@ static int p2p_ctrl_iface_set_opps(struct wpa_supplicant *wpa_s, char *cmd, char
 
         if (hwaddr_aton(str, addr))
             return -1;
-    }
 
-    str = os_strchr(str, ' ');
-    if (str) {
-        *str ++ = '\0';
+        str = os_strchr(str, ' ');
+        if (str) {
+            *str ++ = '\0';
 
-        ssid = wpa_config_parse_string(str, &ssid_len);
-        if (ssid) {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)%s\n",
-                CTWin, MAC2STR(addr), ssid_len, ssid);
-            os_free(ssid);
-        }
-        else {
-            wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)\n",
-                CTWin, MAC2STR(addr), ssid_len);
+            ssid = wpa_config_parse_string(str, &ssid_len);
+            if (ssid) {
+                wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)%s\n",
+                    CTWin, MAC2STR(addr), ssid_len, ssid);
+                os_free(ssid);
+            }
+            else {
+                wpa_printf(MSG_DEBUG, "CTRL_IFACE set_opps CTWin=%d "MACSTR" SSID(%zu)\n",
+                    CTWin, MAC2STR(addr), ssid_len);
+            }
         }
     }
 
@@ -1241,7 +1098,7 @@ static int p2p_ctrl_iface_set_noa(struct wpa_supplicant *wpa_s, char *cmd, char 
         u32 interval;
         u32 duration;
     };
-    char *argv[64];
+    char *argv[64] = { 0 };
     int argc;
     struct wpa_driver_p2p_noa_params noa_param;
 
@@ -1283,7 +1140,7 @@ static int p2p_ctrl_iface_set_noa(struct wpa_supplicant *wpa_s, char *cmd, char 
 
 static int p2p_ctrl_iface_set_ps(struct wpa_supplicant *wpa_s, char *cmd, char *buf, size_t buflen)
 {
-    char *argv[64];
+    char *argv[64] = { 0 };
     int argc;
     int enable;
     s32 ctw;
@@ -1719,28 +1576,6 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
         ret = 0; /* mt5921 linux driver not implement yet */
     } else if (os_strncasecmp(cmd, "btcoexmode", 10) == 0) {
         ret = 0; /* mt5921 linux driver not implement yet */
-#ifdef CONFIG_HOTSPOT_MGR_SUPPORT
-    } else if (os_strncmp(cmd, "STA-BLOCK ", 10) == 0) {
-        if (wpa_driver_sta_block(priv, cmd + 10)) {
-            ret = -1;
-        } else {
-            ret = 0;
-        }
-    } else if (os_strncmp(cmd, "STA-UNBLOCK ", 12) == 0) {
-        if (wpa_driver_sta_unblock(priv, cmd + 12)) {
-            ret = -1;
-        } else {
-            ret = 0;
-        }
-    } else if (os_strncasecmp(cmd, "set_max_client ", 15) == 0) {
-        wpa_driver_set_max_client(priv, cmd + 15, buf, buf_len);
-#endif /* CONFIG_HOTSPOT_MGR_SUPPORT */
-#ifdef CONFIG_MTK_LTE_COEX
-    } else if (os_strncmp(cmd, "MTK-ACS", 7) == 0) {
-        u8 ch = wpa_driver_do_mtk_acs(priv);
-        os_memcpy(buf, &ch, sizeof(u8));
-        ret = sizeof(u8);
-#endif /* CONFIG_MTK_LTE_COEX */
 #ifdef CONFIG_WAPI_SUPPORT
     } else if (os_strncasecmp(cmd, "set-wapi-key", 12) == 0) {
         struct wapi_key_param_type {
@@ -2083,3 +1918,43 @@ int wpa_driver_set_ap_wps_p2p_ie(void *priv, const struct wpabuf *beacon,
     return 0;
 }
 
+#ifdef CONFIG_CTRL_IFACE_MTK_HIDL
+void mtk_nl80211_driver_error_event(struct wpa_driver_nl80211_data *drv,
+                u8 *data, size_t len)
+{
+    struct nlattr *tb[MTK_WALN_VENDOR_ATTR_DRIVER_ERROR_MAX + 1];
+    u32 * errorCode;
+    union wpa_event_data event;
+    struct driver_error *error;
+
+    if (nla_parse(tb, MTK_WALN_VENDOR_ATTR_DRIVER_ERROR_MAX,
+            (struct nlattr *) data, len, NULL) ||
+        !tb[MTK_WALN_VENDOR_ATTR_DRIVER_ERROR_DATA_STALL_NOTICE]) {
+        wpa_printf(MSG_DEBUG, "nl80211: mtk_nl80211_driver_error_event parse error");
+        return;
+    }
+    errorCode = nla_data(tb[MTK_WALN_VENDOR_ATTR_DRIVER_ERROR_DATA_STALL_NOTICE]);
+    wpa_printf(MSG_DEBUG, "nl80211: driver error code: %u", *errorCode);
+
+    /* Cookie match, own scan */
+    os_memset(&event, 0, sizeof(event));
+    error = &event.driver_error;
+    error->errCode = errorCode;
+
+    wpa_supplicant_event(drv->ctx, EVENT_DRIVER_ERROR, &event);
+}
+
+void nl80211_vendor_event_mtk(struct wpa_driver_nl80211_data *drv,
+                  u32 subcmd, u8 *data, size_t len)
+{
+    switch (subcmd) {
+    case WIFI_EVENT_DRIVER_ERROR:
+        mtk_nl80211_driver_error_event(drv, data, len);
+        break;
+    default:
+        wpa_printf(MSG_DEBUG,
+            "nl80211: Ignore unsupported mtk vendor event %u", subcmd);
+        break;
+    }
+}
+#endif /* CONFIG_CTRL_IFACE_MTK_HIDL */
