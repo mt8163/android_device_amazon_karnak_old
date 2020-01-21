@@ -112,8 +112,6 @@
 
 
     <bool name="config_enableWifiDisplay">true</bool>
-<<<<<<< HEAD
-
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tethering over USB this should
@@ -135,8 +133,6 @@
         <item>"bt-pan"</item>
         <item>"bt-dun"</item>
     </string-array>
-=======
->>>>>>> fe7a9b8... karnak: overlay:allow the volume keys to be swapped
 
     <!-- Disable lockscreen rotation by default -->
     <bool name="config_enableLockScreenRotation">true</bool>
