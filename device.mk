@@ -199,7 +199,8 @@ PRODUCT_PACKAGES += \
      libshim_sensor \
      libshim_protobuf \
      libshim_dha \
-     libshim_gpu 
+     libshim_gpu \
+     libshim_drm
 
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
