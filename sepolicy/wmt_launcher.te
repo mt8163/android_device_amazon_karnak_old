@@ -1,9 +1,19 @@
-type mtk_wmt_launcher_exec, exec_type, file_type;
-type mtk_wmt_launcher, domain, domain_deprecated;
+# ==============================================
+# Policy File of /system/bin/mtk_wmt_launcher Executable File
+
+
+
+type mtk_wmt_launcher ,domain;
+type mtk_wmt_launcher_exec , exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(mtk_wmt_launcher)
 
-allow mtk_wmt_launcher stpwmt_device:chr_file rw_file_perms;
-allow mtk_wmt_launcher wmt_prop:property_service set;
+set_prop(mtk_wmt_launcher, wmt_prop)
 
-unix_socket_connect(mtk_wmt_launcher, property, init)
+allow mtk_wmt_launcher stpwmt_device:chr_file rw_file_perms;
+allow mtk_wmt_launcher devpts:chr_file rw_file_perms;
+allow mtk_wmt_launcher system_file:dir { read open };
+
+# Date : W18.01
+# Add for turn on SElinux in enforcing mode
+allow mtk_wmt_launcher vendor_file:dir { read open };

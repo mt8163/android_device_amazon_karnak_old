@@ -51,7 +51,7 @@ TARGET_KERNEL_VARIANT_CONFIG :=lineageos_karnak_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX :=  /build/android/lineage16/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_HAS_MTK_HARDWARE := true
 
@@ -113,6 +113,7 @@ BLOCK_BASED_OTA := true
 
 # Seccomp filters
 BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp-policy
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun%d/file

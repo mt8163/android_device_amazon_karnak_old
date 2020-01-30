@@ -1,1 +1,11 @@
-allow healthd device:dir r_dir_perms;
+# ==============================================
+# MTK Policy Rule
+# ============
+
+#TODO:: MTK need to remove later
+not_full_treble(`
+    allow healthd mtkrild:unix_stream_socket connectto;
+')
+
+allow healthd sysfs_vcorefs_pwrctrl:file write;
+allow healthd app_data_file:file write;

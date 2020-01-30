@@ -1,5 +1,5 @@
 type ril-daemon-mtk_exec, exec_type, file_type;
-type ril-daemon-mtk, domain, domain_deprecated;
+type ril-daemon-mtk, domain;
 
 init_daemon_domain(ril-daemon-mtk)
 net_domain(ril-daemon-mtk)
