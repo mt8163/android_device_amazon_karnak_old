@@ -9,3 +9,4 @@ not_full_treble(`
 
 allow healthd sysfs_vcorefs_pwrctrl:file write;
 allow healthd app_data_file:file write;
+allow healthd sysfs:file { open read getattr };
