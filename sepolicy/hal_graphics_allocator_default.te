@@ -1,0 +1,2 @@
+allow hal_graphics_allocator_default debugfs_ion:dir search;
+allow hal_graphics_allocator proc_ged:file { read ioctl open };

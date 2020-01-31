@@ -192,4 +192,6 @@ type ril_ismdreseted_prop , property_type, mtk_core_property_type;
 type tel_switch_prop, property_type, mtk_core_property_type;
 type vendor_radio_prop, property_type, mtk_core_property_type;
 type coredump_prop, property_type, extended_core_property_type;
-
+type graphics_hwc_pid_prop, property_type;
+type graphics_debug_prop, property_type;
+type graphics_hwc_latch_unsignaled_prop, property_type;

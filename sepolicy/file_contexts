@@ -350,6 +350,14 @@
 /sys/class/invensense_daemon_class/invensense_daemon_device(/.*)?  u:object_r:gyroscope_mpud6050_file:s0
 /sys/power/vcorefs/pwr_ctrl -- u:object_r:sysfs_vcorefs_pwrctrl:s0
 /sys/devices/virtual/misc/scp(/.*)?  u:object_r:sysfs_scp:s0
+/sys/kernel/debug/mali0/gpu_memory u:object_r:debugfs_gpu_mali_midgard:s0
+/sys/kernel/debug/mali/gpu_memory u:object_r:debugfs_gpu_mali_utgard:s0
+/sys/kernel/debug/pvr(/.*)? u:object_r:debugfs_gpu_img:s0
+/sys/kernel/debug/ion/ion_mm_heap(/.*)? u:object_r:debugfs_ion_mm_heap:s0
+/sys/kernel/debug/ion/heaps(/.*)? u:object_r:debugfs_ion_mm_heap:s0
+/sys/kernel/debug/ion/client_history(/.*)? u:object_r:debugfs_ion_mm_heap:s0
+/sys/kernel/debug/ion/clients(/.*)? u:object_r:debugfs_ion:s0
+/sys/kernel/debug/ged(/.*)? u:object_r:debugfs_ged:s0
 
 
 #############################
