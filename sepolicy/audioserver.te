@@ -15,7 +15,9 @@ allow audioserver nvdata_file:dir search;
 allow audioserver nvdata_file:file getattr;
 allow audioserver platformblk_device:dir search;
 allow audioserver nvdata_file:lnk_file r_file_perms;
-
+allow audioserver sysfs_switch:dir search;
+allow audioserver sysfs_switch:file read;
+allow audioserver sysfs_switch:file open;
 # boot_mode
 allow audioserver sysfs_boot_mode:file r_file_perms;
 allow audioserver kernel:system { module_request };
