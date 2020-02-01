@@ -57,3 +57,8 @@ allow bootanim surfaceflinger:fifo_file rw_file_perms;
 
 # dev_info
 allow bootanim sysfs_devinfo:file r_file_perms;
+
+# proc 
+allow bootanim proc:file {read open ioctl};
+allow bootanim debugfs_ion:dir search;
+
