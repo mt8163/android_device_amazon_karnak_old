@@ -12,5 +12,5 @@ allow thermal_manager proc_mtktz:dir search;
 allow thermal_manager proc_mtktz:file rw_file_perms;
 allow thermal_manager thermal_manager_data_file:dir rw_dir_perms;
 allow thermal_manager thermal_manager_data_file:file create_file_perms;
-# oreo
 allow thermal_manager kernel:system { module_request };
+allow thermal_manager vendor_data_file:file { read write open setattr getattr lock };
