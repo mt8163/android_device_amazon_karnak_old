@@ -246,3 +246,15 @@ type persist_property_file, file_type;
 type power_hal_devfs, dev_type;
 type power_hal_sysfs, fs_type, sysfs_type, mlstrustedobject;
 type cw2015_data_file, file_type, core_data_file_type, data_file_type;
+
+# memtrack
+type debugfs_gpu_mali_midgard, fs_type, debugfs_type;
+type debugfs_gpu_mali_utgard, fs_type, debugfs_type;
+type debugfs_gpu_img, fs_type, debugfs_type;
+type debugfs_ion, fs_type, debugfs_type;
+type debugfs_ion_mm_heap, fs_type, debugfs_type;
+
+# ged
+type proc_ged, fs_type, proc_type;
+# gpu debugfs file
+type debugfs_ged, fs_type, debugfs_type;

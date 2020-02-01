@@ -204,7 +204,6 @@ type teei_vfs_device, dev_type;
 type hid_gadget_device, dev_type;
 type tfa9890_device, dev_type;
 type voldblk_device, dev_type;
-
 type mtk_cmdq_device, dev_type;
 type mtk_mdp_device, dev_type;
 type kb_block_device,dev_type;
@@ -212,3 +211,4 @@ type dkb_block_device,dev_type;
 type bootdevice_block_device, dev_type;
 type gps_device, dev_type;
 type urandom_device, dev_type, mlstrustedobject;
+type trustzone_device, dev_type;
