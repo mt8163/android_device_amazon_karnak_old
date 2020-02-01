@@ -457,6 +457,7 @@
 /(system|system\/vendor|vendor)/bin/mtkmal u:object_r:mtkmal_exec:s0
 /(system|system\/vendor|vendor)/bin/wifi2agps                                           u:object_r:wifi2agps_exec:s0
 /(system|system\/vendor|vendor)/bin/wmt_loader                                          u:object_r:wmt_loader_exec:s0
+/(system|system\/vendor|vendor)/bin/wmt_launcher 			                u:object_r:mtk_wmt_launcher_exec:s0
 /(system|system\/vendor|vendor)/bin/sbchk u:object_r:sbchk_exec:s0
 /(system|system\/vendor|vendor)/bin/OperaMaxSystem u:object_r:tunman_exec:s0
 /(system|system\/vendor|vendor)/etc/sensor(/.*)?	u:object_r:system_sensor_data_file:s0
