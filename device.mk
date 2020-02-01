@@ -165,6 +165,9 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     com.android.future.usb.accessory
 
+# memtrack 
+PRODUCT_PACKAGES += \
+    memtrack.mt8163
 # Bluetooth
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
