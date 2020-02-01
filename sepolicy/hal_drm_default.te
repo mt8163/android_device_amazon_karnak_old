@@ -1,2 +1,6 @@
+typeattribute hal_drm_default data_between_core_and_vendor_violators;
 allow hal_drm_default kernel:system { module_request };
 allow hal_drm_default vndbinder_device:chr_file { read write open ioctl };
+allow hal_drm_default media_data_file:dir search;
+allow hal_drm_default media_data_file:dir create_dir_perms;
+allow hal_drm_default media_data_file:file create_file_perms;
