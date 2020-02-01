@@ -75,3 +75,9 @@ allow cameraserver untrusted_app_25:fifo_file { read write };
 
 allow cameraserver platform_app:fifo_file { getattr read open };
 allow cameraserver Vcodec_device:chr_file { open getattr read write ioctl };
+allow cameraserver camera_pipemgr_device:chr_file read;
+allow cameraserver camera_pipemgr_device:chr_file open;
+allow cameraserver camera_pipemgr_device:chr_file ioctl;
+allow cameraserver debugfs_ion:dir search;
+
+
