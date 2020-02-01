@@ -277,6 +277,7 @@
 /dev/tgt(/.*)? u:object_r:tgt_device:s0
 /dev/touch(/.*)? u:object_r:touch_device:s0
 /dev/tpd_em_log(/.*)? u:object_r:tpd_em_log_device:s0
+/dev/trustzone   u:object_r:trustzone_device:s0
 /dev/ttyC0         u:object_r:gsm0710muxd_device:s0
 /dev/ttyC1 u:object_r:mdlog_device:s0
 /dev/ttyC2         u:object_r:agps_device:s0
@@ -326,6 +327,8 @@
 /dev/block/platform/mtk-msdc\.0/by-name/userdata u:object_r:userdata_block_device:s0
 /dev/block/platform/mtk-msdc\.0/by-name/cache u:object_r:cache_block_device:s0
 /dev/block/platform/mtk-msdc\.0/by-name/recovery u:object_r:recovery_block_device:s0
+/dev/block/platform/mtk-msdc\.0/by-name/kb             u:object_r:kb_block_device:s0
+/dev/block/platform/mtk-msdc\.0/by-name/dkb            u:object_r:dkb_block_device:s0
 /dev/block/mmcblk0boot0 u:object_r:preloader_block_device:s0
 /dev/block/mmcblk0boot1 u:object_r:preloader_block_device:s0
 /dev/block/mmcblk0 u:object_r:mmcblk0_block_device:s0
@@ -406,6 +409,7 @@
 /(system|system\/vendor|vendor)/bin/icusbd u:object_r:icusbd_exec:s0
 /(system|system\/vendor|vendor)/bin/init.gprs-pppd u:object_r:zpppd_gprs_exec:s0
 /(system|system\/vendor|vendor)/bin/launchpppoe u:object_r:launchpppoe_exec:s0
+/(system|system\/vendor|vendor)/bin/kisd u:object_r:kisd_exec:s0
 /(system|system\/vendor|vendor)/bin/matv u:object_r:matv_exec:s0
 /(system|system\/vendor|vendor)/bin/mc6420d u:object_r:mc6420d_exec:s0
 /(system|system\/vendor|vendor)/bin/mdlogger u:object_r:mdlogger_exec:s0
@@ -516,6 +520,7 @@
 
 # secblock @Bule 20161119
 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/security      u:object_r:secblock_device:s0
+/dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/kb                u:object_r:kb_block_device:s0
 /dev/block/mmcblk0p13    u:object_r:secblock_device:s0
 
 /data/data(/.*)?       u:object_r:system_data_file:s0
