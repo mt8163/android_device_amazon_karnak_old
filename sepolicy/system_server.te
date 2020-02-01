@@ -13,7 +13,7 @@ allow system_server mtk_rrc_device:chr_file { read write ioctl open };
 # Purpose : for bring up
 allow system_server hwmsensor_device:chr_file { read ioctl open };
 allow system_server m_batch_misc_device:chr_file { read ioctl open };
-allow system_server proc:file write;
+allow system_server proc:file { read write open };
 allow system_server touch_device:chr_file { read ioctl open };
 
 # Date : WK14.32
@@ -286,3 +286,4 @@ allow system_server power_hal_sysfs:file      rw_file_perms;
 
 
 allow system_server init:unix_dgram_socket { sendto };
+allow system_server crash_dump:process getpgid;
