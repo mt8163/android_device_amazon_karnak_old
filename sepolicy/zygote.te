@@ -60,3 +60,4 @@ allow zygote sysfs_devinfo:file r_file_perms;
 #allow zygote serialno_prop:file { read open getattr };
 allow zygote proc:file { read write ioctl open getattr };
 allow zygote kernel:system  { module_request };
+allow zygote self:capability sys_resource;
