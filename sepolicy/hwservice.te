@@ -1,0 +1,2 @@
+type mtk_hal_power_hwservice, hwservice_manager_type;
+type mtk_hal_bluetooth_hwservice, hwservice_manager_type;
