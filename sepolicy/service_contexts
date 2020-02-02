@@ -12,6 +12,7 @@ mtkhdmi             u:object_r:mtk_hdmi_service:s0
 msgmonitorservice   u:object_r:mtk_msg_monitor_service:s0
 anrmanager          u:object_r:mtk_anrmanager_service:s0
 sensorhubservice    u:object_r:sensorservice_service:s0
+audiosignalprocessor u:object_r:audioserver_service:s0
 SensorHubService    u:object_r:sensorservice_service:s0
 epdg_service        u:object_r:mtk_epgd_service:s0
 rns                 u:object_r:mtk_rns_service:s0
