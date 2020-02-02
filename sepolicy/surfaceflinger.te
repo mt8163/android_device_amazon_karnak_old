@@ -84,3 +84,4 @@ allow surfaceflinger shell:fifo_file { read };
 
 allow surfaceflinger proc:file { getattr read open };
 allow surfaceflinger nfc:fifo_file { read };
+allow surfaceflinger debugfs_ion:dir search;
