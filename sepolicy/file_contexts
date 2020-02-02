@@ -414,9 +414,7 @@
 /(system|system\/vendor|vendor)/bin/audiocmdservice_atci u:object_r:audiocmdservice_atci_exec:s0
 /(system|system\/vendor|vendor)/bin/autokd u:object_r:autokd_exec:s0
 /(system|system\/vendor|vendor)/bin/bmi160d          u:object_r:bmi160d_exec:s0
-/(system|system\/vendor|vendor)/bin/6620_launcher    u:object_r:conn_launcher_exec:s0
 /(system|system\/vendor|vendor)/bin/batterywarning u:object_r:batterywarning_exec:s0
-/(system|system\/vendor|vendor)/bin/boot_logo_updater u:object_r:boot_logo_updater_exec:s0
 /(system|system\/vendor|vendor)/bin/br_app_data_service u:object_r:br_app_data_service_exec:s0
 /(system|system\/vendor|vendor)/bin/ccci_fsd                                            u:object_r:ccci_fsd_exec:s0
 /(system|system\/vendor|vendor)/bin/ccci_mdinit                                         u:object_r:ccci_mdinit_exec:s0
