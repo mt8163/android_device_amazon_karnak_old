@@ -203,6 +203,8 @@ type bootdevice_block_device, dev_type;
 type gps_device, dev_type;
 type urandom_device, dev_type, mlstrustedobject;
 type trustzone_device, dev_type;
+type rpmb_device, dev_type;
+type rpmb_block_device, dev_type;
 ##########################
 # Sensor common Devices
 #

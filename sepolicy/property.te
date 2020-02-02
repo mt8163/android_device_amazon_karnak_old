@@ -195,3 +195,5 @@ type coredump_prop, property_type, extended_core_property_type;
 type graphics_hwc_pid_prop, property_type;
 type graphics_debug_prop, property_type;
 type graphics_hwc_latch_unsignaled_prop, property_type;
+#==============allow rpmb_svc set property=============
+type sys_rpmb_ready_prop, property_type;

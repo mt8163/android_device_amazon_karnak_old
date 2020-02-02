@@ -59,6 +59,7 @@
 /data/key_provisioning(/.*)?         u:object_r:key_install_data_file:s0
 /data/lastsoc                        u:object_r:cw2015_data_file:s0
 
+/data/securetime(/.*)? 		     u:object_r:securetime_data_file:s0
 /data/mediadrm/IDM1013                u:object_r:media_data_file:s0
 /data/mediadrm/IDM1013/L3/ay64.dat     u:object_r:media_data_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
@@ -382,6 +383,18 @@
 /sys/kernel/debug/ion/client_history(/.*)? u:object_r:debugfs_ion_mm_heap:s0
 /sys/kernel/debug/ion/clients(/.*)? u:object_r:debugfs_ion:s0
 /sys/kernel/debug/ged(/.*)? u:object_r:debugfs_ged:s0
+/sys/devices/soc/11230000\.mmc/mmc_host/mmc0/mmc0\:0001/cid            u:object_r:sysfs_cid:s0
+/sys/devices/mtk-msdc\.0/11230000\.MSDC0/mmc_host/mmc0/mmc0\:0001/cid  u:object_r:sysfs_cid:s0
+
+# Amazon services
+###################
+/(system|system\/vendor|vendor)/bin/amzn_dha_test	u:object_r:amzn_dha_test_exec:s0
+/(system|system\/vendor|vendor)/bin/amzn_dha_tool	u:object_r:amzn_dha_tool_exec:s0
+/(system|system\/vendor|vendor)/bin/amzn_dha_hmac       u:object_r:amzn_dha_hmac_exec:s0
+/(system|system\/vendor|vendor)/bin/amzn_drmprov_check  u:object_r:amzn_drmprov_check_exec:s0
+/(system|system\/vendor|vendor)/bin/amzn_drmprov_tool   u:object_r:amzn_drmprov_tool_exec:s0
+/(system|system\/vendor|vendor)/bin/securetime          u:object_r:securetime_exec:s0
+/(system|system\/vendor|vendor)/bin/rpmb_svc          u:object_r:rpmb_svc_exec:s0
 
 
 #############################
@@ -543,6 +556,7 @@
 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/security      u:object_r:secblock_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/kb                u:object_r:kb_block_device:s0
 /dev/block/mmcblk0p13    u:object_r:secblock_device:s0
+/dev/block/mmcblk0rpmb    u:object_r:rpmb_block_device:s0
 
 /data/data(/.*)?       u:object_r:system_data_file:s0
 

@@ -70,6 +70,7 @@ type proc_lk_env, fs_type, proc_type;
 type sysfs_md32, fs_type, sysfs_type;
 type sysfs_vcorefs_pwrctrl, fs_type, sysfs_type;
 type sysfs_scp, fs_type, sysfs_type;
+type sysfs_cid, fs_type, sysfs_type;
 
 type agpsd_socket, file_type;
 type agpsd_data_file, core_data_file_type, file_type, data_file_type;
@@ -258,3 +259,11 @@ type debugfs_ion_mm_heap, fs_type, debugfs_type;
 type proc_ged, fs_type, proc_type;
 # gpu debugfs file
 type debugfs_ged, fs_type, debugfs_type;
+
+# securetime
+type securetime_data_file, file_type, core_data_file_type, data_file_type;
+# mediadrm
+type mediadrm_vendor_data_file, file_type, core_data_file_type, data_file_type;
+
+
+
