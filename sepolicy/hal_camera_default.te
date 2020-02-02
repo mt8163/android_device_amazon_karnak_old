@@ -13,6 +13,6 @@ allow hal_camera_default sysfs:file { open read };
 allow hal_camera_default vndbinder_device:chr_file { ioctl };
 allow hal_camera_default vndservicemanager:binder { call };
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager { find };
-# oreo
 allow hal_camera_default nvram_prop:file { open read getattr };
 allow hal_camera_default kmsg_device:chr_file { open read write };
+allow hal_camera_default nvram_data_file:dir search;
