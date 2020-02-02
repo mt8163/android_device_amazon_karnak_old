@@ -192,4 +192,8 @@ allow system_app fm_device:chr_file { ioctl open read write };
 #allow system_app netd_service:service_manager { find };
 #allow system_app netd:binder { call };
 allow system_app wificond:binder { call };
-
+allow system_app proc:file read;
+allow system_app proc_pagetypeinfo:file read;
+allow system_app sysfs_zram:dir search;
+allow system_app debugfs_ion:dir search;
+allow system_app proc:file open;
