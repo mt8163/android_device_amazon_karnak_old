@@ -59,6 +59,9 @@
 /data/key_provisioning(/.*)?         u:object_r:key_install_data_file:s0
 /data/lastsoc                        u:object_r:cw2015_data_file:s0
 
+/data/mediadrm/IDM1013                u:object_r:media_data_file:s0
+/data/mediadrm/IDM1013/L3/ay64.dat     u:object_r:media_data_file:s0
+/data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 ##########################
 # Devices
 #
@@ -573,6 +576,8 @@
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.light@2\.0-service-mediatek     u:object_r:mtk_hal_light_exec:s0
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.sensors@1\.0-service-mediatek     u:object_r:mtk_hal_sensors_exec:s0
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.bluetooth@1\.0-service-mediatek u:object_r:mtk_hal_bluetooth_exec:s0
+/(system\/vendor|vendor)/bin/hw/android\.hardware\.drm@1\.1-service.clearkey	   	u:object_r:hal_drm_clearkey_exec:s0
+/(system\/vendor|vendor)/bin/hw/android\.hardware\.drm@1\.1-service.widevine	   	u:object_r:hal_drm_widevine_exec:s0
 
 ####################################
 # Power HAL

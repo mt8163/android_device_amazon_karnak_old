@@ -10,9 +10,12 @@ vndbinder_use(hal_drm_widevine);
 
 binder_call(hal_drm_widevine, hal_graphics_composer)
 allow hal_drm_widevine hal_allocator_server:fd use;
-
-allow hal_drm_widevine media_data_file:dir create_dir_perms;
-allow hal_drm_widevine media_data_file:file create_file_perms;
-
 allow hal_drm_widevine kernel:system { module_request };
-
+allow hal_drm_widevine media_data_file:file { getattr create open read write };
+allow hal_drm_widevine media_data_file:file create_file_perms;
+allow hal_drm_widevine media_data_file:dir create_dir_perms;
+allow hal_drm_widevine media_data_file:dir { add_name create getattr open read search write };
+allow hal_drm_widevine proc:file { getattr open read };
+allow hal_drm_widevine vendor_data_file:file {  create getattr open read  write };
+allow hal_drm_widevine mediadrm_vendor_data_file:dir { add_name create getattr open read search write };
+allow hal_drm_widevine mediadrm_vendor_data_file:file {  getattr open read write };
