@@ -3,6 +3,7 @@
 # ==============================================
 
 type devmap_device, dev_type;
+type dri_device, dev_type, mlstrustedobject;
 type ttyMT_device, dev_type;
 type ttySDIO_device, dev_type;
 type vmodem_device, dev_type;
@@ -35,11 +36,6 @@ type MAINAF_device, dev_type;
 type MAIN2AF_device, dev_type;
 type SUBAF_device, dev_type;
 type M4U_device_device, dev_type;
-type hwmsensor_device, dev_type;
-type msensor_device, dev_type;
-type gsensor_device, dev_type;
-type als_ps_device, dev_type;
-type gyroscope_device, dev_type;
 type Vcodec_device, dev_type;
 type MJC_device, dev_type;
 type smartpa_device, dev_type;
@@ -106,9 +102,6 @@ type expdb_device, dev_type;
 type fat_device, dev_type;
 type logo_device, dev_type;
 type loop-control_device, dev_type;
-type m_acc_misc_device, dev_type;
-type m_batch_misc_device, dev_type;
-type m_mag_misc_device, dev_type;
 type mbr_device, dev_type;
 type met_device, dev_type;
 type misc_device, dev_type;
@@ -152,8 +145,6 @@ type etb_device, dev_type;
 type MT_pmic_adc_cali_device, dev_type;
 type mtk-adc-cali_device, dev_type;
 type MT_pmic_cali_device,dev_type;
-type barometer_device,dev_type;
-type humidity_device,dev_type;
 type otp_device, dev_type;
 type qemu_pipe_device, dev_type;
 type icusb_device, dev_type;
@@ -212,3 +203,29 @@ type bootdevice_block_device, dev_type;
 type gps_device, dev_type;
 type urandom_device, dev_type, mlstrustedobject;
 type trustzone_device, dev_type;
+##########################
+# Sensor common Devices
+#
+type hwmsensor_device, dev_type;
+type msensor_device, dev_type;
+type gsensor_device, dev_type;
+type als_ps_device, dev_type;
+type gyroscope_device, dev_type;
+type barometer_device,dev_type;
+type humidity_device,dev_type;
+type biometric_device,dev_type;
+type sensorlist_device,dev_type;
+type m_batch_misc_device, dev_type;
+type m_als_misc_device, dev_type;
+type m_ps_misc_device, dev_type;
+type m_baro_misc_device, dev_type;
+type m_hmdy_misc_device, dev_type;
+type m_acc_misc_device, dev_type;
+type m_mag_misc_device, dev_type;
+type m_gyro_misc_device, dev_type;
+type m_act_misc_device, dev_type;
+type m_pedo_misc_device, dev_type;
+type m_situ_misc_device, dev_type;
+type m_step_c_misc_device, dev_type;
+type m_fusion_misc_device, dev_type;
+type m_bio_misc_device, dev_type;
