@@ -18,3 +18,6 @@ allow ueventd null_device:chr_file { read write };
 allow ueventd init:fd use;
 allow ueventd properties_serial:file { getattr read open };
 allow ueventd selinuxfs:filesystem getattr;
+allow ueventd tmpfs:dir write;
+allow ueventd tmpfs:blk_file { getattr setattr relabelfrom };
+
