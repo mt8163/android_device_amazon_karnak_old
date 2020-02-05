@@ -1,0 +1,77 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+#permissive lannetmngrd;
+
+type lannetmngrd, domain;
+type lannetmngrd_exec,exec_type,file_type;
+
+
+
+init_daemon_domain(lannetmngrd)
+
+
+# Date : WK14.34
+# Operation : Migration
+# Purpose :  wifi
+allow lannetmngrd wmtWifi_device:chr_file { write open };
+
+allow lannetmngrd kernel:system module_request;
+allow lannetmngrd self:capability sys_module;
+allow lannetmngrd self:capability fsetid;
+
+
+# Date : WK14.34
+# Operation : Migration
+# Purpose :  property_service for wifi
+allow lannetmngrd mtk_wifi_prop:property_service set;
+
+
+# Date : WK14.34
+# Operation : Migration
+# Purpose :   APP
+allow lannetmngrd platform_app:fd use;
+
+
+# Date : WK14.37
+# Operation : Migration
+# Purpose :  PPPOE Test
+allow lannetmngrd ppp:process sigkill;
+
+# Date : WK14.41
+# Operation : Migration
+# Purpose :  ipv6 Tethering Test
+#============= netd ==============
+allow lannetmngrd dhcp6s_exec:file execute;
+allow lannetmngrd dhcp_data_file:dir { read search write add_name remove_name };
+allow lannetmngrd dhcp_data_file:file { read write create open getattr unlink};
+
+allow lannetmngrd radvd_data_file:dir { read write search add_name remove_name};
+allow lannetmngrd radvd_data_file:file { read write create open unlink};
+
+allow lannetmngrd self:capability { setuid net_bind_service setgid };
+allow lannetmngrd wide_dhcpv6_data_file:dir { read search write add_name remove_name};
+allow lannetmngrd wide_dhcpv6_data_file:file { read write create open getattr unlink};
+
+# Date : WK14.42
+# Operation : Migration
+# Purpose :  ALPS01774455[Need Patch] [Sanity Fail][95E2 L][WFD][EE]EE occur when connect dongle1
+allow lannetmngrd device:file { open write };
+
+
+# Date : WK14.44
+# Operation : Migration
+# Purpose : ALPS01789552
+#============= netd ==============
+allow lannetmngrd self:capability { setuid setgid };
+
+#============= netd ==============
+allow lannetmngrd untrusted_app:fd use;
+
+# Date : W15.02
+# Operation :  SQC
+# Purpose :  CTS for wifi
+allow lannetmngrd untrusted_app:unix_stream_socket { read write getopt setopt};
+
+allow lannetmngrd isolated_app:fd use;

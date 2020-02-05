@@ -1,0 +1,10 @@
+type securetime, domain;
+type securetime_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(securetime)
+allow securetime securetime_data_file:dir {read write open ioctl add_name search remove_name};
+allow securetime trustzone_device:chr_file  {read write open ioctl };
+allow securetime securetime_data_file:file { open ioctl };
+allow securetime securetime_data_file:file { read write };
+allow securetime vendor_file:dir {read open ioctl};
+allow securetime securetime_data_file:file create;
+

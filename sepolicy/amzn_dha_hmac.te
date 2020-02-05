@@ -1,3 +1,0 @@
-type amzn_dha_hmac_exec, exec_type, file_type, vendor_file_type;
-type amzn_dha_hmac ,domain;
-init_daemon_domain(amzn_dha_hmac)
