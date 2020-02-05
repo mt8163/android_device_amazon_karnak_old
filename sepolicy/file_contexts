@@ -590,6 +590,7 @@
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.bluetooth@1\.0-service-mediatek u:object_r:mtk_hal_bluetooth_exec:s0
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.drm@1\.1-service.clearkey	   	u:object_r:hal_drm_clearkey_exec:s0
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.drm@1\.1-service.widevine	   	u:object_r:hal_drm_widevine_exec:s0
+/(system\/vendor|vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service-mediatek 	u:object_r:hal_lineage_livedisplay_sysfs_exec:s0
 
 ####################################
 # Power HAL
