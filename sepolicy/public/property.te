@@ -1,0 +1,91 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+type mtk_default_prop, property_type;
+
+#=============allow netlog running==============
+type debug_mtklog_prop, property_type;
+type persist_mtklog_prop, property_type;
+type debug_netlog_prop, property_type;
+#=============allow system_server to set media.wfd.*==============
+type media_wfd_prop, property_type;
+
+#=============allow netd to set mtk_wifi.*=========================
+type mtk_wifi_prop, property_type;
+
+#=============allow ppp to set pppoe.ppp0==============
+type pppoe_ppp0_prop, property_type;
+
+#=============allow mediatek_prop ==============
+type mediatek_prop, property_type;
+
+#=============allow bootanim==============
+type bootani_prop, property_type;
+
+#=============allow audiohal==============
+type audiohal_prop, property_type;
+
+#=============allow DM==============
+type persist_dm_prop, property_type;
+
+
+#=============allow wmt==============
+type wmt_prop, property_type;
+
+#============= permission_check ==============
+type persist_md_prop, property_type;
+
+#=============allow sensor==============
+type ctl_msensord_prop, property_type;
+type ctl_akmd8963_prop, property_type;
+type ctl_s62xd_prop, property_type;
+type ctl_akmd09911_prop, property_type;
+type ctl_qmc6983d_prop, property_type;
+type ctl_akmd09912_prop, property_type;
+type ctl_bmm050d_prop, property_type;
+type ctl_bmm056d_prop, property_type;
+type ctl_st480_prop, property_type;
+
+type cdma_prop, property_type;
+
+#=============allow saveLocale==============
+type save_locale_prop, property_type;
+
+#=============allow bt==============
+type bt_prop, property_type;
+type persist_bt_prop, property_type;
+
+#=============allow pppd ==============
+type pppd_gprs_prop, property_type;
+
+#=============allow wifi offload deamon  ==============
+type mtk_wod_prop, property_type;
+type persist_wod_prop, property_type;
+
+#=============allow program binary deamon  ==============
+type program_binary_prop, property_type;
+
+#=============allow system deamon  ==============
+type ctl_memsicd3416x_prop, property_type;
+type serial_number_prop, property_type, mtk_property_type;
+type vold_encryption_type_prop, property_type;
+type nvram_prop, property_type, mtk_property_type;
+#=============allow smart audio pa set property ==============
+type smart_audio_prop, property_type;
+#============= allow em set property ===============
+type mtk_em_auto_answer_prop, property_type;
+
+type service_nvram_init_prop, property_type, mtk_core_property_type;
+type wifi_5g_prop, property_type, mtk_core_property_type;
+
+type af_rf_mode_prop , property_type, mtk_core_property_type;
+type af_modem_status_prop , property_type, mtk_core_property_type;
+type tel_switch_prop, property_type, mtk_core_property_type;
+type vendor_radio_prop, property_type, mtk_core_property_type;
+type coredump_prop, property_type, extended_core_property_type;
+type graphics_hwc_pid_prop, property_type;
+type graphics_debug_prop, property_type;
+type graphics_hwc_latch_unsignaled_prop, property_type;
+#==============allow rpmb_svc set property=============
+type sys_rpmb_ready_prop, property_type;
+type vendor_wifi_prop, property_type;

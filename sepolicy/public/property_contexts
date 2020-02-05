@@ -1,0 +1,98 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+#=============allow netlog==============
+#debug.mtklog.init.flag
+debug.mtklog  u:object_r:debug_mtklog_prop:s0
+#persist.mtklog.log2sd.path
+persist.mtklog u:object_r:persist_mtklog_prop:s0
+#debug.netlog.stopreason
+debug.netlog u:object_r:debug_netlog_prop:s0
+
+#=============allow system_server to set media.wfd.*==============
+media.wfd. u:object_r:media_wfd_prop:s0
+
+#=============allow netd to set mtk_wifi.*========================
+mtk_wifi. u:object_r:mtk_wifi_prop:s0
+
+
+#=============allow vold==============
+persist.vold.      u:object_r:vold_prop:s0
+ctl.sdcard         u:object_r:ctl_fuse_prop:s0
+
+#=============allow ppp to set pppoe.ppp0.*========================
+pppoe.ppp0. u:object_r:pppoe_ppp0_prop:s0
+
+#=============allow mediatek_prop ==============
+mediatek. u:object_r:mediatek_prop:s0
+
+#=============allow bootanim==============
+persist.bootanim.     u:object_r:bootani_prop:s0
+
+#=============allow audiohal==============
+streamout.     u:object_r:audiohal_prop:s0
+af.     u:object_r:audiohal_prop:s0
+streamin.     u:object_r:audiohal_prop:s0
+a2dp.     u:object_r:audiohal_prop:s0
+persist.af.     u:object_r:audiohal_prop:s0
+
+#=============allow DM==============
+# persist.dm.lock
+persist.dm. u:object_r:persist_dm_prop:s0
+
+#=============allow wmt ==============
+persist.mtk.wcn u:object_r:wmt_prop:s0
+service.wcn u:object_r:wmt_prop:s0
+
+#============= permission_check ==============
+#persist.md.perm.checked
+persist.md    u:object_r:persist_md_prop:s0
+
+#=============allow sensor daemon==============
+ctl.msensord     u:object_r:ctl_msensord_prop:s0
+ctl.s62xd     u:object_r:ctl_s62xd_prop:s0
+ctl.akmd8963     u:object_r:ctl_akmd8963_prop:s0
+ctl.akmd09911     u:object_r:ctl_akmd09911_prop:s0
+ctl.st480               u:object_r:ctl_st480_prop:s0
+#=============allow c2k_prop ==============
+cdma. u:object_r:cdma_prop:s0
+
+#=============allow saveLocale==============
+user.language                u:object_r:save_locale_prop:s0
+user.region                u:object_r:save_locale_prop:s0
+
+#=============allow bt prop==============
+bt.                         u:object_r:bt_prop:s0
+persist.bt.          u:object_r:persist_bt_prop:s0
+#=============allow pppd ==============
+ctl.pppd_gprs   u:object_r:pppd_gprs_prop:s0
+
+#=============allow wifi offload deamon  ==============
+net.wo.   u:object_r:mtk_wod_prop:s0
+
+# DOLBY_START
+dolby.audio             u:object_r:audio_prop:s0
+dolby.                  u:object_r:system_prop:s0
+# DOLBY_END
+
+#=============allow program binary deamon  ==============
+debug.program_binary.    u:object_r:program_binary_prop:s0
+
+ctl.memsicd3416x u:object_r:ctl_memsicd3416x_prop:s0
+service.nvram_init  u:object_r:nvram_prop:s0
+vold.encryption.type u:object_r:vold_encryption_type_prop:s0
+
+af.rf_mode u:object_r:af_rf_mode_prop:s0
+af.modem_1.status u:object_r:af_modem_status_prop:s0 
+debug.sf.hwc_pid u:object_r:graphics_hwc_pid_prop:s0
+debug.bq. u:object_r:graphics_debug_prop:s0
+debug.hwc. u:object_r:graphics_debug_prop:s0
+vendor.debug.sf.hwc_pid u:object_r:graphics_hwc_pid_prop:s0
+vendor.debug.bq. u:object_r:graphics_debug_prop:s0
+vendor.debug.hwc. u:object_r:graphics_debug_prop:s0
+vendor.debug.sf. u:object_r:graphics_debug_prop:s0
+vendor.debug.sf.latch_unsignaled u:object_r:graphics_hwc_latch_unsignaled_prop:s0
+#allow rpmb_svc set properties
+sys.rpmb.ready u:object_r:sys_rpmb_ready_prop:s0
+vendor.wlan.                    u:object_r:vendor_wifi_prop:s0
