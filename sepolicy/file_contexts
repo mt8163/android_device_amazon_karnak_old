@@ -5,15 +5,11 @@
 
 /dev/block/mtd(.*)?     u:object_r:mtd_device:s0
 
-#############################
-# Executables
-# Meta/Factory Mode multi_init
-/sbin/multi_init		u:object_r:init_exec:s0
-
 
 #############################
 # Data files
 #
+/data/data(/.*)?       u:object_r:system_data_file:s0
 /data/aee_exp(/.*)?  u:object_r:aee_exp_data_file:s0
 /data/agps_supl(/.*)?    u:object_r:agpsd_data_file:s0
 /data/anr/SF_RTT(/.*)? u:object_r:sf_rtt_file:s0
@@ -58,7 +54,6 @@
 /data/setkey_latest.conf u:object_r:ims_ipsec_data_file:s0
 /data/key_provisioning(/.*)?         u:object_r:key_install_data_file:s0
 /data/lastsoc                        u:object_r:cw2015_data_file:s0
-
 /data/securetime(/.*)? 		     u:object_r:securetime_data_file:s0
 /data/mediadrm/IDM1013                u:object_r:media_data_file:s0
 /data/mediadrm/IDM1013/L3/ay64.dat     u:object_r:media_data_file:s0
@@ -153,7 +148,6 @@
 /dev/mt9p012(/.*)? u:object_r:mt9p012_device:s0
 /dev/mtfreqhopping(/.*)? u:object_r:mtfreqhopping_device:s0
 /dev/mtgpio(/.*)? u:object_r:mtgpio_device:s0
-#/dev/mtk-adc-cali(/.*)? u:object_r:mtk_adc_cali_device:s0
 /dev/mtk_disp.* u:object_r:graphics_device:s0
 /dev/mtkfb_vsync(/.*)? u:object_r:graphics_device:s0
 /dev/mtkg2d(/.*)? u:object_r:mtkg2d_device:s0
@@ -200,9 +194,6 @@
 /dev/socket/agpsd2(/.*)? u:object_r:agpsd_socket:s0
 /dev/socket/agpsd3(/.*)? u:object_r:agpsd_socket:s0
 /dev/socket/agpsd(/.*)? u:object_r:agpsd_socket:s0
-/dev/socket/atci-audio(/.*)? u:object_r:atci_audio_socket:s0
-/dev/socket/atci-serv-fw(/.*)? u:object_r:atci_serv_fw_socket:s0
-/dev/socket/atci-service(/.*)? u:object_r:atci_service_socket:s0
 /dev/socket/backuprestore(/.*)? u:object_r:backuprestore_socket:s0
 /dev/socket/dfo(/.*)? u:object_r:dfo_socket:s0
 /dev/socket/dnsproxyd(/.*)? u:object_r:dnsproxyd_socket:s0
@@ -224,8 +215,6 @@
 /dev/socket/rild-mal-at-md2(/.*)? u:object_r:rild_mal_at_md2_socket:s0
 /dev/socket/rild-ims(/.*)? u:object_r:rild_ims_socket:s0
 /dev/socket/volte_imsm(/.*)? u:object_r:rild_imsm_socket:s0
-/dev/socket/rild-atci-md2(/.*)? u:object_r:rild_atci_md2_socket:s0
-/dev/socket/rild-atci(/.*)? u:object_r:rild_atci_socket:s0
 /dev/socket/rild-vsim(/.*)? u:object_r:rild_vsim_socket:s0
 /dev/socket/rild-vsim-md2(/.*)? u:object_r:rild_vsim_md2_socket:s0
 /dev/socket/rild-ctclient u:object_r:rild_ctclient_socket:s0
@@ -243,7 +232,6 @@
 /dev/socket/rild-oem(/.*)? u:object_r:rild_oem_socket:s0
 /dev/socket/rild(/.*)? u:object_r:rild_socket:s0
 /dev/socket/rild-via u:object_r:rild_via_socket:s0
-/dev/socket/rild-atci-c2k(/.*)? u:object_r:rild_atci_c2k_socket:s0
 /dev/socket/mal-mfi(/.*)? u:object_r:mal_mfi_socket:s0
 /dev/socket/mal_mfi(/.*)? u:object_r:mal_mfi_socket2:s0
 /dev/socket/rpc u:object_r:rpc_socket:s0
@@ -401,17 +389,12 @@
 # System files
 #
 /(system|system\/vendor|vendor)/bin/stp_dump3 u:object_r:stp_dump3_exec:s0
-/(system|system\/vendor|vendor)/bin/aal u:object_r:aal_exec:s0
 /(system|system\/vendor|vendor)/bin/aee_core_forwarder u:object_r:aee_core_forwarder_exec:s0
 /(system|system\/vendor|vendor)/bin/akmd09911                                           u:object_r:akmd09911_exec:s0
-/(system|system\/vendor|vendor)/bin/akmd09912 u:object_r:akmd09912_exec:s0
 /(system|system\/vendor|vendor)/bin/akmd8963 u:object_r:akmd8963_exec:s0
 /(system|system\/vendor|vendor)/bin/akmd8975 u:object_r:akmd8975_exec:s0
 /(system|system\/vendor|vendor)/bin/mxg2320d u:object_r:mxg2320d_exec:s0
 /(system|system\/vendor|vendor)/bin/ami304d u:object_r:ami304d_exec:s0
-/(system|system\/vendor|vendor)/bin/atcid u:object_r:atcid_exec:s0
-/(system|system\/vendor|vendor)/bin/atci_service u:object_r:atci_service_exec:s0
-/(system|system\/vendor|vendor)/bin/audiocmdservice_atci u:object_r:audiocmdservice_atci_exec:s0
 /(system|system\/vendor|vendor)/bin/autokd u:object_r:autokd_exec:s0
 /(system|system\/vendor|vendor)/bin/bmi160d          u:object_r:bmi160d_exec:s0
 /(system|system\/vendor|vendor)/bin/batterywarning u:object_r:batterywarning_exec:s0
@@ -430,8 +413,8 @@
 /(system|system\/vendor|vendor)/bin/factory                                             u:object_r:factory_exec:s0
 /(system|system\/vendor|vendor)/bin/flashlessd u:object_r:flashlessd_exec:s0
 /(system|system\/vendor|vendor)/bin/fuelgauged                                          u:object_r:fuelgauged_exec:s0
-/(system|system\/vendor|vendor)/bin/ged_srv u:object_r:ged_srv_exec:s0
-/(system|system\/vendor|vendor)/bin/gas_srv    u:object_r:gas_srv_exec:s0
+/(system|system\/vendor|vendor)/bin/ged_srv 						u:object_r:ged_srv_exec:s0
+/(system|system\/vendor|vendor)/bin/gas_srv    						u:object_r:gas_srv_exec:s0
 /(system|system\/vendor|vendor)/bin/kpoc_charger                                        u:object_r:kpoc_charger_exec:s0
 /(system|system\/vendor|vendor)/bin/geomagneticd u:object_r:geomagneticd_exec:s0
 /(system|system\/vendor|vendor)/bin/GoogleOtaBinder u:object_r:GoogleOtaBinder_exec:s0
@@ -439,7 +422,6 @@
 /(system|system\/vendor|vendor)/bin/gsm0710muxd                                         u:object_r:gsm0710muxd_exec:s0
 /(system|system\/vendor|vendor)/bin/guiext-server u:object_r:guiext-server_exec:s0
 /(system|system\/vendor|vendor)/bin/icusbd u:object_r:icusbd_exec:s0
-/(system|system\/vendor|vendor)/bin/init.gprs-pppd u:object_r:zpppd_gprs_exec:s0
 /(system|system\/vendor|vendor)/bin/launchpppoe u:object_r:launchpppoe_exec:s0
 /(system|system\/vendor|vendor)/bin/kisd u:object_r:kisd_exec:s0
 /(system|system\/vendor|vendor)/bin/matv u:object_r:matv_exec:s0
@@ -484,7 +466,6 @@
 /(system|system\/vendor|vendor)/bin/thermal u:object_r:thermal_exec:s0
 /(system|system\/vendor|vendor)/bin/tiny_mkswap u:object_r:tiny_mkswap_exec:s0
 /(system|system\/vendor|vendor)/bin/tiny_swapon u:object_r:tiny_swapon_exec:s0
-#/(system|system\/vendor|vendor)/bin/tune2fs u:object_r:tune2fs_exec:s0
 /(system|system\/vendor|vendor)/bin/viarild u:object_r:viarild_exec:s0
 /(system|system\/vendor|vendor)/bin/volte_imcb u:object_r:volte_imcb_exec:s0
 /(system|system\/vendor|vendor)/bin/volte_stack u:object_r:volte_stack_exec:s0
@@ -498,7 +479,6 @@
 /(system|system\/vendor|vendor)/bin/OperaMaxSystem u:object_r:tunman_exec:s0
 /(system|system\/vendor|vendor)/etc/sensor(/.*)?	u:object_r:system_sensor_data_file:s0
 /(system|system\/vendor|vendor)/bin/pvrsrvctl u:object_r:pvrsrvctl_exec:s0
-/(system|system\/vendor|vendor)/xbin/BGW u:object_r:BGW_exec:s0
 /(system|system\/vendor|vendor)/xbin/mnld                                                u:object_r:mnld_exec:s0
 /(system|system\/vendor|vendor)/bin/cmddumper u:object_r:cmddumper_exec:s0
 /(system|system\/vendor|vendor)/bin/epdg_wod u:object_r:epdg_wod_exec:s0
@@ -525,7 +505,6 @@
 # define raw block partition label
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/proinfo		u:object_r:nvram_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/nvram		u:object_r:nvram_device:s0
-#/dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/nvram     u:object_r:nvram_block_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/nvdata		u:object_r:nvdata_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/frp		u:object_r:frp_block_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/expdb		u:object_r:expdb_block_device:s0
@@ -548,25 +527,15 @@
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/boot	        u:object_r:boot_block_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/persist           u:object_r:persist_block_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/system            u:object_r:system_block_device:s0
-#line 1 "device/Letv/X500/sepolicy/file_contexts"
-
-# secblock @Bule 20161119
-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/security      u:object_r:secblock_device:s0
 /dev/block/platform/mtk-msdc\.0/[0-9]+\.MSDC0/by-name/kb                u:object_r:kb_block_device:s0
+/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/security          u:object_r:secblock_device:s0
 /dev/block/mmcblk0p13    u:object_r:secblock_device:s0
 /dev/block/mmcblk0rpmb    u:object_r:rpmb_block_device:s0
 
-/data/data(/.*)?       u:object_r:system_data_file:s0
 
 # Other
-#/sys/devices/platform/mtk_disp_mgr.0/rgb                        u:object_r:display_color_sysfs:s0
-#/sys/kernel/charge_levels/quick_charge_enable                   u:object_r:fast_charge_sysfs:s0
-#/sys/kernel/charge_levels/charge_level_ac                       u:object_r:fast_charge_sysfs:s0
-#/sys/kernel/charge_levels/charge_level_usb u:object_r:fast_charge_sysfs:s0
-#/sys/bus/i2c/devices/i2c-2/2-004b/wake_gesture_enable          u:object_r:smartwake_sysfs:s0
 /sys/kernel/ccci(/.*)?                                          u:object_r:sysfs_ccci:s0
-#/protect_s/properties(/.*)?                                     u:object_r:persist_property_file:s0
-/dev/block/platform(/.*)? u:object_r:platformblk_device:s0
+/dev/block/platform(/.*)?                                       u:object_r:platformblk_device:s0
 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq		u:object_r:perf_control_sysfs:s0
 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq		u:object_r:perf_control_sysfs:s0
 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor		u:object_r:perf_control_sysfs:s0
@@ -592,29 +561,15 @@
 /(system\/vendor|vendor)/bin/hw/android\.hardware\.drm@1\.1-service.widevine	   	u:object_r:hal_drm_widevine_exec:s0
 /(system\/vendor|vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service-mediatek 	u:object_r:hal_lineage_livedisplay_sysfs_exec:s0
 
-####################################
-# Power HAL
+###############################################
+# same-process HAL files and their dependencies
 #
-#/sys/class/input/input[0-9]*/enabled                             u:object_r:power_hal_sysfs:s0
-#/sys/class/misc/mali0/device/dvfs(.*)?                           u:object_r:power_hal_sysfs:s0
-#/sys/devices/system/cpu/cpu[0-9]*/online                         u:object_r:power_hal_sysfs:s0
-#/sys/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_max_freq       u:object_r:power_hal_sysfs:s0
-#/sys/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_min_freq       u:object_r:power_hal_sysfs:s0
-#/sys/devices/system/cpu/cpu[0-9]*/cpufreq/interactive(/.*)?      u:object_r:power_hal_sysfs:s0
-#/sys/devices/system/cpu/cpu[0-9]*/cpufreq/nexus(/.*)?            u:object_r:power_hal_sysfs:s0
-#/sys/power/enable_dm_hotplug                                     u:object_r:power_hal_sysfs:s0
-#/sys/class/input_booster(/.*)                                    u:object_r:power_hal_sysfs:s0
-
-# drm
-/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.0-service.widevine		u:object_r:hal_drm_widevine_exec:s0
-
-#isu
-#/sbin/isu.sh 													u:object_r:sbin_isush_exec:s0
-
-#ims 
-#/(vendor|system/vendor)/bin/hw/vendor\.mediatek\.hardware\.imsa@1\.0-service	u:object_r:hal_imsa_service_exec:s0
-
-#lights
-#/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service-mediatek	u:object_r:hal_lights_service_mediatek_exec:s0
-
-
+/vendor/lib(64)?/hw/gralloc\.mt[0-9]+\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libGLES_mali\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libgralloc_extra\.so                  u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libgpu_aux\.so                        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libged\.so                            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm\.so                            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libion_mtk\.so                        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdpframework\.so                    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libm4u\.so   			       u:object_r:same_process_hal_file:s0

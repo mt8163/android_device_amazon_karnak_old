@@ -26,7 +26,6 @@ vie_command  		u:object_r:system_app_service:s0
 terservice          u:object_r:terservice_service:s0
 GoogleOtaBinder      u:object_r:ota_agent_service:s0
 memory_dumper       u:object_r:mediaserver_service:s0
-AAL                 u:object_r:aal_service:s0
 PQ                 u:object_r:pq_service:s0
 iphonesubinfotedongle      u:object_r:radio_service:s0
 isubtedongle               u:object_r:radio_service:s0

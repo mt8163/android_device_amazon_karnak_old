@@ -100,20 +100,9 @@ streamin.     u:object_r:audiohal_prop:s0
 a2dp.     u:object_r:audiohal_prop:s0
 persist.af.     u:object_r:audiohal_prop:s0
 
-#=============allow tedongle to set tedongle.*=============
-tedongle.   u:object_r:radio_prop:s0
-ctl.zpppd_gprs      u:object_r:ctl_zpppdgprs_prop:s0
-
 #=============allow DM==============
 # persist.dm.lock
 persist.dm. u:object_r:persist_dm_prop:s0
-# dm fota
-ctl.rbfota u:object_r:ctl_rbfota_prop:s0
-
-#=============allow atcid==============
-ctl.atcid-daemon-u u:object_r:ctl_atcid-daemon-u_prop:s0
-ctl.atci_service u:object_r:ctl_atci_service_prop:s0
-persist.service.atci.   u:object_r:persist_service_atci_prop:s0
 
 #=============allow wmt ==============
 persist.mtk.wcn u:object_r:wmt_prop:s0
@@ -128,7 +117,6 @@ ctl.msensord     u:object_r:ctl_msensord_prop:s0
 ctl.s62xd     u:object_r:ctl_s62xd_prop:s0
 ctl.akmd8963     u:object_r:ctl_akmd8963_prop:s0
 ctl.akmd09911     u:object_r:ctl_akmd09911_prop:s0
-ctl.akmd09912     u:object_r:ctl_akmd09912_prop:s0
 ctl.geomagneticd     u:object_r:ctl_geomagneticd_prop:s0
 ctl.orientationd     u:object_r:ctl_orientationd_prop:s0
 ctl.emdlogger5       u:object_r:ctl_emcsmdlogger_prop:s0

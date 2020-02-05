@@ -1,3 +1,4 @@
 #============= logpersist ==============
 allow logpersist cache_file:dir search;
-
+allow logpersist cache_file:dir read;
+allow logpersist cache_file:dir open;

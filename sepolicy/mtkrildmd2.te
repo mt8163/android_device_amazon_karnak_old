@@ -69,7 +69,6 @@ allow mtkrildmd2 sysfs_vcorefs_pwrctrl:file { open write };
 allow mtkrildmd2 ril_active_md_prop:property_service set;
 allow mtkrildmd2 ril_mux_report_case_prop:property_service set;
 allow mtkrildmd2 ctl_muxreport-daemon_prop:property_service set;
-allow mtkrildmd2 persist_service_atci_prop:property_service set;
 allow mtkrildmd2 block_device:dir search;
 #allow mtkrildmd2 platformblk_device:dir search;
 allow mtkrildmd2 emd_device:chr_file { read write open };

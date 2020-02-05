@@ -96,21 +96,13 @@ type audiohal_prop, property_type;
 #=============allow contrl ril3gd===========
 type ctl_ril3gd_prop, property_type;
 
-#=============allow contrl zpppd_gprs===========
-type ctl_zpppdgprs_prop, property_type;
-
 #=============allow DM==============
 type persist_dm_prop, property_type;
-type ctl_rbfota_prop, property_type;
 
 
 #=============allow wmt==============
 type wmt_prop, property_type;
 
-#=============allow atcid==============
-type ctl_atcid-daemon-u_prop, property_type;
-type ctl_atci_service_prop, property_type;
-type persist_service_atci_prop, property_type;
 #============= permission_check ==============
 type persist_md_prop, property_type;
 

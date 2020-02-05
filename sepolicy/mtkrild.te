@@ -73,7 +73,6 @@ allow mtkrild sysfs_vcorefs_pwrctrl:file { open write };
 allow mtkrild ril_active_md_prop:property_service set;
 allow mtkrild ril_mux_report_case_prop:property_service set;
 allow mtkrild ctl_muxreport-daemon_prop:property_service set;
-allow mtkrild persist_service_atci_prop:property_service set;
 allow mtkrild block_device:dir search;
 #allow mtkrild platformblk_device:dir search;
 allow mtkrild platform_app:fd use;

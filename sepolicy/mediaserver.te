@@ -212,12 +212,6 @@ allow mediaserver smartpa_device:chr_file { read write ioctl open };
 # Purpose : Smartpa
 allow mediaserver smartpa1_device:chr_file { read write ioctl open };
 
-# Data : WK14.40
-# Operation : Migration
-# Purpose : permit 'call' by audio tunning tool audiocmdservice_atci
-allow mediaserver audiocmdservice_atci:binder call;
-binder_call(mediaserver,audiocmdservice_atci)
-
 # Date : WK14.40
 # Operation : Migration
 # Purpose : mtk_jpeg

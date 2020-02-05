@@ -36,7 +36,6 @@ type rild_oem_socket, file_type;
 type rild_mtk_ut_socket, file_type;
 type rild_mtk_ut_2_socket, file_type;
 type rild_mtk_modem_socket, file_type;
-type rild_atci_socket, file_type;
 type rild_md2_socket, file_type;
 type rild2_md2_socket, file_type;
 type rild_debug_md2_socket, file_type;
@@ -44,15 +43,11 @@ type rild_oem_md2_socket, file_type;
 type rild_mtk_ut_md2_socket, file_type;
 type rild_mtk_ut_2_md2_socket, file_type;
 type rild_mtk_modem_md2_socket, file_type;
-type rild_atci_md2_socket, file_type;
 type rild_vsim_socket, file_type;
 type rild_vsim_md2_socket, file_type;
 type mal_mfi_socket, file_type;
 type mal_mfi_socket2, file_type;
 type netdiag_socket, file_type;
-type atci_service_socket, file_type;
-type atci_serv_fw_socket, file_type;
-type atci_audio_socket, file_type;
 type wpa_wlan0_socket, file_type;
 type soc_vt_imcb_socket, file_type;
 type soc_vt_tcv_socket, file_type;
@@ -149,7 +144,6 @@ type bmi160d_data_file,core_data_file_type, file_type, data_file_type;
 type rild_via_socket, file_type;
 type rpc_socket, file_type;
 type rild_ctclient_socket, file_type;
-type rild_atci_c2k_socket, file_type;
 type statusd_socket, file_type;
 #For icusb
 type proc_icusb, fs_type, proc_type;
@@ -184,8 +178,6 @@ type ims_ipsec_data_file, file_type, core_data_file_type,  data_file_type;
 # thermal manager config file
 type thermal_manager_data_file, file_type, core_data_file_type, data_file_type;
 
-# atci data file
-type atci_data_file, file_type, core_data_file_type, data_file_type;
 
 # factory data file
 type factory_data_file, file_type, core_data_file_type, data_file_type;

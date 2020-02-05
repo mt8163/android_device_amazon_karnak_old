@@ -63,17 +63,6 @@ unix_socket_connect(radio, agpsd, mtk_agpsd)
 # Purpose : for IMSA connect to volte_imsa1 provided by imcb process
 unix_socket_connect(radio, volte_imsa1, volte_imcb)
 
-# Date : 2014/10/16
-# Operation : IT
-# Purpose : for TTLIA apk connect to rild_atci by mtkrild process
-allow radio rild_atci_socket:sock_file write;
-
-# Date : 2014/10/20
-# Operation : IT
-# Purpose : enable ATCId in engineer mode.
-allow radio ctl_atcid-daemon-u_prop:property_service set;
-allow radio ctl_atci_service_prop:property_service set;
-allow radio persist_service_atci_prop:property_service set;
 
 # Date : 2014/11/05
 # Operation : IT
@@ -96,12 +85,6 @@ allow radio als_ps_device:chr_file { read open ioctl };
 # Purpose : for engineermode Usb PHY Tuning
 allow radio debugfs:file { getattr };
 
-# Date : 2015/01/21
-# Operation : IT
-# Purpose : C2K rild
-allow radio rild_atci_md2_socket:sock_file write;
-allow radio rild_atci_c2k_socket:sock_file write;
-
 # Date : WK15.05 2015/01/26
 # Operation : IT
 # Purpose : for engineermode camera
@@ -118,13 +101,6 @@ allow radio ppl_agent_service:service_manager find;
 # Operation : IT
 # Purpose : for setting volte enable property
 allow radio mtk_volte_prop:property_service set;
-
-# Date : W15.32 2015/08/05
-# Operation : IT
-# Purpose : for VSIM adaptor connect to rild_atci by mtkrild process
-unix_socket_connect(radio, rild_vsim, mtkrild)
-unix_socket_connect(radio, rild_vsim_md2, mtkrild)
-
 
 # Date : 2015/08/17
 # Operation : VoLTE sanity
