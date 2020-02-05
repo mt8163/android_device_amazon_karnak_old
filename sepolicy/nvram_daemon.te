@@ -102,3 +102,9 @@ allow nvram_daemon device:chr_file { ioctl };
 allow nvram_daemon platformblk_device:dir { search };
 allow nvram_daemon nvram_device:chr_file rw_file_perms;
 allow nvram_daemon platformblk_device:blk_file { read write open getattr };
+
+# Purpose: for setting property
+# ro.wlan.mtk.wifi.5g relabel to wifi_5g_prop
+# denied  { set } for property=ro.wlan.mtk.wifi.5g pid=242 uid=0 gid=1000 scontext=u:r:nvram_daemon:s0 tcontext=u:object_r:default_prop:s0 tclass=property_service permissive=1
+set_prop(nvram_daemon, service_nvram_init_prop)
+set_prop(nvram_daemon, wifi_5g_prop)
