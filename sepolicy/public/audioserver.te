@@ -28,7 +28,7 @@ allow audioserver nvram_prop:file { read open getattr };
 allow audioserver nvram_data_file:dir { search };
 allow audioserver kmsg_device:chr_file {  open read write };
 
-
+allow audioserver audiohal_prop:file read;
 get_prop(audioserver, vendor_default_prop)
 set_prop(audioserver, af_rf_mode_prop );
 set_prop(audioserver, af_modem_status_prop );
