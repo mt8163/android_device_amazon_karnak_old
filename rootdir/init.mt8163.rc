@@ -1011,3 +1011,11 @@ on post-fs
     
     mkdir /cache/logs 0775 system log
     start persistentLogging
+ 
+on property:apexd.status=ready
+    symlink /system/lib/libashmemd_client.so /system/apex/com.android.media.swcodec/lib/libashmemd_client.so
+    symlink /system/lib/libashmemd_client.so /system/apex/com.android.media/lib/libashmemd_client.so
+    symlink /system/lib/ashmemd_aidl_interface-cpp.so /system/apex/com.android.media.swcodec/lib/ashmemd_aidl_interface-cpp.so
+    symlink /system/lib/ashmemd_aidl_interface-cpp.so /system/apex/com.android.media/lib/ashmemd_aidl_interface-cpp.so
+
+   
