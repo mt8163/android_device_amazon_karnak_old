@@ -214,6 +214,9 @@ PRODUCT_PACKAGES += \
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
 
+# System Prop
+include $(LOCAL_PATH)/system_prop.mk
+
 include vendor/amazon/karnak/karnak-vendor.mk
 include vendor/amazon/mt8163/mt8163-vendor.mk
 
