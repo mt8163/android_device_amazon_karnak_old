@@ -8,4 +8,6 @@ allow rpmb_svc sysfs_cid:file { read write open ioctl getattr };
 allow rpmb_svc property_socket:sock_file write;
 allow rpmb_svc init:unix_stream_socket connectto;
 allow rpmb_svc vendor_file:dir { read open ioctl getattr };
+allow rpmb_svc self:capability setuid;
+allowxperm tee rpmb_block_device:blk_file ioctl { MMC_IOC_CMD };
 
