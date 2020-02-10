@@ -128,7 +128,13 @@ TARGET_LD_SHIM_LIBS := \
 /vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
 /vendor/bin/amzn_drmprov_check|libshim_dha.so \
-/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
+/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so \
+/vendor/lib/hw/gralloc.mt8163.so|libshim_gralloc.so \
+/vendor/lib/hw/hwcomposer.mt8163.so|libshim_hwcomposer.so \
+/vendor/lib/libcam_utils.so|libshim_camera_utils.so \
+/vendor/lib/libaudiocomponentengine.so|libshim_audiocomponent.so \
+/vendor/lib/libcam.client.so|libshim_camera_platform.so \
+/vendor/lib/libMtkOmxVdecEx.so|libshim_mtk_codec.so
 
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true

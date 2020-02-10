@@ -204,7 +204,13 @@ PRODUCT_PACKAGES += \
      libshim_sensor \
      libshim_protobuf \
      libshim_dha \
-     libshim_drm 
+     libshim_drm \
+     libshim_gralloc \
+     libshim_camera_utils \
+     libshim_hwcomposer \
+     libshim_audiocomponent \
+     libshim_camera_platform \
+     libshim_mtk_codec
 
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
