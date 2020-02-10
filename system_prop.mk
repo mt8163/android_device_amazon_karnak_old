@@ -43,7 +43,8 @@ debug.hwui.use_partial_updates=false
 # Media Settings
 PRODUCT_PROPERTY_OVERRIDES += \
 media.settings.xml=/vendor/etc/media_profiles_V1_0.xml \
-persist.media.treble_omx=false
+persist.media.treble_omx=false \
+debug.stagefright.ccodec=0
 
 
 # Mediatek Properties
