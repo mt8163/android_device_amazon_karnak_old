@@ -86,6 +86,8 @@
         </interface>
         <fqname>@1.2::ICryptoFactory/clearkey</fqname>
         <fqname>@1.2::IDrmFactory/clearkey</fqname>
+        <fqname>@1.0::ICryptoFactory/widevine</fqname>
+        <fqname>@1.0::IDrmFactory/widevine</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
