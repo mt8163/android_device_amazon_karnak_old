@@ -60,3 +60,7 @@ persist.mtk.wcn.combo.chipid=-1
 PRODUCT_PROPERTY_OVERRIDES += \
 ro.radio.noril=1 \
 ro.carrier=wifi-only
+
+# LMK
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.lmk.use_psi=true
