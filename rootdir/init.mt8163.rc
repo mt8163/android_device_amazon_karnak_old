@@ -924,7 +924,7 @@ service thermal_manager /vendor/bin/thermal_manager
     oneshot
 
 service wmt_loader /vendor/bin/wmt_loader
-    class core
+    class early_hal
     user root
     group root system
     oneshot
@@ -932,14 +932,14 @@ service wmt_loader /vendor/bin/wmt_loader
 service wmt_launcher /vendor/bin/wmt_launcher -p /vendor/firmware/
     user system
     group system
-    class core
+    class early_hal
 
 on property:service.wcn.coredump.mode=2
 start stp_dump
 
 service stp_dump /vendor/bin/stp_dump3
     user root
-    group root
+    group root sdcard_rw misc
     class core
     disabled
     oneshot
