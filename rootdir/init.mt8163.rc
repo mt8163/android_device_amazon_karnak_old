@@ -1000,6 +1000,8 @@ on post-fs
     chown system radio /dev/ttyGS3
  
 on property:apexd.status=ready
+    symlink /system/lib/libaudio_shim.so /system/apex/apex/com.android.media.swcodec/lib/libaudio_shim.so
+    symlink /system/lib/libaudio_shim.so /system/apex/apex/com.android.media/lib/libaudio_shim.so
     symlink /system/lib/libashmemd_client.so /system/apex/com.android.media.swcodec/lib/libashmemd_client.so
     symlink /system/lib/libashmemd_client.so /system/apex/com.android.media/lib/libashmemd_client.so
     symlink /system/lib/ashmemd_aidl_interface-cpp.so /system/apex/com.android.media.swcodec/lib/ashmemd_aidl_interface-cpp.so
