@@ -833,6 +833,9 @@ on property:persist.uartconsole.enable=1
 on property:dev.bootcomplete=1
     write /sys/power/pm_print_times 0
 
+on property:sys.boot_completed=1
+    stop persistentLogging
+
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
         -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
@@ -989,6 +992,7 @@ service rpmb_svc /vendor/bin/rpmb_svc
     class main
     group system drmrpc
     disabled
+
 
 service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cache/logs/log
     user system
