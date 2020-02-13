@@ -1,3 +1,18 @@
+#
+# Copyright (C) 2019-2020 The LineageOS Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 # onn8 codec libs to fix hulu and netflix and prime video
 vendor/lib/libMtkOmxVdecEx.so|478d59a82c9108aa9f1485c227522cd48d28a2da
@@ -5,9 +20,6 @@ vendor/lib/libMtkOmxCore.so|f6dc426bb7be19dd1b62e355825bec0dd3fcf89d
 vendor/lib/libMtkOmxVenc.so|5f1f4b7cf3ca195d61dabf0c9a7e290778aeb62f 
 vendor/lib/drm/libdrmmtkplugin.so|054a533ec5f3ad622fd9e71d7f66c13bcbcf1c6c 
 vendor/lib/drm/libdrmctaplugin.so|0a41a4d79bef9730f6eb028d8c64dc92da3ed209
-
-
-
 
 bin/amzn_dha_hmac
 bin/amzn_dha_tool
