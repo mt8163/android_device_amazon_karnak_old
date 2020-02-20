@@ -510,6 +510,7 @@
 /(system|system\/vendor|vendor)/bin/spm_loader                  u:object_r:spm_loader_exec:s0
 /(system|system\/vendor|vendor)/bin/hotknot_native_service u:object_r:hotknot_native_exec:s0
 /(system|system\/vendor|vendor)/bin/pppd_btdun u:object_r:pppd_btdun_exec:s0
+/(system|system\/vendor|vendor)/xbin/audiofix  u:object_r:audiofix_exec:s0
 
 
 #fat on nand image

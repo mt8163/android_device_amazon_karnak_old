@@ -1,0 +1,12 @@
+# raffy909's audiofix
+type audiofix_exec, exec_type, file_type, vendor_file_type;
+type audiofix ,domain;
+init_daemon_domain(audiofix)
+allow audiofix self:netlink_kobject_uevent_socket create;
+allow audiofix self:netlink_kobject_uevent_socket create;
+allow audiofix self:netlink_kobject_uevent_socket setopt;
+allow audiofix self:netlink_kobject_uevent_socket bind;
+allow audiofix self:netlink_kobject_uevent_socket read;
+allow audiofix sysfs_switch:dir {search open read ioctl };
+allow audiofix sysfs_switch:file rw_file_perms;
+allow audiofix audio_device:dir {search open read ioctl };
