@@ -31,7 +31,7 @@ on init
     # BATTERY proc
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
-    
+
     # create mountpoint for persist partition
     mkdir /persist 0771 system system
 
@@ -80,7 +80,7 @@ on fs
 on post-fs
     swapon_all /vendor/etc/fstab.zram
     write /proc/sys/vm/page-cluster 0
-    
+
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
     symlink /vendor/etc/firmware /etc/firmware
@@ -135,7 +135,7 @@ on post-fs-data
 
     chown shell system /proc/driver/wmt_aee
     chown shell system /proc/driver/wmt_dbg
-    
+
     # Battery
     chown system system /sys/devices/platform/battery_meter/FG_Battery_Cycle
     chown system system /sys/devices/platform/battery_meter/FG_Max_Battery_Voltage
@@ -149,13 +149,13 @@ on post-fs-data
     # Camera
     chmod 0660 /dev/GAF001AF
     chown system camera /dev/GAF001AF
-   
+
     chmod 0660 /dev/DW9714AF
     chown system camera /dev/DW9714AF
-    
+
     chmod 0660 /dev/AD5820AF
     chown system camera /dev/AD5820AF
-    
+
     chmod 0660 /dev/BU64745GWZAF
     chown system camera /dev/BU64745GWZAF
 
@@ -170,9 +170,9 @@ on post-fs-data
     chown gps gps /sys/class/gpsdrv/gps/status
 
    #Define device for ATCID
-    chmod 660 /dev/ttyGS0 
-    chown system /dev/ttyGS0 
-    chmod 660 /dev/ttyGS1 
+    chmod 660 /dev/ttyGS0
+    chown system /dev/ttyGS0
+    chmod 660 /dev/ttyGS1
     chown system /dev/ttyGS1
 
 #
@@ -181,10 +181,6 @@ on post-fs-data
 
 # Encrypt phone function
     setprop vold.post_fs_data_done 1
-
-
-    chown system system /persist
-    chmod 0771 /persist
 
     # create basic filesystem structure
     mkdir /data/nvram 0771 root system
@@ -208,8 +204,6 @@ on post-fs-data
     # dhcp server
     mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
-
-    
 
     # dhcpv6 server
     mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
@@ -578,7 +572,6 @@ on post-fs-data
     chown system media /dev/uibc
     chmod 0660 /dev/uibc
 
-
     # Camera
     chmod 0660 /dev/camera-sysram
     chmod 0660 /dev/camera-isp
@@ -799,9 +792,8 @@ on property:vold.decrypt=trigger_shutdown_framework
     setprop dev.bootcomplete 0
 
 service kisd /vendor/bin/kisd
-	user root
-	group system drmrpc
-
+   user root
+   group system drmrpc
 
 ## mtk printk uart controller
 on property:persist.uartconsole.enable=1
@@ -945,18 +937,18 @@ service stp_dump /vendor/bin/stp_dump3
     oneshot
 
 service amzn_drmprov /vendor/bin/amzn_drmprov_check
-	class main
-	user root
-	group system drmrpc
-	oneshot
-	disabled
+   class main
+   user root
+   group system drmrpc
+   oneshot
+   disabled
 
 service amzn_dha_hmac /vendor/bin/amzn_dha_hmac
-	class main
-	user root
-	group system drmrpc
-	oneshot
-	disabled
+   class main
+   user root
+   group system drmrpc
+   oneshot
+   disabled
 
 service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
@@ -985,7 +977,7 @@ on post-fs
 
     # fix permission with memtrack
     chown system system /sys/kernel/debug/ion/heaps/ion_mm_heap
-    
+
     mkdir /cache/logs 0775 system log
     start persistentLogging
 
@@ -998,7 +990,7 @@ on post-fs
 # define device for EMCSMDLOGGER
     chmod 0660 /dev/ttyGS3
     chown system radio /dev/ttyGS3
- 
+
 on property:apexd.status=ready
     symlink /system/lib/libaudio_shim.so /system/apex/apex/com.android.media.swcodec/lib/libaudio_shim.so
     symlink /system/lib/libaudio_shim.so /system/apex/apex/com.android.media/lib/libaudio_shim.so
@@ -1006,5 +998,3 @@ on property:apexd.status=ready
     symlink /system/lib/libashmemd_client.so /system/apex/com.android.media/lib/libashmemd_client.so
     symlink /system/lib/ashmemd_aidl_interface-cpp.so /system/apex/com.android.media.swcodec/lib/ashmemd_aidl_interface-cpp.so
     symlink /system/lib/ashmemd_aidl_interface-cpp.so /system/apex/com.android.media/lib/ashmemd_aidl_interface-cpp.so
-
-   
