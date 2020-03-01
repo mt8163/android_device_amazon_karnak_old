@@ -31,10 +31,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ro.camera.sound.forced=0 \
 ro.audio.silent=0
 
-# Display
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.sf.lcd_density=213
-
 # Disable partial updates (formerly known as 'dirty region') for Mali
 PRODUCT_PROPERTY_OVERRIDES += \
 debug.hwui.use_partial_updates=false

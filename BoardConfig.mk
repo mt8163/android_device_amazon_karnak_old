@@ -153,6 +153,9 @@ USE_MINIKIN := true
 # Fix video autoscaling on old OMX decoders
 TARGET_OMX_LEGACY_RESCALING:= true
 
+# Display
+TARGET_SCREEN_DENSITY := 213
+
 # Webkit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
