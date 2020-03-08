@@ -63,6 +63,7 @@
 /data/mediadrm/IDM1013                u:object_r:media_data_file:s0
 /data/mediadrm/IDM1013/L3/ay64.dat     u:object_r:media_data_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor/mediadrm/IDM1013/L1/(/.*)? u:object_r:mediadrm_vendor_data_file:s0
 ##########################
 # Devices
 #

@@ -18,6 +18,6 @@ allow hal_drm_widevine media_data_file:dir { add_name create getattr open read s
 allow hal_drm_widevine proc:file { getattr open read };
 allow hal_drm_widevine vendor_data_file:file {  create getattr open read  write };
 allow hal_drm_widevine mediadrm_vendor_data_file:dir { add_name create getattr open read search write };
-allow hal_drm_widevine mediadrm_vendor_data_file:file {  getattr open read write };
+allow hal_drm_widevine mediadrm_vendor_data_file:file {create getattr open read write };
 allow hal_drm_widevine trustzone_device:chr_file { read write open getattr ioctl };
 allow hal_drm_widevine kisd:unix_stream_socket connectto;
