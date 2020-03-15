@@ -190,7 +190,7 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # Vendor Security Patch
-VENDOR_SECURITY_PATCH := 2019-09-01
+VENDOR_SECURITY_PATCH := 2020-02-12
 
 # TWRP
 ifneq (,$(strip $(wildcard bootable/recovery-twrp/twrp.cpp)))
