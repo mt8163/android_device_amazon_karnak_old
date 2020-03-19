@@ -75,4 +75,6 @@ allow system_app proc:file read;
 allow system_app proc_pagetypeinfo:file read;
 allow system_app sysfs_zram:dir search;
 allow system_app debugfs_ion:dir search;
-allow system_app proc:file open;
+allow system_app proc:file { ioctl open read};
+allow system_app ged_procfs:file { ioctl open read};
+

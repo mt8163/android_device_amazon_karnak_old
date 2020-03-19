@@ -50,15 +50,13 @@ allow untrusted_app mtk_mwblacklist_service:service_manager find;
 
 #allow untrusted_app_25 proc:file { read open ioctl };
 allow untrusted_app_25 sysfs_leds:dir { search };
-
-
 allow untrusted_app_25 proc:file { getattr };
 allow untrusted_app_25 mediatek_prop:file  { getattr open read };
-
 allow untrusted_app_25 mediacodec:fifo_file { read write open getattr };
-
 allow untrusted_app proc:file { getattr };
-
 allow untrusted_app sysfs_boot_mode:file { open read };
-
 allow untrusted_app mediacodec:fifo_file { read write open getattr };
+allow untrusted_app debugfs_ion:dir search;
+allow untrusted_app ged_procfs:file {read write open ioctl};
+allow untrusted_app proc_asound:dir search;
+allow untrusted_app proc_mtkcooler:dir search;

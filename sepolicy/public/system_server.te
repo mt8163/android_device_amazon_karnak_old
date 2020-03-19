@@ -236,3 +236,5 @@ allow system_server power_hal_sysfs:file      rw_file_perms;
 
 allow system_server init:unix_dgram_socket { sendto };
 allow system_server crash_dump:process getpgid;
+allow system_server proc:file ioctl;
+allow system_server ged_procfs:file  { ioctl open read};

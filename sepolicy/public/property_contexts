@@ -94,5 +94,7 @@ vendor.debug.hwc. u:object_r:graphics_debug_prop:s0
 vendor.debug.sf. u:object_r:graphics_debug_prop:s0
 vendor.debug.sf.latch_unsignaled u:object_r:graphics_hwc_latch_unsignaled_prop:s0
 #allow rpmb_svc set properties
-sys.rpmb.ready u:object_r:sys_rpmb_ready_prop:s0
+sys.rpmb.ready                  u:object_r:sys_rpmb_ready_prop:s0
 vendor.wlan.                    u:object_r:vendor_wifi_prop:s0
+ro.wlan.mtk.wifi.5g             u:object_r:wifi_5g_prop:s0
+

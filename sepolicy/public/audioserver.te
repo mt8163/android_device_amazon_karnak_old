@@ -32,3 +32,4 @@ allow audioserver kmsg_device:chr_file {  open read write };
 get_prop(audioserver, vendor_default_prop)
 set_prop(audioserver, af_rf_mode_prop );
 set_prop(audioserver, af_modem_status_prop );
+allow audioserver audiohal_prop:file { read open getattr };

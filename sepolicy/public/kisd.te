@@ -7,7 +7,7 @@
 # ==============================================
 type kisd ,domain;
 type kisd_exec, exec_type, file_type, vendor_file_type;
-typeattribute kisd mlstrustedsubject;
+typeattribute kisd coredomain;
 
 # ==============================================
 # MTK Policy Rule
@@ -32,4 +32,3 @@ allow kisd dkb_block_device:chr_file {read write open ioctl getattr};
 allow kisd platformblk_device:dir search;
 allow kisd platformblk_device:blk_file { read write open ioctl getattr };
 allow kisd trustzone_device:chr_file { read write open ioctl getattr};
-allow kisd vendor_file:dir { read open ioctl getattr};

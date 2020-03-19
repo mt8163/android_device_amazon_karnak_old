@@ -6,4 +6,4 @@ allow priv_app sysfs_devinfo:file r_file_perms;
 allow priv_app kernel:system { module_request };
 allow priv_app debugfs_ion:dir search;
 allow priv_app sysfs:file read;
-
+allow priv_app ged_procfs:file {ioctl open read};

@@ -41,7 +41,7 @@ allow mtk_hal_bluetooth mnt_vendor_file:dir search;
 
 get_prop(mtk_hal_bluetooth, hwservicemanager_prop)
 
-#add_hwservice(hal_bluetooth, mtk_hal_bluetooth_hwservice)
+add_hwservice(hal_bluetooth, mtk_hal_bluetooth_hwservice)
 allow hal_bluetooth_client mtk_hal_bluetooth_hwservice:hwservice_manager find;
 
 allow mtk_hal_bluetooth system_data_file:lnk_file read;

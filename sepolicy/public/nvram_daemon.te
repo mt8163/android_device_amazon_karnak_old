@@ -102,3 +102,5 @@ allow nvram_daemon device:chr_file { ioctl };
 allow nvram_daemon platformblk_device:dir { search };
 allow nvram_daemon nvram_device:chr_file rw_file_perms;
 allow nvram_daemon platformblk_device:blk_file { read write open getattr };
+allow nvram_daemon mtk-adc-cali_device:chr_file { read write open getattr ioctl };
+allow nvram_daemon wifi_5g_prop:file {getattr open read };

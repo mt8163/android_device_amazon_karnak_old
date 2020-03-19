@@ -2,3 +2,4 @@
 # 2017/7/22: daniel_hk(danielhk@github.com)
 allow hal_wifi_default wmtWifi_device:chr_file { open write };
 set_prop(hal_wifi_default, vendor_wifi_prop)
+allow hal_wifi_default wifi_5g_prop:file { getattr open read};
