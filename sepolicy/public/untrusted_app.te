@@ -60,3 +60,5 @@ allow untrusted_app debugfs_ion:dir search;
 allow untrusted_app ged_procfs:file {read write open ioctl};
 allow untrusted_app proc_asound:dir search;
 allow untrusted_app proc_mtkcooler:dir search;
+allow untrusted_app debugfs_ion_mm_heap:dir{ read write open getattr search };
+allow untrusted_app proc_zoneinfo:file read;
