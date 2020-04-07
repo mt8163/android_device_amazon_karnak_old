@@ -77,3 +77,5 @@ allow surfaceflinger proc:file { getattr read open };
 allow surfaceflinger nfc:fifo_file { read };
 allow surfaceflinger debugfs_ion:dir search;
 allow surfaceflinger ged_procfs:file { getattr read open ioctl };
+allow surfaceflinger graphics_debug_prop:file { getattr read open ioctl };
+allow surfaceflinger mtk_m4u_procfs:file { getattr read open ioctl };
