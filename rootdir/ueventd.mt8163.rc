@@ -44,6 +44,8 @@
 # RPMB
 /dev/block/mmcblk0rpmb    0660   root       system
 
+# GPT timer
+/dev/mt_xgpt              0660   system     audio
 
 # Thermal
 /sys/devices/virtual/thermal/thermal_zone* mode 0660  system system
