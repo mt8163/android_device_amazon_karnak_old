@@ -48,4 +48,4 @@ allow vendor_init wide_dhcpv6_data_file:dir create;
 allow vendor_init wpa_supplicant_data_file:dir create;
 allow vendor_init cache_file:dir create;
 allow vendor_init nvram_data_file:dir write;
-
+allow vendor_init nvram_data_file:dir add_name;
