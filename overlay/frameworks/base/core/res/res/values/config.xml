@@ -190,8 +190,7 @@
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
     <!-- Auto Power Modes is required for Doze and App Standby -->
     <bool name="config_enableAutoPowerModes">true</bool>
-    <!-- Whether to allow process with media UID to access CameraServiceProxy -->
-    <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
+    
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
