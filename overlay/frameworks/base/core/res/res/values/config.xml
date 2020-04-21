@@ -119,16 +119,16 @@
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
-    <!-- Default list of files pinned by the Pinner Service -->
+     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm/boot-framework.oat"</item>
-        <item>"/system/framework/boot-framework.vdex"</item>
+        <item>"/system/framework/arm/boot-framework.vdex"</item>
         <item>"/system/framework/oat/arm/services.odex"</item>
         <item>"/system/framework/oat/arm/services.vdex"</item>
         <item>"/system/framework/arm/boot.oat"</item>
-        <item>"/system/framework/boot.vdex"</item>
+        <item>"/system/framework/arm/boot.vdex"</item>
         <item>"/system/framework/arm/boot-core-libart.oat"</item>
-        <item>"/system/framework/boot-core-libart.vdex"</item>
+        <item>"/system/framework/arm/boot-core-libart.vdex"</item>
     </string-array>
 
      <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
@@ -166,7 +166,6 @@
 
     <!-- If this is true, the screen will come on when you plug/unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
-
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">8</integer>
