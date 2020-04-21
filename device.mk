@@ -22,9 +22,9 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 PRODUCT_CHARACTERISTICS := tablet
 
-# Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal large
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := large mdpi hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_LOCALES += mdpi
 
 # Default.prop
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
