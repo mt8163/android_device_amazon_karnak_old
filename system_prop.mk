@@ -1,7 +1,3 @@
-# Recents
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.recents.grid=true
-
 # ADB on recovery
 PRODUCT_PROPERTY_OVERRIDES += \
 service.adb.root=1 
