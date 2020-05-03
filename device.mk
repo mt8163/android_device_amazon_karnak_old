@@ -49,6 +49,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES +=\
     lights.mt8163
 
+# Memtrack
+PRODUCT_PACKAGES +=\
+    memtrack.mt8163
+
 # Power
 PRODUCT_PACKAGES +=\
     power.mt8163
