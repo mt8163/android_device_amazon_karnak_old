@@ -120,7 +120,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto
 TARGET_LD_SHIM_LIBS := \
 /system/lib/libasp.so|libshim_asp.so \
 /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
-/vendor/lib/libgui_ext.so|libshim_gui.so \
 /vendor/lib/libcam_utils.so|libshim_camera.so\
 /vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
 /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
