@@ -1,0 +1,2 @@
+/vendor        ext4   /dev/block/platform/mtk-msdc.0/by-name/vendor      flags=backup=1
+/vendor_image  emmc   /dev/block/platform/mtk-msdc.0/by-name/vendor      flags=backup=1
