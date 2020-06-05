@@ -214,6 +214,10 @@ PRODUCT_PACKAGES += \
      libshim_camera_platform \
      libshim_mtk_codec
 
+# VNDK-SP
+PRODUCT_PACKAGES += \
+     vndk-sp
+
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
 
