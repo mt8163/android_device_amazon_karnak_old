@@ -18,6 +18,6 @@
 <resources>
  
     <!-- Default value for swapping volume keys on rotation -->
-    <bool name="def_swap_volume_keys_on_rotation">false</bool>
+    <bool name="def_swap_volume_keys_on_rotation">true</bool>
 
 </resources>

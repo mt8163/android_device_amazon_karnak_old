@@ -97,6 +97,9 @@ on post-fs-data
     chown system system /acct/uid_*
     chmod 0777 /acct/uid_*
 
+    mkdir /data/vendor/audiohal 0771 system audio
+    mkdir /data/vendor/audiohal/audio_dump 0777 system audio
+
     # BT relayer mode used VCOM
     chown bluetooth bluetooth /dev/ttyGS2
     chmod 0660 /dev/ttyGS2
