@@ -6,8 +6,6 @@
 /dev/block/platform/soc/11230000.mmc/by-name/MISC      0660    root    system
 /dev/block/platform/soc/11230000.mmc/by-name/logo      0660    root    system
 
-
-
 # Connectivity
 /dev/stpwmt               0660   system     system
 /dev/wmtdetect            0660   system     system
@@ -26,7 +24,7 @@
 /dev/wmtWifi              0660   wifi      wifi
 
 # FMRadio
-/dev/fm                   0660   media     media
+/dev/fm                   0660   media      media
 
 # NFC
 /dev/msr3110              0666   root       root
@@ -39,13 +37,69 @@
 /dev/btif                 0600   system     system
 
 # MTK in-house TEE
-/dev/trustzone            0660   system       drmrpc
+/dev/trustzone            0660   system     drmrpc
 
 # RPMB
 /dev/block/mmcblk0rpmb    0660   root       system
 
 # GPT timer
 /dev/mt_xgpt              0660   system     audio
+
+#/dev/ttyMT2 for Connectivity BT/FM/GPS usage
+/dev/ttyMT2               0660   system     system
+
+# BT relayer mode used VCOM
+/dev/ttyGS0               0660   system     system
+/dev/ttyGS1               0660   system     system
+/dev/ttyGS2               0660   bluetooth  bluetooth
+/dev/ttyGS3               0660   system     radio
+
+# Camera
+/dev/GAF001AF             0660   system     camera
+/dev/AD5820AF             0660   system     camera
+/dev/DW9714AF             0660   system     camera
+/dev/BU64745GWZAF         0660   system     camera
+/dev/FM50AF               0660   system     camera
+/dev/DW9718AF             0660   system     camera
+/dev/CAM_CAL_DRV          0660   system     camera
+/dev/camera-sysram        0660   system     camera
+/dev/camera-isp           0660   system     camera
+/dev/camera-fdvt          0660   system     camera
+/dev/camera-pipemgr       0660   system     camera
+/dev/kd_camera_hw         0660   system     camera
+/dev/kd_camera_flashlight 0660   system     camera
+/dev/kd_camera_hw_bus2    0660   system     camera
+
+# ION driver
+/dev/ion                  0666   root       root
+
+# VCodec
+/dev/Vcodec               0666   media      system
+
+# UIBC
+/dev/uibc                 0660   system     media
+
+# BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
+/dev/ebc                  0660   media      media
+
+# SMI
+/dev/MTK_SMI              0666   media      media
+
+# device info /proc interface
+/dev/devmap               0444   root       media
+
+# Graphics
+/dev/mali0                0666   root       root
+/dev/graphics/fb0         0660   system     graphics
+/dev/mtk_disp_mgr         0660   system     graphics
+/dev/mtkfb_vsync          0660   system     graphics
+/dev/sw_sync              0660   system     graphics
+
+# set ptmx group to non-root
+/dev/ptmx                 0666   root       radio
+
+# CMDQ
+/dev/mtk_cmdq             0640   system     system
 
 # Thermal
 /sys/devices/virtual/thermal/thermal_zone* mode 0660  system system
