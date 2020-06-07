@@ -118,19 +118,19 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto
 
 # Libshims
 TARGET_LD_SHIM_LIBS := \
-/system/lib/libasp.so|libshim_asp.so \
-/vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
-/vendor/lib/libcam_utils.so|libshim_camera.so\
-/vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
-/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/vendor/bin/amzn_drmprov_check|libshim_dha.so \
-/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so \
-/vendor/lib/hw/gralloc.mt8163.so|libshim_gralloc.so \
-/vendor/lib/hw/hwcomposer.mt8163.so|libshim_hwcomposer.so \
-/vendor/lib/libcam_utils.so|libshim_camera_utils.so \
-/vendor/lib/libaudiocomponentengine.so|libshim_audiocomponent.so \
-/vendor/lib/libcam.client.so|libshim_camera_platform.so \
-/vendor/lib/libMtkOmxVdecEx.so|libshim_mtk_codec.so
+  /system/lib/libasp.so|libshim_lab126_log.so \
+  /vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
+  /vendor/lib/libcam_utils.so|libshim_camera.so\
+  /vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_lab126_log.so \
+  /vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
+  /vendor/bin/amzn_drmprov_check|libshim_dha.so \
+  /vendor/lib/hw/amzn_dha.mt8163.so|libshim_dha.so \
+  /vendor/lib/hw/gralloc.mt8163.so|libshim_graphic_buffer.so \
+  /vendor/lib/hw/hwcomposer.mt8163.so|libshim_hwcomposer.so \
+  /vendor/lib/libcam_utils.so|libshim_graphic_buffer.so \
+  /vendor/lib/libaudiocomponentengine.so|libshim_audiocomponent.so \
+  /vendor/lib/libcam.client.so|libshim_graphic_buffer.so \
+  /vendor/lib/libMtkOmxVdecEx.so|libshim_graphic_buffer.so
 
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true

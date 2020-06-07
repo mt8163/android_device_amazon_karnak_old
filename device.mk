@@ -202,20 +202,17 @@ PRODUCT_COPY_FILES += \
 
 # Libshims
 PRODUCT_PACKAGES += \
-     libshim_asp \
+     libshim_lab126_log \
+     libshim_dha \
      libshim_egl \
-     libshim_gui \
      libshim_camera \
+     libshim_graphic_buffer \
+     libshim_gui \
      libshim_sensor \
      libshim_protobuf \
-     libshim_dha \
-     libshim_drm \
      libshim_gralloc \
-     libshim_camera_utils \
-     libshim_hwcomposer \
      libshim_audiocomponent \
-     libshim_camera_platform \
-     libshim_mtk_codec
+     libshim_hwcomposer
 
 # VNDK-SP
 PRODUCT_PACKAGES += \
