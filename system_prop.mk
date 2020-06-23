@@ -68,3 +68,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.present_time_offset_from_vsync_ns=0 \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=5 \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
+    
+# Pixel identification
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.build.fingerprint=google/flame/flame:10/QQ2A.200501.001.A3/6353761:user/release-keys
