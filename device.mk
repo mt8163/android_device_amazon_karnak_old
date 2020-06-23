@@ -15,7 +15,6 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 LOCAL_PATH := device/amazon/karnak
-DEVICE_FOLDER := device/amazon/karnak
 
 # Build Date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
