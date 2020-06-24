@@ -1,5 +1,8 @@
 #include <ui/GraphicBufferMapper.h>
 
+int32_t outBytesPerPixel = 0;
+int32_t outBytesPerStride = 0;
+
 namespace android {
 extern "C" status_t
 _ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPvPiS9_(
@@ -10,7 +13,7 @@ extern "C" status_t
 _ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPv(
     buffer_handle_t handle, uint32_t usage, const Rect& bounds, void** vaddr) {
   return _ZN7android19GraphicBufferMapper4lockEPK13native_handlejRKNS_4RectEPPvPiS9_(
-      handle, usage, bounds, vaddr, nullptr, nullptr);
+      handle, usage, bounds, vaddr, &outBytesPerPixel, &outBytesPerStride);
 }
 
 extern "C" void _ZN7android13GraphicBuffer4lockEjPPvPiS3_(
@@ -19,6 +22,6 @@ extern "C" void _ZN7android13GraphicBuffer4lockEjPPvPiS3_(
 
 extern "C" void _ZN7android13GraphicBuffer4lockEjPPv(uint32_t inUsage,
                                                      void** vaddr) {
-  _ZN7android13GraphicBuffer4lockEjPPvPiS3_(inUsage, vaddr, nullptr, nullptr);
+  _ZN7android13GraphicBuffer4lockEjPPvPiS3_(inUsage, vaddr, &outBytesPerPixel, &outBytesPerStride);
 }
 }  // namespace android
