@@ -73,7 +73,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.present_time_offset_from_vsync_ns=0 \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=5 \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
-    
+
+# Disable Strict Mode
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.strictmode.disable=1 \
+    persist.sys.strictmode.visual=0
+
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.build.fingerprint=google/flame/flame:10/QQ3A.200605.001/6392402:user/release-keys
