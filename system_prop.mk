@@ -1,61 +1,76 @@
+#
+# Copyright (C) 2019-2020 The LineageOS Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # ADB on recovery
 PRODUCT_PROPERTY_OVERRIDES += \
-service.adb.root=1 
+    service.adb.root=1
 
 # add support for USB storage type
 PRODUCT_PROPERTY_OVERRIDES += \
-persist.sys.isUsbOtgEnabled=1 
+    persist.sys.isUsbOtgEnabled=1
 
 # WLAN Interface
 PRODUCT_PROPERTY_OVERRIDES += \
-wifi.interface=wlan0 \
-wifi.tethering.interface=ap0 
+    wifi.interface=wlan0 \
+    wifi.tethering.interface=ap0
 
 # Mali
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.opengles.version=196609 \
-ro.hardware.gralloc=mt8163.mali
+    ro.opengles.version=196609 \
+    ro.hardware.gralloc=mt8163.mali
 
 # Wifi Direct
 PRODUCT_PROPERTY_OVERRIDES += \
-wifi.direct.interface=p2p0 
+    wifi.direct.interface=p2p0
 
 
 # USB Charge only function
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.sys.usb.charging.only=yes
+    ro.sys.usb.charging.only=yes
 
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.camera.sound.forced=0 \
-ro.audio.silent=0
+    ro.camera.sound.forced=0 \
+    ro.audio.silent=0
 
 # Disable partial updates (formerly known as 'dirty region') for Mali
 PRODUCT_PROPERTY_OVERRIDES += \
-debug.hwui.use_partial_updates=false
+    debug.hwui.use_partial_updates=false
 
 
 # Media Settings
 PRODUCT_PROPERTY_OVERRIDES += \
-media.settings.xml=/vendor/etc/media_profiles_V1_0.xml \
-persist.media.treble_omx=false \
-debug.stagefright.ccodec=0
+    media.settings.xml=/vendor/etc/media_profiles_V1_0.xml \
+    persist.media.treble_omx=false \
+    debug.stagefright.ccodec=0
 
 
 # Mediatek Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-service.wcn.driver.ready=no \
-ro.mtk_key_manager_kb_path=1 \
-ro.mediatek.platform=MT8163 \
-mtk_in_house_tee_support=true \
-ro.mtk_sec_video_path_support=1 \
-persist.mtk.wcn.combo.chipid=-1
+    service.wcn.driver.ready=no \
+    ro.mtk_key_manager_kb_path=1 \
+    ro.mediatek.platform=MT8163 \
+    mtk_in_house_tee_support=true \
+    ro.mtk_sec_video_path_support=1 \
+    persist.mtk.wcn.combo.chipid=-1
 
 # Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
-ro.radio.noril=1 \
-ro.carrier=wifi-only
+    ro.radio.noril=1 \
+    ro.carrier=wifi-only
 
 # LMK
 PRODUCT_PRODUCT_PROPERTIES += \
