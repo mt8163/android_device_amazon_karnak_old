@@ -807,11 +807,11 @@ service rpmb_svc /vendor/bin/rpmb_svc
     disabled
 
 service cameraserver /system/bin/cameraserver
-		class main
-		user cameraserver
-		group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
-		ioprio rt 4
-		writepid /dev/cpuset/foreground/tasks
+    class main
+    user cameraserver
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
 
 on post-fs
     # Allow writing to the kernel trace log.
