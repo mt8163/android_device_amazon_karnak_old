@@ -806,11 +806,6 @@ service rpmb_svc /vendor/bin/rpmb_svc
     group system drmrpc
     disabled
 
-service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cache/logs/log
-    user system
-    group system log
-    disabled
-
 service cameraserver /system/bin/cameraserver
 		class main
 		user cameraserver
