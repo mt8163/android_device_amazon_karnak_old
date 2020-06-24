@@ -146,7 +146,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Camera2 \
+    Snap \
     libcamera_parameters_mtk \
 
 # DRM
