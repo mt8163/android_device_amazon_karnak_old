@@ -33,7 +33,7 @@ on init
     # BATTERY proc
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
-    
+
     # create mountpoint for persist partition
     mkdir /persist 0771 system system
 
@@ -56,7 +56,7 @@ on fs
 on post-fs
     swapon_all /vendor/etc/fstab.zram
     write /proc/sys/vm/page-cluster 0
-    
+
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
     symlink /vendor/etc/firmware /etc/firmware
@@ -79,7 +79,6 @@ on post-fs
     # change owner
     chown root system /proc/mtprof/cputime
     chown root system /proc/mtprof/reboot_pid
-
 
 on post-fs-data
     # Create the directories used by the Wireless subsystem
@@ -117,7 +116,7 @@ on post-fs-data
 
     chown shell system /proc/driver/wmt_aee
     chown shell system /proc/driver/wmt_dbg
-    
+
     # Battery
     chown system system /sys/devices/platform/battery_meter/FG_Battery_Cycle
     chown system system /sys/devices/platform/battery_meter/FG_Max_Battery_Voltage
@@ -131,13 +130,13 @@ on post-fs-data
     # Camera
     chmod 0660 /dev/GAF001AF
     chown system camera /dev/GAF001AF
-   
+
     chmod 0660 /dev/DW9714AF
     chown system camera /dev/DW9714AF
-    
+
     chmod 0660 /dev/AD5820AF
     chown system camera /dev/AD5820AF
-    
+
     chmod 0660 /dev/BU64745GWZAF
     chown system camera /dev/BU64745GWZAF
 
@@ -152,9 +151,9 @@ on post-fs-data
     chown gps gps /sys/class/gpsdrv/gps/status
 
    #Define device for ATCID
-    chmod 660 /dev/ttyGS0 
-    chown system /dev/ttyGS0 
-    chmod 660 /dev/ttyGS1 
+    chmod 660 /dev/ttyGS0
+    chown system /dev/ttyGS0
+    chmod 660 /dev/ttyGS1
     chown system /dev/ttyGS1
 
 #
@@ -190,8 +189,6 @@ on post-fs-data
     # dhcp server
     mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
-
-    
 
     # dhcpv6 server
     mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
@@ -899,13 +896,11 @@ service akmd09911 /vendor/bin/akmd09911
     group system
     class main
 
-
 service bmm050d /vendor/bin/bmm050d
     disabled
     user system
     group system
     class main
-
 
 service mc6420d /vendor/bin/mc6420d
     disabled
@@ -968,12 +963,12 @@ service rpmb_svc /vendor/bin/rpmb_svc
     disabled
 
 service cameraserver /system/bin/cameraserver
-		class main
-		user cameraserver
-		group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
-		ioprio rt 4
-		writepid /dev/cpuset/foreground/tasks
-		
+    class main
+    user cameraserver
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+
 # healthd charger
 service charger /sbin/charger
     class charger
