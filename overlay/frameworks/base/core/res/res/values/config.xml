@@ -131,8 +131,8 @@
         <item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/system/priv-app/SystemUIGoogle/oat/arm/SystemUIGoogle.vdex"</item>
-        <item>"/system/priv-app/SystemUIGoogle/oat/arm/SystemUIGoogle.odex"</item>
+        <item>"/product/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/product/priv-app/SystemUI/oat/arm/SystemUI.odex"</item>
         <item>"/system/lib/libsurfaceflinger.so"</item>
     </string-array>
 
