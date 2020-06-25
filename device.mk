@@ -232,6 +232,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
      vndk-sp
 
+# Dex
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
+
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
 
