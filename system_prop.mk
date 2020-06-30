@@ -94,6 +94,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.strictmode.disable=1 \
     persist.sys.strictmode.visual=0
 
+# Zygote Preforking
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.device.config.runtime_native.uasp_pool_enabled=true
+
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.build.fingerprint=google/flame/flame:10/QQ3A.200605.001/6392402:user/release-keys
