@@ -32,9 +32,6 @@ on init
     chown shell system /proc/mtk_battery_cmd/current_cmd
     chown shell system /proc/mtk_battery_cmd/discharging_cmd
 
-    # create mountpoint for persist partition
-    mkdir /persist 0771 system system
-
     # CD-ROM
     mkdir /mnt/cd-rom 0000 system system
 
