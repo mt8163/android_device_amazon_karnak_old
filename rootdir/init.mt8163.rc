@@ -797,10 +797,6 @@ service amzn_dha_hmac /vendor/bin/amzn_dha_hmac
    oneshot
    disabled
 
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
-    class late_start
-    disabled
-
 service rpmb_svc /vendor/bin/rpmb_svc
     class main
     group system drmrpc
