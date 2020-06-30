@@ -649,14 +649,6 @@ on property:persist.uartconsole.enable=1
 on property:dev.bootcomplete=1
     write /sys/power/pm_print_times 0
 
-# bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B \
-        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot
-    keycodes 114 115 116
-
 # start ged_srv
 on property:sys.boot_completed=1
     start ged_srv
