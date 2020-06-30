@@ -26,5 +26,15 @@ $(FSTAB_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@rm -rf $@
 	$(hide) ln -sf /vendor/etc/fstab.mt8163 $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(FSTAB_SYMLINK)
+NVDATA_SYMLINK := $(TARGET_OUT_VENDOR)/nvdata
+$(NVDATA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "fstab link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /data/nvram $@
+
+
+ALL_DEFAULT_INSTALLED_MODULES +=  \
+$(FSTAB_SYMLINK) \
+$(NVDATA_SYMLINK)
 endif
