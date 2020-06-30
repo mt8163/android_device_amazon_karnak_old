@@ -41,7 +41,6 @@ on charger
     mkdir /dev/block/platform/mtk-msdc.0
     symlink ../soc/11230000.mmc /dev/block/platform/mtk-msdc.0/11230000.MSDC0
     mount ext4 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/system /system ro wait
-    #mount ext4 /dev/block/mntlblk_d1  /system ro wait
 
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/red/brightness
