@@ -98,6 +98,13 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.device.config.runtime_native.uasp_pool_enabled=true
 
+# Memory optimization
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.sys.fw.bservice_enable=true \
+    ro.sys.fw.bservice_limit=5 \
+    ro.sys.fw.bservice_age=5000 \
+    ro.am.reschedule_service=true \
+    ro.sys.fw.bg_apps_limit=24
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.build.fingerprint=google/flame/flame:10/QQ3A.200605.001/6392402:user/release-keys
