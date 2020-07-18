@@ -106,6 +106,10 @@ on post-fs-data
     mkdir /data/misc/wpa_supplicant 0770 wifi wifi
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
 
+    # playready data and control dirs
+    mkdir /data/playready 0770 drm drmrpc
+    mkdir /data/securestop 0770 drm drmrpc
+
     # Amazon DRM
     start amzn_drmprov
     start amzn_dha_hmac
