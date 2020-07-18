@@ -105,6 +105,12 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.sys.fw.bservice_age=5000 \
     ro.am.reschedule_service=true \
     ro.sys.fw.bg_apps_limit=24
+
+# Force Lock Screen Rotation
+PRODUCT_PRODUCT_PROPERTIES += \
+    log.tag.launcher_force_rotate=VERBOSE \
+    lockscreen.rot_override=true
+
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.build.fingerprint=google/flame/flame:10/QQ3A.200605.001/6392402:user/release-keys
