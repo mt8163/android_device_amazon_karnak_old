@@ -83,6 +83,7 @@ PRODUCT_PACKAGES += \
 
 # Sensor
 PRODUCT_PACKAGES += \
+    sensors.mt8163 \
     libsensorndkbridge
 
 # Audio
