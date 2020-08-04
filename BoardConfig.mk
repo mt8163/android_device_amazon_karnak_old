@@ -130,6 +130,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 BLOCK_BASED_OTA := true
 
+# Force 32 bit mode for audioserver since it only has 32 bit audio blobs
+AUDIOSERVER_MULTILIB := 32
+
 # Seccomp filters
 BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp-policy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
