@@ -48,6 +48,9 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
+TARGET_CPU_ABI_LIST := arm64-v8a,armeabi-v7a,armeabi
+TARGET_CPU_ABI_LIST_64_BIT := arm64-v8a
+
 # Kernel Config
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_BASE := 0x40080000
