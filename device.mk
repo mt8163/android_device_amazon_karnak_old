@@ -38,12 +38,6 @@ PRODUCT_PACKAGES +=\
 PRODUCT_PACKAGES +=\
     power.mt8163
 
-# Graphics
-PRODUCT_PACKAGES += \
-    libgralloc_extra \
-    libgui_ext \
-    libui_ext
-
 # Memtrack
 PRODUCT_PACKAGES += \
     memtrack.mt8163
