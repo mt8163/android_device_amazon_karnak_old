@@ -74,7 +74,7 @@ cc_library_shared {
     srcs: ["ui/ui.cpp"],
 
     shared_libs: [
-        "libgui",
+        "libgui_vendor",
         "libui",
     ],
     include_dirs: ["frameworks/native/include"],
@@ -92,7 +92,7 @@ cc_library_shared {
     shared_libs: [
         "libutilscallstack",
         "libutils",
-        "libgui",
+        "libgui_vendor",
         "libui",
     ],
     proprietary: true,
@@ -102,7 +102,7 @@ cc_library_shared {
     name: "libshim_gui",
     srcs: ["gui/gui.cpp"],
     shared_libs: [
-    "libgui",
+    "libgui_vendor",
     "libui",
     ],
     proprietary: true,
@@ -129,6 +129,7 @@ cc_library_shared {
     srcs: ["misc/protobuf.cpp"],
     shared_libs: ["libprotobuf-cpp-lite"],
     proprietary: true,
+
 }
 
 cc_library_shared {
@@ -168,7 +169,7 @@ cc_library_shared {
     ],
 
     shared_libs: [
-        "libgui",
+        "libgui_vendor",
         "libui",
         "libutilscallstack",
         "libutils",
