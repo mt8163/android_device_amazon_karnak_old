@@ -171,6 +171,10 @@ PRODUCT_PACKAGES += \
     libion \
     libcap
 
+# Suspend
+ PRODUCT_PACKAGES += \
+     libsuspend
+
 # Other
 PRODUCT_PACKAGES += \
     librs_jni \
