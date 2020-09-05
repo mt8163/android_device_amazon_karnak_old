@@ -131,6 +131,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto
 # Libshims
 TARGET_LD_SHIM_LIBS := \
   /vendor/lib/libcam.client.so|libshim_graphic_buffer.so \
+  /vendor/lib/libnvram.so|libshim_nvram.so \
   /vendor/lib/libMtkOmxVdecEx.so|libshim_graphic_buffer.so
 
 # Software Gatekeeper

@@ -40,6 +40,17 @@ cc_library_shared {
     proprietary: true,
 }
 
+
+cc_library_shared {
+    name: "libshim_nvram",
+
+    srcs: [
+        "misc/nvram.cpp",
+    ],
+
+    proprietary: true,
+}
+
 cc_library_shared {
     name: "libshim_egl",
     srcs: [
