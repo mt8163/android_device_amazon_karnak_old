@@ -121,7 +121,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BLOCK_BASED_OTA := true
 
 # Seccomp filters
-BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp-policy
+BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/configs/seccomp
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 
