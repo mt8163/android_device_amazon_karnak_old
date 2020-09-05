@@ -13,6 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Default.prop
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.service.acm.enable=0 \
+    camera.disable_zsl_mode=1 \
+    sys.usb.ffs.aio_compat=1 \
+    ro.mount.fs=EXT4 \
+    ro.mtk_key_manager_kb_path=1 \
+    persist.sys.debug.multi_window=true
+
 # ADB on recovery
 PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.root=1
