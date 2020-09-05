@@ -119,6 +119,7 @@ PRODUCT_PACKAGES += \
     init.mt8163.rc \
     init.mt8163.usb.rc \
     fstab.mt8163 \
+    fstab.mt8163_first_stage \
     ueventd.mt8163.rc \
 
 # Audio
