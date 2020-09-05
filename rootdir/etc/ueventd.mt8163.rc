@@ -48,7 +48,7 @@
 /dev/mt_xgpt              0660   system     audio
 
 #/dev/ttyMT2 for Connectivity BT/FM/GPS usage
-/dev/ttyMT2               0660   system     system 
+/dev/ttyMT2               0660   system     system
 
 # BT relayer mode used VCOM
 /dev/ttyGS0               0660   system     system
@@ -102,6 +102,13 @@
 
 # CMDQ
 /dev/mtk_cmdq             0640   system     system
+
+/sys/kernel/debug/ged/hal/fps_upper_bound  0660   system system
+/sys/kernel/debug/ged/hal/vsync_offset_level     0660   system system
+/sys/kernel/debug/ged/hal/event_notify            0660   system system
+/sys/kernel/debug/ged/hal/custom_upbound_gpu_freq   0660   system system
+/sys/kernel/debug/ged/hal/custom_boost_gpu_freq     0660   system system
+
 
 # Thermal
 /sys/devices/virtual/thermal/thermal_zone* mode 0660  system system

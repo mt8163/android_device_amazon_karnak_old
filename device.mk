@@ -108,18 +108,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
   libGLES_android
 
-
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/fstab.mt8163:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.mt8163 \
-    $(LOCAL_PATH)/rootdir/init.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.rc \
-    $(LOCAL_PATH)/rootdir/init.mt8163.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8163.usb.rc \
-    $(LOCAL_PATH)/rootdir/ueventd.mt8163.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
-
+PRODUCT_PACKAGES += \
+    dump-ramdump.sh \
+    wifi_log_levels.sh \
+    init.mt8163.rc \
+    init.mt8163.usb.rc \
+    fstab.mt8163 \
+    ueventd.mt8163.rc \
 
 # Audio
 PRODUCT_COPY_FILES += \
