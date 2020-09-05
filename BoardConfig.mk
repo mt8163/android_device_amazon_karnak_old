@@ -34,22 +34,14 @@ TARGET_BOARD_PLATFORM_GPU := mali-720mp2
 TARGET_NO_BOOTLOADER := true
 
 # Architecture
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a53
-
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
-
-TARGET_CPU_ABI_LIST := arm64-v8a,armeabi-v7a,armeabi
-TARGET_CPU_ABI_LIST_64_BIT := arm64-v8a
+TARGET_ARCH := arm
+TARGET_CPU_VARIANT := cortex-a7
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a7
+TARGET_CPU_VARIANT:= cortex-a7
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
 
 # Kernel Config
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
@@ -129,9 +121,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 
 BLOCK_BASED_OTA := true
-
-# Force 32 bit mode for audioserver since it only has 32 bit audio blobs
-AUDIOSERVER_MULTILIB := 32
 
 # Seccomp filters
 BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp-policy
