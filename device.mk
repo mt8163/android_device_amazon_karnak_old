@@ -237,6 +237,10 @@ PRODUCT_PACKAGES += \
      vndk_package \
 	 libstdc++.vendor
 
+PRODUCT_PACKAGES += \
+    libladder \
+    libudf
+
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
