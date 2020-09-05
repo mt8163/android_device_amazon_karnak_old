@@ -240,9 +240,10 @@ PRODUCT_PACKAGES += \
      libshim_audiocomponent \
      libshim_hwcomposer
 
-# VNDK-SP
+# VNDK
 PRODUCT_PACKAGES += \
-     vndk-sp
+     vndk_package \
+	 libstdc++.vendor
 
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
