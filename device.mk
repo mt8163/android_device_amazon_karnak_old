@@ -30,11 +30,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
-#Camera Legacy
-PRODUCT_PROPERTY_OVERRIDES += \
-     media.stagefright.legacyencoder=true \
-     media.stagefright.less-secure=true
-
 # Lights
 PRODUCT_PACKAGES +=\
     lights.mt8163
@@ -172,11 +167,6 @@ PRODUCT_PACKAGES += \
     libdrm \
     libmockdrmcryptoplugin \
     libdrmclearkeyplugin
-
-# Camera Legacy
-PRODUCT_PROPERTY_OVERRIDES += \
-     media.stagefright.legacyencoder=true \
-     media.stagefright.less-secure=true
 
 # Net
 PRODUCT_PACKAGES += \

@@ -49,7 +49,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.usb.charging.only=yes
 
-
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.sound.forced=0 \
@@ -59,22 +58,71 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.use_partial_updates=false
 
-
 # Media Settings
 PRODUCT_PROPERTY_OVERRIDES += \
     media.settings.xml=/vendor/etc/media_profiles_V1_0.xml \
-    persist.media.treble_omx=false \
     debug.stagefright.ccodec=0
 
+# Mediatek version
+PRODUCT_PROPERTY_OVERRIDES += \
+    Build.BRAND=MTK \
+    ro.mediatek.chip_ver=S01 \
+    ro.mediatek.platform=MT8163 \
+    ro.mediatek.version.release=ALPS.W10.24.p0 \
+    ro.vendor.mediatek.platform=MT8163 \
+    ro.vendor.mediatek.version.branch=alps-mp-p0.mp6.tc6sp \
+    ro.vendor.mediatek.version.release=alps-mp-p0.mp6.tc6sp-of.p14
 
 # Mediatek Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     service.wcn.driver.ready=no \
     ro.mtk_key_manager_kb_path=1 \
-    ro.mediatek.platform=MT8163 \
-    mtk_in_house_tee_support=true \
+    ro.mtk_key_manager_support=1 \
     ro.mtk_sec_video_path_support=1 \
-    persist.mtk.wcn.combo.chipid=-1
+    ro.vendor.mtk_config_max_dram_size=0x100000000 \
+    ro.vendor.mtk_in_house_tee_support=true \
+    ro.vendor.mtk_pq_color_mode=1 \
+    ro.vendor.mtk_protocol1_rat_config=no \
+    ro.vendor.mtk_ril_mode=no \
+    ro.vendor.mtk_sec_video_path_support=1 \
+    ro.vendor.wfd.dummy.enable=1 \
+    ro.vendor.wfd.iframesize.level=0 \
+    vendor.camera.mdp.cz.enable=0 \
+    vendor.camera.mdp.dre.enable=0 \
+    vendor.debug.log.coredump.enable=n \
+    vendor.mtk.vdec.waitkeyframeforplay=1
+
+# Connectivity
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.vendor.wlan.gen=gen2 \
+    service.wcn.driver.ready=no \
+    persist.vendor.connsys.chipid=-1 \
+    persist.vendor.connsys.coredump.mode=0 \
+    persist.vendor.connsys.dynamic.dump=0 \
+    persist.vendor.connsys.patch.version=-1 \
+    persist.vendor.pms_removable=1 \
+    persist.vendor.vilte_support=0 \
+    persist.vendor.viwifi_support=0 \
+    vendor.connsys.driver.ready=no \
+    ro.vendor.mtk_dhcpv6c_wifi=1
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mtk_audenh_support=1 \
+    ro.mtk_audio_profiles=1 \
+    ro.mtk_bessurround_support=1 \
+    ro.vendor.mtk_audio_alac_support=1 \
+    ro.vendor.mtk_audio_ape_support=1 \
+    ro.vendor.mtk_audio_tuning_tool_ver=V2.2 \
+    ro.vendor.mtk_besloudness_support=1
+
+# Volume steps
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.alarm_vol_steps=25 \
+    ro.config.media_vol_steps=25 \
+    ro.config.notification_vol_steps=25 \
+    ro.config.ring_vol_steps=25 \
+    ro.config.vc_call_vol_steps=25
 
 # Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
