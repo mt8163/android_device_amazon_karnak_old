@@ -229,7 +229,8 @@ PRODUCT_PACKAGES += \
      libshim_protobuf \
      libshim_gralloc \
      libshim_audiocomponent \
-     libshim_hwcomposer
+     libshim_hwcomposer \
+     libshim_nvram \
 
 # VNDK
 PRODUCT_PACKAGES += \
