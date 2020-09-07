@@ -17,67 +17,11 @@
 /* Credits to @R0rt1z2 and @chaosmaster*/
 
 cc_library_shared {
-    name: "libshim_lab126_log",
-    srcs: ["amzn/lab126_log.cpp"],
-
-    shared_libs: ["liblog"],
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_dha",
-
-    srcs: [ // dha needs amazon logging functions
-        "amzn/amzn_dha.cpp",
-        "amzn/lab126_log.cpp",
-    ],
-
-    shared_libs: [
-        "liblog",
-        "libselinux",
-    ],
-
-    proprietary: true,
-}
-
-
-cc_library_shared {
     name: "libshim_nvram",
 
     srcs: [
         "misc/nvram.cpp",
     ],
-
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_egl",
-    srcs: [
-        "egl/egl.cpp",
-        "egl/callstack.cpp",
-    ],
-
-    static_libs: ["libgcc"],
-    shared_libs: [
-        "libm",
-        "libc",
-        "libutilscallstack",
-        "libutils",
-    ],
-
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_camera",
-    srcs: ["ui/ui.cpp"],
-
-    shared_libs: [
-        "libgui_vendor",
-        "libui",
-    ],
-    include_dirs: ["frameworks/native/include"],
 
     proprietary: true,
 }
@@ -94,85 +38,6 @@ cc_library_shared {
         "libutils",
         "libgui_vendor",
         "libui",
-    ],
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_gui",
-    srcs: ["gui/gui.cpp"],
-    shared_libs: [
-    "libgui_vendor",
-    "libui",
-    ],
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_sensor",
-    srcs: ["gui/SensorManager.cpp"],
-    include_dirs: ["frameworks/native/libs/sensor/include/"],
-    shared_libs: [
-    "libsensor",
-    "libsensorservice",
-    "libbinder",
-    "libcutils",
-    "libutils",
-    "liblog",
-    "libhardware",
-    ],
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_protobuf",
-    srcs: ["misc/protobuf.cpp"],
-    shared_libs: ["libprotobuf-cpp-lite"],
-    proprietary: true,
-
-}
-
-cc_library_shared {
-    name: "libshim_gralloc",
-    srcs: [
-        "egl/egl.cpp",
-        "egl/callstack.cpp",
-    ],
-
-    static_libs: ["libgcc"],
-    shared_libs: [
-        "libm",
-        "libc",
-        "libutilscallstack",
-        "libutils",
-    ],
-
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_audiocomponent",
-    srcs: ["egl/callstack.cpp"],
-    shared_libs: [
-        "libc",
-        "libutils",
-        "libutilscallstack",
-    ],
-    proprietary: true,
-}
-
-cc_library_shared {
-    name: "libshim_hwcomposer",
-    srcs: [
-        "gui/GraphicBuffer.cpp",
-        "egl/callstack.cpp",
-    ],
-
-    shared_libs: [
-        "libgui_vendor",
-        "libui",
-        "libutilscallstack",
-        "libutils",
     ],
     proprietary: true,
 }

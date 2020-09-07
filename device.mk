@@ -207,18 +207,8 @@ PRODUCT_COPY_FILES += \
 
 # Libshims
 PRODUCT_PACKAGES += \
-     libshim_lab126_log \
-     libshim_dha \
-     libshim_egl \
-     libshim_camera \
      libshim_graphic_buffer \
-     libshim_gui \
-     libshim_sensor \
-     libshim_protobuf \
-     libshim_gralloc \
-     libshim_audiocomponent \
-     libshim_hwcomposer \
-     libshim_nvram \
+     libshim_nvram
 
 # VNDK
 PRODUCT_PACKAGES += \

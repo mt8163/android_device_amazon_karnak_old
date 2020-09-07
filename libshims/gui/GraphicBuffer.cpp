@@ -1,7 +1,7 @@
 #include <ui/GraphicBufferMapper.h>
 
-int32_t outBytesPerPixel = 0;
-int32_t outBytesPerStride = 0;
+int32_t outBytesPerPixel = 1;
+int32_t outBytesPerStride = 1;
 
 namespace android {
 extern "C" status_t
