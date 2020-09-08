@@ -21,4 +21,4 @@
 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/tee1     /tee1       emmc defaults defaults
 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/tee2     /tee2       emmc defaults defaults
 
-/dev/block/zram0                                                none       swap defaults zramsize=268435456,max_comp_streams=8
+/dev/block/zram0                                                none       swap defaults zramsize=268435456,max_comp_streams=8,zram_loopback_path=/data/per_boot/zram_swap,zram_loopback_size=512M
