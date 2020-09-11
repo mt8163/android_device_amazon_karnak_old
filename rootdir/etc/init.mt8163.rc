@@ -403,10 +403,6 @@ on property:vendor.hwc.video_mode=0
     mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
     chown dhcp wifi /data/misc/wide-dhcpv6
 
-    mkdir /persistbackup
-    chmod 0771 /persistbackup
-    chown system system /persistbackup
-
     # radvd
     mkdir /data/misc/radvd 0770 system system
     chmod 444 /etc/radvd/radvd.conf
