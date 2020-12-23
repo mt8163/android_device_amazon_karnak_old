@@ -104,7 +104,8 @@ PRODUCT_PRODUCT_PROPERTIES += \
     persist.vendor.vilte_support=0 \
     persist.vendor.viwifi_support=0 \
     vendor.connsys.driver.ready=no \
-    ro.vendor.mtk_dhcpv6c_wifi=1
+    ro.vendor.mtk_dhcpv6c_wifi=1  \
+    persist.camera.HAL3.enabled=1
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -168,6 +169,11 @@ PRODUCT_PRODUCT_PROPERTIES += \
     log.tag.launcher_force_rotate=VERBOSE \
     lockscreen.rot_override=true
 
+# Fix rank of OMX audio codec components
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.stagefright.omx_default_rank.sw-audio=1 \
+    debug.stagefright.omx_default_rank=0
+
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.build.fingerprint=google/flame/flame:10/QQ3A.200605.001/6392402:user/release-keys
+    ro.build.fingerprint=google/flame/flame:10/QQ3A.200805.001/6578210:user/release-keys
