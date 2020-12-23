@@ -125,14 +125,15 @@ BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/configs/seccomp
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun%d/file
 
 # Libshims
 TARGET_LD_SHIM_LIBS := \
   /vendor/lib/libcam.client.so|libshim_graphic_buffer.so \
   /vendor/lib/libnvram.so|libshim_nvram.so \
   /vendor/lib/libMtkOmxVdecEx.so|libshim_graphic_buffer.so
+
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
 
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
