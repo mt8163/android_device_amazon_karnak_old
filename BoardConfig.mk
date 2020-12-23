@@ -189,8 +189,8 @@ TARGET_LMKD_STATS_LOG := true
 #SENSORS
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
-# Vendor Security Patch
-VENDOR_SECURITY_PATCH := 2019-09-01
+# Security patch level
+VENDOR_SECURITY_PATCH := 2020-08-03
 
 # TWRP
 ifneq (,$(strip $(wildcard bootable/recovery-twrp/twrp.cpp)))
