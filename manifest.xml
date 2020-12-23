@@ -247,6 +247,26 @@
         </interface>
         <fqname>@1.0::IHalAudioSignalProcessor/default</fqname>
     </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.camera.ccap</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ICCAPControl</name>
+            <instance>internal/0</instance>
+        </interface>
+        <fqname>@1.0::ICCAPControl/internal/0</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.power</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>IPower</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::IPower/default</fqname>
+    </hal>
 <!---Lineageos Services -->
     <hal format="hidl">
         <name>vendor.lineage.trust</name>
