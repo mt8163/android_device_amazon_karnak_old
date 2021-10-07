@@ -28,11 +28,6 @@ PRODUCT_PACKAGES += \
    android.hardware.keymaster@3.0-impl \
    android.hardware.keymaster@3.0-service
 
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
