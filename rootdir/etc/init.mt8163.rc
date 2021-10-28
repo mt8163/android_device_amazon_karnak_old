@@ -303,6 +303,10 @@ on post-fs-data
     chown bluetooth bluetooth /dev/ampc0
     chmod 0660 /dev/ampc0
 
+# Prevents permission denied error for telephony
+    chmod 0644 /proc/cmdline
+
+
 #
 # Connectivity related device nodes & configuration (end)
 #
