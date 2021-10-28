@@ -212,6 +212,11 @@ PRODUCT_PACKAGES += \
    libaudio_shim \
    audiofix
 
+# Protobuf
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full-vendorcompat \
+    libprotobuf-cpp-lite-vendorcompat
+
 # Libshims
 PRODUCT_PACKAGES += \
      libshim_graphic_buffer \

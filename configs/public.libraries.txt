@@ -1,3 +1,5 @@
 libMcClient.so
 libMcRegistry.so
 libOpenCL.so
+libprotobuf-cpp-full.so
+libprotobuf-cpp-lite.so
