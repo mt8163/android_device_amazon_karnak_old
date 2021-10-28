@@ -239,6 +239,9 @@
 
     <!-- Component name for default assistant on this device -->
     <string name="config_defaultAssistantComponentName">com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService</string>
+    
+        <!-- The name of the package that will hold the assistant role by default. -->
+    <string name="config_defaultAssistant" translatable="false">com.google.android.googlequicksearchbox</string>
 
     <!-- An array of packages for which notifications cannot be blocked.
          Should only be used for core device functionality that must not be
