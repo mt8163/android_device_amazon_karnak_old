@@ -176,4 +176,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.build.fingerprint=google/flame/flame:10/QQ3A.200805.001/6578210:user/release-keys
+    ro.build.fingerprint=google/redfin/redfin:11/RQ3A.211001.001/7641976:user/release-keys
