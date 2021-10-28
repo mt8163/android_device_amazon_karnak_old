@@ -733,6 +733,11 @@ on property:vendor.hwc.video_mode=0
 
 on boot
 
+stop console
+
+setprop init.svc.console stopped
+
+
 # Wlan
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -g@android:wpa_wlan0 -O /data/vendor/wifi/wpa/sockets
