@@ -34,6 +34,20 @@ if [ ! -f "${HELPER}" ]; then
 fi
 source "${HELPER}"
 
+function blob_fixup {
+    case "$1" in
+        vendor/lib/libcam.client.so)
+            "$PATCHELF" --add-needed "libshim_graphic_buffer.so" "${2}"
+            ;;
+        vendor/lib/libMtkOmxVdecEx.so)
+            "$PATCHELF" --add-needed "libshim_graphic_buffer.so" "${2}"
+            ;;
+        vendor/lib/libnvram.so)
+            "${PATCHELF}" --add-needed "libshim_nvram.so" "${2}"
+            ;;
+    esac
+}
+
 # Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
 SECTION=
