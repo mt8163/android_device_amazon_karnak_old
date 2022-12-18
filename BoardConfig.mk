@@ -63,6 +63,7 @@ TARGET_KERNEL_SOURCE := kernel/amazon/karnak
 TARGET_KERNEL_CONFIG := lineageos_karnak_defconfig
 TARGET_KERNEL_VARIANT_CONFIG := lineageos_karnak_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/linaro/linux-x86/aarch64/aarch64-linux-gnu/bin/aarch64-linux-gnu-
+TARGET_KERNEL_LLVM_BINUTILS := false
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
