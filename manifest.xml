@@ -247,4 +247,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <sepolicy>
+        <version>33.0</version>
+    </sepolicy>
 </manifest>
