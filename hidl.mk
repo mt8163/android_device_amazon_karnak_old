@@ -32,7 +32,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.3-service.clearkey \
+    android.hardware.drm@1.4-service.clearkey \
 
 # Light
 PRODUCT_PACKAGES += \
@@ -44,18 +44,12 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0 \
     android.hardware.usb@1.0-service.basic
 
-# USB
-PRODUCT_PACKAGES += \
-   android.hardware.usb.gadget@1.0-impl \
-   android.hardware.usb.gadget@1.0-service
-
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
-    android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service
 
 # Memtrack

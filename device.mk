@@ -38,10 +38,6 @@ PRODUCT_PACKAGES +=\
 PRODUCT_PACKAGES +=\
     power.mt8163
 
-# Memtrack
-PRODUCT_PACKAGES += \
-    memtrack.mt8163
-
 # Thermal
 PRODUCT_PACKAGES +=\
     thermal.mt8163 \
@@ -49,16 +45,13 @@ PRODUCT_PACKAGES +=\
 
 # Audio Shim
 PRODUCT_PACKAGES += \
-   libaudio_shim \
    audiofix
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
-    dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf \
     libwifi-hal-mt66xx
 
 # Sensor
@@ -70,7 +63,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.r_submix.mt8163 \
     audio.usb.default \
-    audio.a2dp.default \
     audio_policy.stub \
     audio.r_submix.default \
     libaudio-resampler \
@@ -83,10 +75,6 @@ PRODUCT_PACKAGES += \
     tinypcminfo \
     tinycap \
     tinyplay
-
-# EGL
-PRODUCT_PACKAGES += \
-  libGLES_android
 
 # Net
 PRODUCT_PACKAGES += \
@@ -181,13 +169,7 @@ PRODUCT_PACKAGES += \
 # Other
 PRODUCT_PACKAGES += \
     librs_jni \
-    libnl_2 \
     com.android.future.usb.accessory
-
-# Bluetooth
-PRODUCT_PACKAGES += \
-    libbluetooth_mtk \
-    libbt-vendor
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -210,13 +192,13 @@ PRODUCT_COPY_FILES += \
 
 # Audio Shim
 PRODUCT_PACKAGES += \
-   libaudio_shim \
    audiofix
 
 # Protobuf
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
     libprotobuf-cpp-lite-vendorcompat
+
 
 # Libshims
 PRODUCT_PACKAGES += \
@@ -226,7 +208,7 @@ PRODUCT_PACKAGES += \
 # VNDK
 PRODUCT_PACKAGES += \
      vndk_package \
-	 libstdc++.vendor
+     libstdc++.vendor
 
 PRODUCT_PACKAGES += \
     libladder \
