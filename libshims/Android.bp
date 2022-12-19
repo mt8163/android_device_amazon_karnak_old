@@ -21,6 +21,8 @@ cc_library_shared {
         "libshim_nvram.cpp",
     ],
 
+    shared_libs: ["libbase"],
+
     proprietary: true,
 }
 

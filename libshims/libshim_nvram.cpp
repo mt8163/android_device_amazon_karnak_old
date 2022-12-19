@@ -1,1 +1,11 @@
-extern "C" void _ZN7android4base10StartsWithERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEPKc() { }
+#include <string>
+
+#include <android-base/strings.h>
+
+namespace android {
+namespace base {
+    bool StartsWith(const std::string& str, const char* prefix) {
+        return StartsWith((std::string_view)str, *prefix);
+    }
+} // namespace base
+} // namespace android
