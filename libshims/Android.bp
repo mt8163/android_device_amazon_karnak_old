@@ -48,3 +48,19 @@ cc_library_shared {
     srcs: ["libshim_keymaster.cpp"],
     proprietary: true,
 }
+
+
+cc_library_shared {
+    name: "libshim_mtkcam",
+    vendor_available: true,
+    srcs: [
+        "libinput/PropertyMap.cpp",
+        "libinput/PropertyMap_fuzz.cpp",
+    ],
+    include_dirs: [ "frameworks/native/include" ],
+    shared_libs: [
+        "libutils",
+        "libbase",
+        "liblog",
+    ],
+}

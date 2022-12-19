@@ -48,6 +48,9 @@ function blob_fixup {
         vendor/lib/hw/keystore.mt8163.so)
             "${PATCHELF}" --add-needed "libshim_keymaster.so" "${2}"
             ;;
+        vendor/lib/libmtkcam_stdutils.so)
+            "${PATCHELF}" --add-needed "libshim_mtkcam.so" "${2}"
+            ;;
     esac
 }
 

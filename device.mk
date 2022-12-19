@@ -199,7 +199,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
      libshim_gui \
      libshim_nvram \
-     libshim_keymaster
+     libshim_keymaster \
+     libshim_mtkcam.vendor
 
 # VNDK
 PRODUCT_PACKAGES += \
