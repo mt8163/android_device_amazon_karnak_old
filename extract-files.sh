@@ -45,6 +45,9 @@ function blob_fixup {
         vendor/lib/libnvram.so)
             "${PATCHELF}" --add-needed "libshim_nvram.so" "${2}"
             ;;
+        vendor/lib/hw/keystore.mt8163.so)
+            "${PATCHELF}" --add-needed "libshim_keymaster.so" "${2}"
+            ;;
     esac
 }
 

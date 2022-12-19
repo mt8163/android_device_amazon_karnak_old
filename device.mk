@@ -198,7 +198,8 @@ PRODUCT_PACKAGES += \
 # Shims
 PRODUCT_PACKAGES += \
      libshim_gui \
-     libshim_nvram
+     libshim_nvram \
+     libshim_keymaster
 
 # VNDK
 PRODUCT_PACKAGES += \
