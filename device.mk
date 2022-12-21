@@ -43,9 +43,10 @@ PRODUCT_PACKAGES +=\
     thermal.mt8163 \
     thermal_manager
 
-# Audio Shim
+# Audio
 PRODUCT_PACKAGES += \
-   audiofix
+    audio.primary.default \
+    audiofix
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
