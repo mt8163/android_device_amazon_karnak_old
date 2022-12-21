@@ -81,6 +81,11 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.a2dp@1.0.vendor \
     android.hardware.bluetooth.audio-impl \
 
+#OMX
+PRODUCT_PACKAGES += \
+    android.hardware.media.omx@1.0-service \
+    libstagefright_omx.vendor
+
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
