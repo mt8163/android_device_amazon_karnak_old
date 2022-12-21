@@ -744,6 +744,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
     socket wpa_wlan0 dgram 660 wifi wifi
+    interface aidl android.hardware.wifi.supplicant.ISupplicant/default
     class main
     disabled
     oneshot
