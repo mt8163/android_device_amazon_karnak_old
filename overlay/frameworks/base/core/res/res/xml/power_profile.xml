@@ -26,8 +26,8 @@
     <item name="wifi.on">3.5</item>
     <item name="wifi.active">73.24</item>
     <item name="wifi.scan">75.48</item>
-    <item name="dsp.audio">0.1</item>
-    <item name="dsp.video">0.1</item>
+    <item name="audio">0.1</item>
+    <item name="video">0.1</item>
     <item name="camera.avg">500</item> <!-- Avg. power use of camera in standard usecases, ~550mA -->
     <array name="cpu.clusters.cores">
         <value>4</value>
