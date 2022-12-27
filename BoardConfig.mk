@@ -213,6 +213,7 @@ TW_AMONET := true
 TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 
 # Properties
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
 
 #Use dlmalloc instead of jemalloc for mallocs
