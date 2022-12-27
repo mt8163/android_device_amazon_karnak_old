@@ -8,6 +8,9 @@ vendor.mtk.vdec.waitkeyframeforplay=1
 
 # Display
 ro.vendor.mtk_pq_color_mode=1
+debug.hwui.renderer=skiagl
+debug.renderengine.backend=skiaglthreaded
+renderthread.skia.reduceopstasksplitting=true
 
 # SurfaceFlinger
 ro.surface_flinger.protected_contents=true
