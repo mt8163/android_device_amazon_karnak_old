@@ -50,5 +50,5 @@ ro.vendor.mediatek.version.release=alps-mp-p0.mp6.tc6sp-of.p14
 
 # ZRAM
 ro.zram.mark_idle_delay_mins=60
-ro.zram.first_wb_delay_mins=180
+ro.zram.first_wb_delay_mins=1440
 ro.zram.periodic_wb_delay_hours=24
