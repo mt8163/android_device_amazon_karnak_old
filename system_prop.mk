@@ -176,7 +176,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Pixel identification
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.build.fingerprint=google/redfin/redfin:11/RQ3A.211001.001/7641976:user/release-keys
+    ro.build.fingerprint=google/cheetah/cheetah:13/TQ1A.221205.011/9244662:user/release-keys
 
 # XML
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
