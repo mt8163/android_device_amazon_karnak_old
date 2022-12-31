@@ -130,10 +130,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
 
-# Charger
-BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
-
 # Manifest
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
