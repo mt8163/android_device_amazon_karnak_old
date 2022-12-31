@@ -41,7 +41,6 @@ TARGET_ARCH_VARIANT_CPU := cortex-a7
 TARGET_CPU_VARIANT:= cortex-a7
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 
 # Kernel Config
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
@@ -135,9 +134,6 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_co
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE:= karnak
-
-# Enable Minikin text layout engine (will be the default soon)
-USE_MINIKIN := true
 
 # Fix video autoscaling on old OMX decoders
 TARGET_OMX_LEGACY_RESCALING:= true
