@@ -19,10 +19,6 @@ DEVICE_PATH := device/amazon/karnak
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
 
-# Bootanimation
-TARGET_SCREEN_WIDTH := 1280
-TARGET_SCREEN_HEIGHT := 800
-
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOARD_PLATFORM_GPU := mali-720mp2
