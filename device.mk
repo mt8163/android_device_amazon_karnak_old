@@ -150,7 +150,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Camera2
+    Aperture
 
 # DRM
 PRODUCT_PACKAGES += \
