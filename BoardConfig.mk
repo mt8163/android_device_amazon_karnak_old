@@ -18,6 +18,7 @@ DEVICE_PATH := device/amazon/karnak
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOARD_PLATFORM_GPU := mali-720mp2
+BOARD_HAS_MTK_HARDWARE := true
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -62,8 +63,6 @@ BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += loop.max_part=7
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
-
-BOARD_HAS_MTK_HARDWARE := true
 
 # Build Vendor Image
 TARGET_COPY_OUT_VENDOR := vendor
