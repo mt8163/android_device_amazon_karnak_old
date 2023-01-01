@@ -129,9 +129,6 @@ USE_CUSTOM_AUDIO_POLICY := 1
 # Exclude AudioFx
 TARGET_EXCLUDES_AUDIOFX := true
 
-# Camera
-USE_CAMERA_STUB := true
-
 # Graphics
 TARGET_USES_HWC2 := true
 
