@@ -190,7 +190,5 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
 #Use dlmalloc instead of jemalloc for mallocs
 MALLOC_SVELTE := true
 
-BUILD_BROKEN_DUP_RULES := true
-
 # Disable API check
 WITHOUT_CHECK_API := true
