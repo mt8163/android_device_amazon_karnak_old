@@ -15,9 +15,6 @@
 
 DEVICE_PATH := device/amazon/karnak
 
-# Headers
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
-
 # Inherit from the proprietary version
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
