@@ -31,6 +31,9 @@ TARGET_CPU_VARIANT:= cortex-a7
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 
+# OTA Assert
+TARGET_OTA_ASSERT_DEVICE:= karnak
+
 # Kernel Config
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_BASE := 0x40080000
@@ -118,9 +121,6 @@ BOARD_USE_SOFT_GATEKEEPER := true
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_compatibility_matrix.xml
-
-# OTA assert
-TARGET_OTA_ASSERT_DEVICE:= karnak
 
 # Display
 TARGET_SCREEN_DENSITY := 213
