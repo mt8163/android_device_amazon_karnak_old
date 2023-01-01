@@ -16,9 +16,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 LOCAL_PATH := device/amazon/karnak
 
-# Build Date
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-
 PRODUCT_CHARACTERISTICS := tablet
 
 # Device uses high-density artwork where available
