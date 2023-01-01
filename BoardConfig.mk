@@ -15,10 +15,6 @@
 
 DEVICE_PATH := device/amazon/karnak
 
-# Inherit from the proprietary version
-include vendor/amazon/mt8163/BoardConfigVendor.mk
-include vendor/amazon/karnak/BoardConfigVendor.mk
-
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOARD_PLATFORM_GPU := mali-720mp2
@@ -179,3 +175,6 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
 
 # Disable API check
 WITHOUT_CHECK_API := true
+# Inherit from the proprietary version
+include vendor/amazon/mt8163/BoardConfigVendor.mk
+include vendor/amazon/karnak/BoardConfigVendor.mk
