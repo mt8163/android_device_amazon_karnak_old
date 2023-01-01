@@ -168,13 +168,8 @@ PRODUCT_PACKAGES += \
     libcap
 
 # Suspend
- PRODUCT_PACKAGES += \
-     libsuspend
-
-# Other
 PRODUCT_PACKAGES += \
-    librs_jni \
-    com.android.future.usb.accessory
+    libsuspend
 
 # Disable SF configstore
 PRODUCT_PACKAGES += \
