@@ -173,8 +173,6 @@ TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
 
-# Disable API check
-WITHOUT_CHECK_API := true
 # Inherit from the proprietary version
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
