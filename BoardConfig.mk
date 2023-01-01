@@ -133,9 +133,6 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_co
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE:= karnak
 
-# Fix video autoscaling on old OMX decoders
-TARGET_OMX_LEGACY_RESCALING:= true
-
 # Display
 TARGET_SCREEN_DENSITY := 213
 
