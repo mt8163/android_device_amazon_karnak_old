@@ -10,6 +10,7 @@ DEVICE_PATH := device/amazon/karnak
 # Platform
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOARD_PLATFORM_GPU := mali-720mp2
+TARGET_BOOTLOADER_BOARD_NAME := karnak
 BOARD_HAS_MTK_HARDWARE := true
 
 # Bootloader
