@@ -94,12 +94,6 @@ on post-fs
     chown radio system /proc/freqhopping/status
     chown radio system /proc/freqhopping/userdef
 
-    # Support A/B feature for emmc boot region
-    symlink /dev/block/sda /dev/block/mmcblk0boot0
-    symlink /dev/block/sdb /dev/block/mmcblk0boot1
-    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
-    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
-
 # change owner
     chown system system /proc/bootprof
     chown root system /proc/mtprof/cputime
