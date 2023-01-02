@@ -9,6 +9,7 @@ vendor.mtk.vdec.waitkeyframeforplay=1
 # Display
 ro.vendor.mtk_pq_color_mode=1
 debug.sf.recomputecrop=0
+debug.cpurend.vsync=false
 debug.hwui.renderer=skiagl
 debug.renderengine.backend=skiaglthreaded
 renderthread.skia.reduceopstasksplitting=true
