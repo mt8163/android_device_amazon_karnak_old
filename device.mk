@@ -196,14 +196,14 @@ PRODUCT_PACKAGES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-     libshim_gui \
-     libshim_nvram \
-     libshim_keymaster \
-     libshim_mtkcam.vendor
+    libshim_gui \
+    libshim_nvram \
+    libshim_keymaster \
+    libshim_mtkcam.vendor
 
 # VNDK
 PRODUCT_PACKAGES += \
-     libstdc++.vendor
+    libstdc++.vendor
 
 PRODUCT_PACKAGES += \
     libladder \
