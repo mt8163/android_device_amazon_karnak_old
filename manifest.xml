@@ -201,6 +201,16 @@
         </interface>
         <fqname>@4.0::IDevicesFactory/default</fqname>
     </hal>
+	    <hal format="hidl">
+        <name>fireos.hardware.idme</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IIdme</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IIdme/default</fqname>
+    </hal>
     <hal format="hidl">
         <name>fireos.hardware.audiosignalprocessor</name>
         <transport>hwbinder</transport>
