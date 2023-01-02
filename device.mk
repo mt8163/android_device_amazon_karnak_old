@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.0.vendor \
     android.hardware.bluetooth.a2dp@1.0.vendor \
     android.hardware.bluetooth.audio-impl \
+    audio.bluetooth.default \
     audio.primary.default \
     audiofix \
     libaudio_shim
