@@ -26,6 +26,7 @@ debug.sf.hwc.min.duration=17000000
 debug.sf.late.app.duration=20000000
 debug.sf.late.sf.duration=27600000
 debug.sf.use_phase_offsets_as_durations=1
+debug.sf.enable_gl_backpressure=1
 
 # RIL
 ro.vendor.mtk_protocol1_rat_config=no
