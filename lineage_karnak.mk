@@ -20,6 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/amazon/karnak/device.mk)
 
+# Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := karnak
 PRODUCT_NAME := lineage_karnak
 PRODUCT_BRAND := google
