@@ -5,11 +5,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
-
 # Camera HAL
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
