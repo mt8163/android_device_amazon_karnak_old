@@ -47,7 +47,8 @@ PRODUCT_PACKAGES +=\
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.default \
-    audiofix
+    audiofix \
+    libaudio_shim
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
