@@ -309,4 +309,8 @@
 
     <!-- The max scale for the wallpaper when it's zoomed in -->
     <item name="config_wallpaperMaxScale" format="float" type="dimen">1.00</item>
+
+    <!-- If device supports corner radius on windows.
+         This should be turned off on low-end devices to improve animation performance. -->
+    <bool name="config_supportsRoundedCornersOnWindows">false</bool>
 </resources>
