@@ -84,8 +84,6 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-    dump-ramdump.sh \
-    wifi_log_levels.sh \
     init.mt8163.rc \
     init.mt8163.usb.rc \
     fstab.mt8163 \
