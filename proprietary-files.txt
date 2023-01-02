@@ -292,7 +292,7 @@ vendor/bin/wmt_loopback
 vendor/etc/init/init.wlan_drv.rc
 vendor/etc/init/init.wmt_drv.rc
 vendor/etc/init/init_connectivity.rc
-vendor/bin/hw/wpa_supplicant
+vendor/bin/hw/wpa_supplicant|6fc8170c0469764a0860189a79aff9a3dde0c54e
 vendor/bin/hw/hostapd
 vendor/etc/init/hostapd.android.rc
 vendor/lib/libwpa_client.so
