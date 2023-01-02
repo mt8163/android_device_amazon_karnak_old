@@ -5,7 +5,7 @@
 
 /dev/block/platform/soc/11230000.mmc/by-name/system               /system      ext4   ro                                                         wait,first_stage_mount
 /dev/block/platform/soc/11230000.mmc/by-name/vendor               /vendor      ext4   ro                                                         wait,first_stage_mount
-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata    /data        ext4   noatime,nosuid,nodev,noauto_da_alloc,errors=remount-ro     wait,check,formattable,reservedsize=128m
+/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata    /data        ext4   noatime,nosuid,nodev,noauto_da_alloc,errors=remount-ro,discard     wait,check,formattable,reservedsize=128m
 /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/cache       /cache       ext4   noatime,nosuid,nodev,noauto_da_alloc                       wait,check,latemount
 
 /devices/platform/soc/11240000.mmc* auto vfat defaults voldmanaged=sdcard1:auto
