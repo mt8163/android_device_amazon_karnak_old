@@ -12,6 +12,9 @@ debug.hwui.renderer=skiagl
 debug.renderengine.backend=skiaglthreaded
 renderthread.skia.reduceopstasksplitting=true
 
+# Media
+media.stagefright.thumbnail.prefer_hw_codecs=true
+
 # SurfaceFlinger
 ro.surface_flinger.protected_contents=true
 ro.surface_flinger.running_without_sync_framework=true
