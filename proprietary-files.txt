@@ -284,6 +284,21 @@ vendor/lib/fireos.hardware.amazonthermal@1.0.so
 vendor/lib/hw/fireos.hardware.amazonthermal@1.0-impl.so
 
 # WiFi
+vendor/bin/wmt_concurrency
+vendor/bin/wmt_fdb
+vendor/bin/wmt_launcher
+vendor/bin/wmt_loader
+vendor/bin/wmt_loopback
+vendor/etc/init/init.wlan_drv.rc
+vendor/etc/init/init.wmt_drv.rc
+vendor/etc/init/init_connectivity.rc
+vendor/bin/hw/wpa_supplicant
+vendor/bin/hw/hostapd
+vendor/etc/init/hostapd.android.rc
+vendor/lib/libwpa_client.so
+vendor/bin/hostapd_cli
+vendor/bin/hw/android.hardware.wifi@1.0-service-mediatek
+vendor/etc/init/android.hardware.wifi@1.0-service-mediatek.rc
 vendor/bin/iwpriv
 
 # rootdir
