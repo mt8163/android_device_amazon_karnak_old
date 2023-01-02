@@ -11,3 +11,4 @@ genfscon proc /ged u:object_r:ged_procfs:s0
 genfscon iso9660 / u:object_r:iso9660:s0
 genfscon rawfs / u:object_r:rawfs:s0
 genfscon proc /m4u u:object_r:mtk_m4u_procfs:s0
+genfscon proc /sys/vm/dirty_writeback_centisecs u:object_r:proc_dirty:s0
