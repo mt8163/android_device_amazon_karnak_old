@@ -82,8 +82,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl-mediatek \
     android.hardware.sensors@1.0-service-mediatek \
     sensors.mt8163 \
-    libsensorndkbridge \
-    sensor_permission
+    libsensorndkbridge
 
 # Audio
 PRODUCT_PACKAGES += \
