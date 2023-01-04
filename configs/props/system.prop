@@ -55,3 +55,6 @@ ro.zram.periodic_wb_delay_hours=24
 
 # Avoid GFX Accel
 ro.config.avoid_gfx_accel=true
+
+# Storage XML
+persist.sys.binary_xml=false
