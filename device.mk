@@ -51,6 +51,11 @@ PRODUCT_PACKAGES += \
     audiofix \
     libaudio_shim
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl-mediatek \
+    android.hardware.bluetooth@1.0-service-mediatek
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwpa_client \
