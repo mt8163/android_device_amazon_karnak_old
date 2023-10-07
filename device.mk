@@ -283,6 +283,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
+# Enable DM file pre-opting to reduce first boot time
+PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
 
 include vendor/amazon/karnak/karnak-vendor.mk
 include vendor/amazon/mt8163/mt8163-vendor.mk
