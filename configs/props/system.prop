@@ -48,6 +48,9 @@ ro.vendor.mediatek.platform=MT8163
 ro.vendor.mediatek.version.branch=alps-mp-p0.mp6.tc6sp
 ro.vendor.mediatek.version.release=alps-mp-p0.mp6.tc6sp-of.p14
 
+# Disable surfaceflinger prime_shader cache to improve post boot memory.
+service.sf.prime_shader_cache=0
+
 # ZRAM
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=1440
