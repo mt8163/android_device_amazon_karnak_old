@@ -9,7 +9,11 @@ PRODUCT_SYSTEM_PROPERTIES += \
   ro.lmk.critical_upgrade=true \
   ro.lmk.upgrade_pressure=40 \
   ro.lmk.downgrade_pressure=60 \
-  ro.lmk.kill_heaviest_task=false
+  ro.lmk.kill_heaviest_task=true \
+  ro.lmk.kill_timeout_ms=100 \
+  ro.lmk.use_minfree_levels=true \
+  ro.lmk.use_new_strategy=true \
+
 
 # set threshold to filter unused apps
 PRODUCT_SYSTEM_PROPERTIES += \
