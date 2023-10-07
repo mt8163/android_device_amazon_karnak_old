@@ -13,7 +13,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 
 # set threshold to filter unused apps
 PRODUCT_SYSTEM_PROPERTIES += \
-  pm.dexopt.downgrade_after_inactive_days=10
+  pm.dexopt.downgrade_after_inactive_days=7
 
 # set the compiler filter for shared apks to quicken.
 # Rationale: speed has a lot of dex code expansion, it uses more ram and space
