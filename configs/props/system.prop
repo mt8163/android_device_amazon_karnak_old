@@ -58,3 +58,6 @@ ro.config.avoid_gfx_accel=true
 
 # Storage XML
 persist.sys.binary_xml=false
+
+# Zygote
+zygote.critical_window.minute=10
