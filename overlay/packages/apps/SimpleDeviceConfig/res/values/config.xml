@@ -16,5 +16,8 @@
         <!-- ART heap compaction for cached apps -->
         <item>activity_manager/use_compaction=true</item>
     </string-array>
+    <string-array name="configs_device">
+        <item>activity_manager/no_kill_cached_processes_until_boot_completed=true</item>
+    </string-array>
 </resources>
 
