@@ -7,7 +7,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Set lowram options
 PRODUCT_SYSTEM_PROPERTIES += \
   ro.lmk.critical_upgrade=true \
-  ro.lmk.upgrade_pressure=40 \
+  ro.lmk.upgrade_pressure=60 \
   ro.lmk.downgrade_pressure=60 \
   ro.lmk.kill_heaviest_task=true \
   ro.lmk.kill_timeout_ms=100 \
