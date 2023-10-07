@@ -13,6 +13,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
   ro.lmk.kill_timeout_ms=100 \
   ro.lmk.use_minfree_levels=true \
   ro.lmk.use_new_strategy=true \
+  ro.lmk.log_stats=false
 
 
 # set threshold to filter unused apps
