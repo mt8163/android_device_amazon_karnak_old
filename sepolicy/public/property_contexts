@@ -10,8 +10,6 @@ persist.mtklog                u:object_r:persist_mtklog_prop:s0
 #debug.netlog.stopreason
 debug.netlog                  u:object_r:debug_netlog_prop:s0
 
-#=============allow system_server to set media.wfd.*==============
-media.wfd.                    u:object_r:media_wfd_prop:s0
 
 #=============allow netd to set mtk_wifi.*========================
 mtk_wifi.                     u:object_r:mtk_wifi_prop:s0

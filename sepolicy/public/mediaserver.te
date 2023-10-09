@@ -64,11 +64,6 @@ allow mediaserver bt_int_adp_socket:sock_file write;
 
 # Date : WK14.37
 # Operation : Migration
-# Purpose : WFD and MET Latency measurement
-allow mediaserver media_wfd_prop:property_service set;
-
-# Date : WK14.37
-# Operation : Migration
 # Purpose : camera ioctl
 allow mediaserver camera_sysram_device:chr_file { read ioctl open };
 

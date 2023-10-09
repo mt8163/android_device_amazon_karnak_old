@@ -7,8 +7,6 @@ type mtk_default_prop, property_type;
 type debug_mtklog_prop, property_type;
 type persist_mtklog_prop, property_type;
 type debug_netlog_prop, property_type;
-#=============allow system_server to set media.wfd.*==============
-type media_wfd_prop, property_type;
 
 #=============allow netd to set mtk_wifi.*=========================
 type mtk_wifi_prop, property_type;

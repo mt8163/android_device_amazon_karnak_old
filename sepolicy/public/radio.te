@@ -64,7 +64,6 @@ allow radio mal_mfi_socket2:sock_file write;
 # Date : WK15.34 2015/08/21
 # Operation : IT
 # Purpose : for engineermode WFD IOT property
-allow radio media_wfd_prop:property_service set;
 allow radio surfaceflinger:fifo_file { read write };
 
 # Date: 2015/10/22
