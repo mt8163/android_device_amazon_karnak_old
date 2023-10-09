@@ -161,6 +161,9 @@ TW_DEFAULT_BRIGHTNESS := 128
 TW_AMONET := true
 TW_DEFAULT_BACKUP_LIST := "/system_image;/vendor_image;/data;/boot;"
 
+# APEX
+OVERRIDE_TARGET_FLATTEN_APEX := true
+
 # Verified Boot
 BOARD_AVB_ENABLE := false
 
