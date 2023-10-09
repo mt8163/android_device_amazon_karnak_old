@@ -64,18 +64,12 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     libwifi-hal-mt66xx
 
-# Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
 
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-service \
     android.hardware.health@2.1-impl
 
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-karnak
 
 # Sensor
 PRODUCT_PACKAGES += \
