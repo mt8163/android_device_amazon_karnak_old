@@ -24,11 +24,6 @@ ro.radio.noril=1
 ro.carrier=wifi-only
 
 # LMKD
-ro.lmk.critical_upgrade=true
-ro.lmk.downgrade_pressure=60
-ro.lmk.kill_heaviest_task=false
-ro.lmk.log_stats=true
-ro.lmk.upgrade_pressure=40
 ro.lmk.use_psi=false
 
 # OTG
@@ -64,3 +59,8 @@ persist.sys.binary_xml=false
 
 # Zygote
 zygote.critical_window.minute=10
+
+# Props
+persist.sys.disable_rescue=true
+ro.sys.sdcardfs=0
+
