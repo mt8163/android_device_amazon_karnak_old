@@ -6,10 +6,10 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/lineage_karnak.mk
+     $(LOCAL_DIR)/evolution_karnak.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_karnak-userdebug \
-    lineage_karnak-eng \
-    lineage_karnak-user
+    evolution_karnak-userdebug \
+    evolution_karnak-eng \
+    evolution_karnak-user
 
