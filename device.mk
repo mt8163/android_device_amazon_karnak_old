@@ -288,9 +288,3 @@ PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
 
 include vendor/amazon/karnak/karnak-vendor.mk
 include vendor/amazon/mt8163/mt8163-vendor.mk
-
-# call dalvik heap config
-$(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
-
-# call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
