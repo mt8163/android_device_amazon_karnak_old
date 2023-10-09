@@ -265,10 +265,6 @@ PRODUCT_PACKAGES += \
     libshim_keymaster \
     libshim_mtkcam.vendor
 
-# VNDK
-PRODUCT_PACKAGES += \
-    libstdc++.vendor
-
 PRODUCT_PACKAGES += \
     libladder \
     libudf
