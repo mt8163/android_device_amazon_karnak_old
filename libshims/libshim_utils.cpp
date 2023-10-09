@@ -1,6 +1,5 @@
 #define LOG_TAG "CallStack_shim"
 
-#include <backtrace/Backtrace.h>
 #include <utils/CallStack.h>
 #include <utils/Errors.h>
 #include <utils/Log.h>
