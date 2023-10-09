@@ -7,6 +7,174 @@
         <instance>default</instance>
     </interface>
 </hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.audio.effect</name>
+    <version>4.0</version>
+    <interface>
+        <name>IEffectsFactory</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.audio</name>
+    <version>4.0</version>
+    <interface>
+        <name>IDevicesFactory</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="aidl" optional="true">
+    <name>android.hardware.bluetooth.audio</name>
+    <interface>
+        <name>IBluetoothAudioProviderFactory</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.bluetooth</name>
+    <version>1.0</version>
+    <interface>
+        <name>IBluetoothHci</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.camera.provider</name>
+    <version>2.0-4</version>
+    <interface>
+        <name>ICameraProvider</name>
+        <instance>internal/0</instance>
+    </interface>
+</hal>
+<hal format="aidl" optional="true">
+    <name>android.hardware.cas</name>
+    <interface>
+        <name>IMediaCasService</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.drm</name>
+    <version>1.0-1</version>
+    <interface>
+        <name>ICryptoFactory</name>
+        <instance>default</instance>
+        <instance>widevine</instance>
+    </interface>
+    <interface>
+        <name>IDrmFactory</name>
+        <instance>default</instance>
+        <instance>widevine</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.gatekeeper</name>
+    <version>1.0</version>
+    <interface>
+        <name>IGatekeeper</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.graphics.allocator</name>
+    <version>2.0</version>
+    <interface>
+        <name>IAllocator</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.graphics.composer</name>
+    <version>2.0-1</version>
+    <interface>
+        <name>IComposer</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.graphics.mapper</name>
+    <version>2.0-1</version>
+    <interface>
+        <name>IMapper</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.keymaster</name>
+    <version>3.0</version>
+    <interface>
+        <name>IKeymasterDevice</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.light</name>
+    <version>2.0</version>
+    <interface>
+        <name>ILight</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.media.omx</name>
+    <version>1.0</version>
+    <interface>
+        <name>IOmx</name>
+        <instance>default</instance>
+    </interface>
+    <interface>
+        <name>IOmxStore</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.memtrack</name>
+    <version>1.0</version>
+    <interface>
+        <name>IMemtrack</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.power</name>
+    <version>1.0</version>
+    <interface>
+        <name>IPower</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.renderscript</name>
+    <version>1.0</version>
+    <interface>
+        <name>IDevice</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.sensors</name>
+    <version>1.0</version>
+    <interface>
+        <name>ISensors</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="hidl" optional="true">
+    <name>android.hardware.soundtrigger</name>
+    <version>2.0-1</version>
+    <interface>
+        <name>ISoundTriggerHw</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+<hal format="aidl" optional="true">
+    <name>android.hardware.wifi.supplicant</name>
+    <interface>
+        <name>ISupplicant</name>
+        <instance>default</instance>
+    </interface>
+</hal>
+
 <hal format="aidl" optional="true">
     <name>android.hardware.bluetooth.audio</name>
     <interface>
