@@ -103,11 +103,11 @@
 # CMDQ
 /dev/mtk_cmdq             0640   system     system
 
-/sys/kernel/debug/ged/hal/fps_upper_bound  0660   system system
-/sys/kernel/debug/ged/hal/vsync_offset_level     0660   system system
-/sys/kernel/debug/ged/hal/event_notify            0660   system system
-/sys/kernel/debug/ged/hal/custom_upbound_gpu_freq   0660   system system
-/sys/kernel/debug/ged/hal/custom_boost_gpu_freq     0660   system system
+/sys/kernel/debug/ged/hal* fps_upper_bound  0660   system system
+/sys/kernel/debug/ged/hal* vsync_offset_level     0660   system system
+/sys/kernel/debug/ged/hal* event_notify            0660   system system
+/sys/kernel/debug/ged/hal* custom_upbound_gpu_freq   0660   system system
+/sys/kernel/debug/ged/hal* custom_boost_gpu_freq     0660   system system
 
 
 # Thermal
