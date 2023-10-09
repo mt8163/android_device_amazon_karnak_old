@@ -233,6 +233,6 @@
         <fqname>@2.0::IPower/default</fqname>
     </hal>
     <sepolicy>
-        <version>33.0</version>
+        <version>34.0</version>
     </sepolicy>
 </manifest>
