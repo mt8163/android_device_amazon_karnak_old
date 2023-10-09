@@ -7,6 +7,8 @@
 /dev/block/platform/soc/11230000.mmc/by-name/vendor               /vendor      ext4   ro                                                         wait,first_stage_mount
 /dev/block/platform/soc/11230000.mmc/by-name/userdata    		 /data        ext4   noatime,nosuid,nodev,noauto_da_alloc,errors=remount-ro,discard     wait,check,formattable,reservedsize=128m
 /dev/block/platform/soc/11230000.mmc/by-name/cache       		/cache       ext4   noatime,nosuid,nodev,noauto_da_alloc                       wait,check,latemount
+/dev/block/platform/soc/11230000.mmc/by-name/metadata  			/metadata      ext4   noatime,nosuid,nodev,discard                      		 wait,check,formattable,first_stage_mount
+
 
 /devices/platform/soc/11240000.mmc* auto vfat defaults voldmanaged=sdcard1:auto
 /devices/platform/mt_usb*  auto vfat defaults voldmanaged=usbotg:auto
