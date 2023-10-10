@@ -6,10 +6,10 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/evolution_karnak.mk
+     $(LOCAL_DIR)/aosp_karnak.mk
 
 COMMON_LUNCH_CHOICES := \
-    evolution_karnak-userdebug \
-    evolution_karnak-eng \
-    evolution_karnak-user
+    aosp_karnak-userdebug \
+    aosp_karnak-eng \
+    aosp_karnak-user
 
