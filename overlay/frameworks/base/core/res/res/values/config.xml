@@ -332,4 +332,7 @@
          snapshots are disabled, and snapshots will only be stored at config_highResTaskSnapshotScale
          -->
     <item name="config_lowResTaskSnapshotScale" format="float" type="dimen">0.3</item>
+
+        <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
+    <bool name="config_useRoundIcon">true</bool>
 </resources>
