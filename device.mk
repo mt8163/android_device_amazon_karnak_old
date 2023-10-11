@@ -47,8 +47,7 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
     audio.primary.default \
-    audiofix \
-    libaudio_shim
+    headsetd
 
 # Bluetooth
 PRODUCT_PACKAGES += \
