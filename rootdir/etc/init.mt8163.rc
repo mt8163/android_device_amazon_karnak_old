@@ -1,0 +1,306 @@
+import /vendor/etc/init/hw/init.mt8163.usb.rc
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "performance"
+
+on init
+    mount tmpfs tmpfs /mnt/media_rw/ mode=0755,uid=1000,gid=1000
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+    mount tmpfs tmpfs /storage/usbotg mode=0755,uid=1000,gid=1000
+
+    # Adjust minimum free memory space (default is 2.5M)
+    write /proc/sys/vm/min_free_kbytes 16384
+
+    # Adjust zRAM algorithm to lz4
+    write /sys/block/zram0/comp_algorithm lz4
+    # Set swappiness from 60 to 100
+    write /proc/sys/vm/swappiness 100
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+
+    #create mountpoint for persist partition
+    mkdir /mnt/vendor/persist 0771 system system
+    
+    # Create CIP mount point
+    mkdir /mnt/vendor/custom
+
+# kisd
+    symlink /dev/block/platform/bootdevice/by-name/kb   /dev/kb
+    symlink /dev/block/platform/bootdevice/by-name/dkb  /dev/dkb
+
+on charger
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/green/brightness
+
+    start servicemanager
+    start hwservicemanager
+    start light-hal-2-0
+
+    setprop sys.usb.config charging
+
+    # md32 boot
+    chown root system /dev/md32
+    chmod 0440 /dev/md32
+    chown root system /sys/class/misc/md32/md32_mobile_log
+    chmod 0660 /sys/class/misc/md32/md32_mobile_log
+    write /sys/class/misc/md32/md32_boot 1
+
+on fs
+    symlink /dev/block/platform/soc/11230000.mmc /dev/block/platform/bootdevice
+    mkdir /dev/block/platform/mtk-msdc.0
+    symlink ../soc/11230000.mmc /dev/block/platform/mtk-msdc.0/11230000.MSDC0
+    mount_all /vendor/etc/fstab.mt8163 --early
+
+on late-fs
+    # Mount RW partitions which need run fsck
+    mount_all /vendor/etc/fstab.mt8163 --late
+
+on post-fs
+    swapon_all /vendor/etc/fstab.mt8163
+
+    # Support legacy paths
+    symlink /sdcard /storage/sdcard0
+
+on post-fs-data
+    #amazon dha
+    start amzn_drmprov
+    start amzn_dha_hmac
+
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+
+    # calibration
+    mkdir /data/misc/sensor 0774 system system
+
+#Set mlock resource to unlimited
+    setrlimit 8 4294967295 4294967295
+
+    chown system system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+
+# Prevents permission denied error for telephony
+    chmod 0644 /proc/cmdline
+
+# Encrypt phone function
+    setprop vold.post_fs_data_done 1
+
+on init
+
+service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
+    class late_start
+    disabled
+
+service amzn_drmprov /vendor/bin/amzn_drmprov_check
+	class main
+	user root
+	group system drmrpc
+	oneshot
+	disabled
+
+service amzn_dha_hmac /vendor/bin/amzn_dha_hmac
+	class main
+	user root
+	group system drmrpc
+	oneshot
+	disabled
+
+# CABC
+on property:vendor.hwc.video_mode=1
+    write /sys/devices/platform/soc/soc:mtkfb@0/backlight_mode "mov"
+
+on property:vendor.hwc.video_mode=0
+    write /sys/devices/platform/soc/soc:mtkfb@0/backlight_mode "off"
+
+# WiFi
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+
+    # create basic filesystem structure
+    mkdir /data/vendor/nvram  0771 root system
+    mkdir /data/vendor/nvram  0771 media audio
+    symlink /data/vendor/nvram /mnt/vendor/nvdata
+
+    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
+
+    mkdir /data/drm/wv 0770 drm system
+
+    # md32 boot
+    chown root system /dev/md32
+    chmod 0440 /dev/md32
+    chown root system /sys/class/misc/md32/md32_mobile_log
+    chmod 0660 /sys/class/misc/md32/md32_mobile_log
+    write /sys/class/misc/md32/md32_boot 1
+
+    # dhcp server
+    mkdir /data/misc/dhcp 0770 dhcp wifi
+    chown dhcp wifi /data/misc/dhcp
+
+    # dhcpv6 server
+    mkdir /data/misc/wide-dhcpv6 0770 dhcp wifi
+    chown dhcp wifi /data/misc/wide-dhcpv6
+
+    # radvd
+    mkdir /data/misc/radvd 0770 system system
+    chmod 444 /etc/radvd/radvd.conf
+
+    #Create cct mount point
+    mkdir /mnt/vendor/cct
+    chown root system /mnt/vendor/cct
+    chmod 0771 /mnt/vendor/cct
+
+    # set ptmx group to non-root
+    chown root radio /dev/ptmx
+
+    # RTC
+    mkdir /data/misc/rtc 0770 system system
+
+    #set mlock to 64MB for netd
+    setrlimit 8 67108864 67108864
+
+    #set mlock limit to infinate (for m4u operation)
+    setrlimit 8 -1 -1
+
+    # DRM
+    # playready data and control dirs
+    mkdir /data/vendor/playready 0770 drm drmrpc
+
+    # for ppp options file
+    mkdir /data/misc/ppp 0770 bluetooth net_bt
+
+    # device info /proc interface
+    chmod 0444 /dev/devmap
+    chown root media /dev/devmap
+
+    # bluetooth
+    mkdir /data/@btmtk 0770 bluetooth net_bt
+    chown bluetooth bluetooth /dev/hid-keyboard
+    chmod 0660 /dev/hid-keyboard
+    #Use uinput's default permission
+    chown system net_bt_admin /dev/uinput
+
+    write /proc/sys/vm/dirty_writeback_centisecs 300
+    chmod 0660 /sys/power/autosleep
+
+    chmod 0664 /sys/class/leds/lcd-backlight/brightness
+
+    chown system system /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
+    chmod 0660 /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
+    chown root system /sys/kernel/debug/binder/transaction_log_enable
+    chown root system /sys/kernel/debug/binder/perf_evalue
+
+    chown system /sys/module/mlog/parameters/do_mlog
+    chown system /sys/module/mlog/parameters/timer_intval
+
+# HMP CPU hotplug strategy
+    chown system system /proc/hps/num_base_perf_serv
+    chmod 0660 /proc/hps/num_base_perf_serv
+    chown system system /proc/hps/num_limit_power_serv
+    chmod 0660 /proc/hps/num_limit_power_serv
+
+# CPU freq
+    chown system system /proc/cpufreq/cpufreq_limited_by_hevc
+    chmod 0660 /proc/cpufreq/cpufreq_limited_by_hevc
+    chown system system /proc/cpufreq/cpufreq_limited_max_freq_by_user
+    chmod 0660 /proc/cpufreq/cpufreq_limited_max_freq_by_user
+
+# WMT proc
+    chown shell system /proc/driver/wmt_dbg
+    chown shell system /proc/driver/wmt_aee
+
+    #usb
+    chown system system /sys/class/android_usb/android0/f_acm/port_index
+    chmod 0660 /sys/class/android_usb/android0/f_acm/port_index
+
+    # secure memory
+    chown system system /proc/secmem0
+
+    #Thermal
+    mkdir /data/vendor/.tp/ 0775 system system
+
+# End of adding by MTK drivers
+# -----------------------
+
+on boot
+on property:vold.decrypt=trigger_reset_main
+    setprop sys.boot_completed 0
+    setprop dev.bootcomplete 0
+
+on property:vold.decrypt=trigger_restart_min_framework
+    start nvram_daemon
+    start msensord
+    start permission_check
+
+on property:vold.decrypt=trigger_restart_framework
+    start nvram_daemon
+    start msensord
+    start permission_check
+
+on property:vold.decrypt=trigger_shutdown_framework
+    setprop sys.boot_completed 0
+    setprop dev.bootcomplete 0
+
+# Set enableflags for boot Systrace
+on early-init && property:ro.boot.boot_trace=1
+    setprop debug.atrace.tags.enableflags 0x1fffffe
+
+on property:sys.boot_completed=1
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "interactive"
+   	
+   	# speed up synchronize_rcu 
+    write /sys/kernel/rcu_expedited 1
+    
+    # write caching
+    # Tell the kernel to use up to 99% of the RAM as cache for writes
+    # and instruct kernel to use up to 50% of RAM before slowing down
+    # the process that's writing.
+    write /proc/sys/vm/dirty_ratio 99
+    write /proc/sys/vm/dirty_background_ratio 50
+
+    # Tell that 10 minutes write delay is ok to even start writing
+    # stuff on the disk (ten minutes = 60000; 1 hour 360000).
+    write /proc/sys/vm/dirty_expire_centisecs 60000
+    write /proc/sys/vm/dirty_writeback_centisecs 60000
+
+# Wlan
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+    -g@android:wpa_wlan0 -O /data/vendor/wifi/wpa/sockets
+    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
+    socket wpa_wlan0 dgram 660 wifi wifi
+    class main
+    disabled
+    oneshot
+
+#
+# MTK Wi-Fi related services (Begin)
+#
+
+# monitor property and power on/off wlan
+on property:wlan.driver.status=ok
+    write /dev/wmtWifi "1"
+
+on property:wlan.driver.status=unloaded
+    write /dev/wmtWifi "0"
+
+service cameraserver /system/bin/cameraserver
+		class main
+		user cameraserver
+		group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct sdcard_rw
+		ioprio rt 4
+		writepid /dev/cpuset/foreground/tasks

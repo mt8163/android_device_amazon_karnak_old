@@ -1,0 +1,26 @@
+# Android fstab file.
+#<src>           <mnt_point>         <type>    <mnt_flags and options>                 <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+/dev/block/platform/soc/11230000.mmc/by-name/system     /system      ext4   ro                                                wait,recoveryonly
+/dev/block/platform/soc/11230000.mmc/by-name/vendor     /vendor      ext4   ro                                                wait,recoveryonly
+/dev/block/platform/soc/11230000.mmc/by-name/userdata   /data        ext4   noatime,nosuid,nodev,noauto_da_alloc,errors=remount-ro      wait,check,formattable,latemount,encryptable=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/metadata
+/dev/block/platform/soc/11230000.mmc/by-name/cache      /cache       ext4   noatime,nosuid,nodev,noauto_da_alloc      wait,check,formattable
+
+/devices/platform/soc/11240000.mmc* auto vfat defaults voldmanaged=sdcard1:auto
+/devices/platform/mt_usb*  auto vfat defaults voldmanaged=usbotg:auto
+/devices/soc/11270000.usb* auto vfat defaults voldmanaged=usbotg:auto
+
+/dev/block/platform/soc/11230000.mmc/by-name/metadata /metadata   ext4    noatime,nosuid,nodev,discard,data=journal,commit=1   wait,formattable
+/dev/block/platform/soc/11230000.mmc/by-name/nvram    /nvram      emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/proinfo  /proinfo    emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/lk       /bootloader emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/MISC     /misc       emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/boot     /boot       emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/recovery /recovery   emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/tee1     /tee1       emmc defaults defaults
+/dev/block/platform/soc/11230000.mmc/by-name/tee2     /tee2       emmc defaults defaults
+
+# Add for zram. zramsize can be in numeric (byte) , in percent or auto (detect by the system)
+/dev/block/zram0     /swap_zram0             swap      defaults                             wait,zramsize=75%,max_comp_streams=4,zram_backingdev_size=512M
