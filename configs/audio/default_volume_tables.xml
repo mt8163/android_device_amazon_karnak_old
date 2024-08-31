@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2015 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!-- Default Volume Tables included by Audio Policy Configuration file -->
+<!-- Full Default Volume table for all device category -->
+<volumes>
+    <reference name="FULL_SCALE_VOLUME_CURVE">
+    <!-- Full Scale reference Volume Curve -->
+        <point>0,0</point>
+        <point>100,0</point>
+    </reference>
+    <reference name="SILENT_VOLUME_CURVE">
+        <point>0,-9600</point>
+        <point>100,-9600</point>
+    </reference>
+    <reference name="DEFAULT_SYSTEM_VOLUME_CURVE">
+    <!-- Default System reference Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-4200</point>
+        <point>2,-3900</point>
+        <point>3,-3600</point>
+        <point>4,-3300</point>
+        <point>5,-3000</point>
+        <point>6,-2700</point>
+        <point>7,-2500</point>
+        <point>8,-2300</point>
+        <point>9,-2100</point>
+        <point>10,-1900</point>
+        <point>11,-1700</point>
+        <point>12,-1500</point>
+        <point>13,-1300</point>
+        <point>14,-1200</point>
+        <point>15,-1100</point>
+        <point>16,-1000</point>
+        <point>17,-900</point>
+        <point>18,-800</point>
+        <point>19,-700</point>
+        <point>20,-600</point>
+        <point>21,-500</point>
+        <point>22,-400</point>
+        <point>23,-300</point>
+        <point>24,-200</point>
+        <point>25,0</point>
+    </reference>
+    <reference name="DEFAULT_MEDIA_VOLUME_CURVE">
+    <!-- Default Media reference Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-4200</point>
+        <point>2,-3900</point>
+        <point>3,-3600</point>
+        <point>4,-3300</point>
+        <point>5,-3000</point>
+        <point>6,-2700</point>
+        <point>7,-2500</point>
+        <point>8,-2300</point>
+        <point>9,-2100</point>
+        <point>10,-1900</point>
+        <point>11,-1700</point>
+        <point>12,-1500</point>
+        <point>13,-1300</point>
+        <point>14,-1200</point>
+        <point>15,-1100</point>
+        <point>16,-1000</point>
+        <point>17,-900</point>
+        <point>18,-800</point>
+        <point>19,-700</point>
+        <point>20,-600</point>
+        <point>21,-500</point>
+        <point>22,-400</point>
+        <point>23,-300</point>
+        <point>24,-200</point>
+        <point>25,0</point>
+    </reference>
+    <reference name="DEFAULT_DEVICE_CATEGORY_HEADSET_VOLUME_CURVE">
+    <!--Default Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-5500</point>
+        <point>2,-5100</point>
+        <point>3,-4800</point>
+        <point>4,-4500</point>
+        <point>5,-4200</point>
+        <point>6,-3900</point>
+        <point>7,-3600</point>
+        <point>8,-3400</point>
+        <point>9,-3200</point>
+        <point>10,-3000</point>
+        <point>11,-2800</point>
+        <point>12,-2600</point>
+        <point>13,-2400</point>
+        <point>14,-2200</point>
+        <point>15,-2000</point>
+        <point>16,-1800</point>
+        <point>17,-1600</point>
+        <point>18,-1400</point>
+        <point>19,-1200</point>
+        <point>20,-1000</point>
+        <point>21,-800</point>
+        <point>22,-600</point>
+        <point>23,-400</point>
+        <point>24,-200</point>
+        <point>25,0</point>
+    </reference>
+    <reference name="DEFAULT_DEVICE_CATEGORY_SPEAKER_VOLUME_CURVE">
+    <!-- Default is Speaker Media Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-4000</point>
+        <point>2,-3800</point>
+        <point>3,-3700</point>
+        <point>4,-3500</point>
+        <point>5,-3400</point>
+        <point>6,-3200</point>
+        <point>7,-3100</point>
+        <point>8,-2900</point>
+        <point>9,-2800</point>
+        <point>10,-2600</point>
+        <point>11,-2400</point>
+        <point>12,-2200</point>
+        <point>13,-2000</point>
+        <point>14,-1800</point>
+        <point>15,-1600</point>
+        <point>16,-1400</point>
+        <point>17,-1200</point>
+        <point>18,-1000</point>
+        <point>19,-800</point>
+        <point>20,-600</point>
+        <point>21,-400</point>
+        <point>22,-300</point>
+        <point>23,-200</point>
+        <point>24,-100</point>
+        <point>25,0</point>
+    </reference>
+    <reference name="DEFAULT_DEVICE_CATEGORY_EARPIECE_VOLUME_CURVE">
+    <!--Default Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-5500</point>
+        <point>2,-5100</point>
+        <point>3,-4800</point>
+        <point>4,-4500</point>
+        <point>5,-4200</point>
+        <point>6,-3900</point>
+        <point>7,-3600</point>
+        <point>8,-3400</point>
+        <point>9,-3200</point>
+        <point>10,-3000</point>
+        <point>11,-2800</point>
+        <point>12,-2600</point>
+        <point>13,-2400</point>
+        <point>14,-2200</point>
+        <point>15,-2000</point>
+        <point>16,-1800</point>
+        <point>17,-1600</point>
+        <point>18,-1400</point>
+        <point>19,-1200</point>
+        <point>20,-1000</point>
+        <point>21,-800</point>
+        <point>22,-600</point>
+        <point>23,-400</point>
+        <point>24,-200</point>
+        <point>25,0</point>
+    </reference>
+    <reference name="DEFAULT_DEVICE_CATEGORY_EXT_MEDIA_VOLUME_CURVE">
+    <!-- Default is Ext Media System Volume Curve -->
+        <point>0,-20000</point>
+        <point>1,-6000</point>
+        <point>2,-5600</point>
+        <point>3,-5300</point>
+        <point>4,-5000</point>
+        <point>5,-4700</point>
+        <point>6,-4400</point>
+        <point>7,-4100</point>
+        <point>8,-3900</point>
+        <point>9,-3700</point>
+        <point>10,-3500</point>
+        <point>11,-3300</point>
+        <point>12,-3100</point>
+        <point>13,-2900</point>
+        <point>14,-2700</point>
+        <point>15,-2500</point>
+        <point>16,-2300</point>
+        <point>17,-2100</point>
+        <point>18,-1900</point>
+        <point>19,-1700</point>
+        <point>20,-1500</point>
+        <point>21,-1300</point>
+        <point>22,-1100</point>
+        <point>23,-900</point>
+        <point>24,-700</point>
+        <point>25,-500</point>
+    </reference>
+</volumes>
