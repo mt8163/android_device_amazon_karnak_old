@@ -19,12 +19,12 @@ ifeq ($(TARGET_DEVICE),karnak)
 
 include $(call first-makefiles-under,$(LOCAL_PATH))
 
-FSTAB_SYMLINK := $(TARGET_ROOT_OUT)/fstab.mt8163
-$(FSTAB_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@echo "fstab link: $@"
+NVDATA_SYMLINK := $(TARGET_OUT_VENDOR)/nvdata
+$(NVDATA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "nvdata link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) ln -sf /vendor/etc/fstab.mt8163 $@
+	$(hide) ln -sf /data/vendor/nvram $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(FSTAB_SYMLINK)
+ALL_DEFAULT_INSTALLED_MODULES += $(NVDATA_SYMLINK)
 endif
