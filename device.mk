@@ -86,12 +86,17 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinypcminfo \
     tinycap \
-    tinyplay
+    tinyplay \
+    libamazonlog
 
 # EGL
 PRODUCT_PACKAGES += \
   libGLES_android
 
+# display
+PRODUCT_PACKAGES += \
+  libudf \
+  libladder
 
 # Net
 PRODUCT_PACKAGES += \
@@ -159,6 +164,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbluetooth_mtk \
     libbt-vendor
+
+# sensors
+PRODUCT_PACKAGES += \
+	libsensorndkbridge \
+	sensors.mt8163
 
 # Permissions
 PRODUCT_COPY_FILES += \

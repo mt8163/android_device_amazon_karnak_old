@@ -21,6 +21,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 # Inherit from the proprietary version
 include vendor/amazon/mt8163/BoardConfigVendor.mk
 include vendor/amazon/karnak/BoardConfigVendor.mk
+include $(DEVICE_PATH)/go_opt.mk
 
 # Bootanimation
 TARGET_SCREEN_WIDTH := 1280
@@ -62,11 +63,11 @@ BOARD_MKBOOTIMG_ARGS := \
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/amazon/karnak
 TARGET_KERNEL_CONFIG := lineageos_karnak_defconfig
-TARGET_KERNEL_VARIANT_CONFIG :=lineageos_karnak_defconfig
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/linaro/linux-x86/aarch64/aarch64-linux-gnu/bin/aarch64-linux-gnu-
 
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 
 BOARD_HAS_MTK_HARDWARE := true
 
@@ -77,8 +78,6 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Binder API version
 TARGET_USES_64_BIT_BINDER := true
-
-BOARD_NO_SECURE_DISCARD := true
 
 # Bootanimation
 TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
@@ -107,12 +106,7 @@ BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Graphics
-VSYNC_EVENT_PHASE_OFFSET_NS := 0
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-TARGET_USES_C2D_COMPOSITION := true
-TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x2000U | 0x02000000U
+TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x00000200
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -134,17 +128,6 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0.auto/gadget/lun%d/file
 
-# Libshims
-TARGET_LD_SHIM_LIBS := \
-/system/lib/libasp.so|libshim_asp.so \
-/vendor/lib/egl/libGLES_mali.so|libshim_egl.so \
-/vendor/lib/libgui_ext.so|libshim_gui.so \
-/vendor/lib/libcam_utils.so|libshim_camera.so\
-/vendor/lib/hw/amzn_drmprov.mt8163.so|libshim_asp.so \
-/vendor/lib/libcam.utils.sensorlistener.so|libshim_sensor.so \
-/vendor/bin/amzn_drmprov_check|libshim_dha.so \
-/vendor/lib/hw/amzn_dha.mt8163.so|libshim_drm.so 
-
 # Software Gatekeeper
 BOARD_USE_SOFT_GATEKEEPER := true
 
@@ -153,8 +136,8 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # Manifest
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifest.xml
-DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/configs/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE:= karnak
@@ -162,24 +145,11 @@ TARGET_OTA_ASSERT_DEVICE:= karnak
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
-# Fix video autoscaling on old OMX decoders
-TARGET_OMX_LEGACY_RESCALING:= true
-
-# Webkit
-ENABLE_WEBGL := true
-TARGET_FORCE_CPU_UPLOAD := true
-
 # Audio
 USE_XML_AUDIO_POLICY_CONF := 1
 
 # Exclude AudioFx
 TARGET_EXCLUDES_AUDIOFX := true
-
-# Camera
-TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
-TARGET_USES_NON_TREBLE_CAMERA := true
-USE_CAMERA_STUB := true
-TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := libcamera_parameters_mtk
 
 #BACKLIGHTS
 TARGET_PROVIDES_LIBLIGHT := true
@@ -193,11 +163,18 @@ TARGET_NO_SENSOR_PERMISSION_CHECK := true
 # Vendor Security Patch
 VENDOR_SECURITY_PATCH := 2020-02-12
 
+mtk_kernel_modules :
+	$(hide) cp -r vendor/amazon/karnak/proprietary/vendor/lib/modules/* $(TARGET_OUT_VENDOR)/lib/modules
+
+# copy kernel modules
+TARGET_KERNEL_MODULES := mtk_kernel_modules
+
 # TWRP
 ifneq (,$(strip $(wildcard bootable/recovery-twrp/twrp.cpp)))
 RECOVERY_VARIANT := twrp
 endif
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+# Recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt8163
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone2/temp
 DEVICE_RESOLUTION := 800x1280
 TW_DEFAULT_EXTERNAL_STORAGE := true
