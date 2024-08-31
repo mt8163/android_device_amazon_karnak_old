@@ -21,9 +21,7 @@ PRODUCT_PACKAGES += \
 # Camera HAL
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
+    camera.device@3.2-impl 
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -74,7 +72,6 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl-mediatek \
     android.hardware.sensors@1.0-service-mediatek
 
-
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service \
@@ -92,8 +89,8 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl-mediatek \
-    android.hardware.bluetooth@1.0-service-mediatek
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # Wifi
 PRODUCT_PACKAGES += \
