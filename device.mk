@@ -199,16 +199,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 
-# Libshims
-PRODUCT_PACKAGES += \
-     libshim_asp \
-     libshim_egl \
-     libshim_gui \
-     libshim_camera \
-     libshim_sensor \
-     libshim_protobuf \
-     libshim_dha \
-     libshim_drm 
 
 # Hidl
 include $(LOCAL_PATH)/hidl.mk
