@@ -17,3 +17,9 @@ allow hal_drm_default media_data_file:file getattr;
 allow hal_drm_default media_data_file:file read;
 allow hal_drm_default media_data_file:dir create_dir_perms;
 allow hal_drm_default media_data_file:file create_file_perms;
+
+# Network permissions for DRM license acquisition and API communication
+allow hal_drm_default self:tcp_socket { create connect getattr read write setopt getopt shutdown };
+allow hal_drm_default self:udp_socket { create connect getattr read write setopt getopt };
+allow hal_drm_default node_type:tcp_socket node_bind;
+allow hal_drm_default port_type:tcp_socket name_connect;

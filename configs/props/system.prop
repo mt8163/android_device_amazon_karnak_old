@@ -12,6 +12,9 @@ debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
 debug.stagefright.ccodec=0
 
+# Network Security Configuration
+ro.config.network_security_config=/system/etc/security/network_security_config.xml
+
 # Audio
 ro.config.alarm_vol_steps=25
 ro.config.media_vol_steps=25
