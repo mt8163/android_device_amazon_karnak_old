@@ -1,3 +1,9 @@
 type amzn_drmprov_tool_exec, exec_type, file_type, vendor_file_type;
 type amzn_drmprov_tool ,domain;
 init_daemon_domain(amzn_drmprov_tool)
+
+# Network permissions for Amazon DRM provisioning
+allow amzn_drmprov_tool self:tcp_socket { create connect getattr read write setopt getopt shutdown };
+allow amzn_drmprov_tool self:udp_socket { create connect getattr read write setopt getopt };
+allow amzn_drmprov_tool node_type:tcp_socket node_bind;
+allow amzn_drmprov_tool port_type:tcp_socket name_connect;

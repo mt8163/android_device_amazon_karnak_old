@@ -6,6 +6,17 @@ ro.vendor.mtk_in_house_tee_support=true
 ro.vendor.mtk_sec_video_path_support=1
 vendor.mtk.vdec.waitkeyframeforplay=1
 
+# DRM Network Configuration
+drm.service.enabled=true
+ro.drm.clearkey.uuid=e2719d58-a985-b3c9-781a-b030af78d30e
+ro.drm.widevine.hl_output_level=1
+vendor.mediadrm.policy=000000
+persist.vendor.drm.settings_cache=30
+
+# Amazon DRM Configuration
+persist.vendor.amazon.drm.enabled=1
+ro.amazon.drm.certs.enabled=1
+
 # Display
 ro.vendor.mtk_pq_color_mode=1
 ro.vendor.mtk_pq_support=0

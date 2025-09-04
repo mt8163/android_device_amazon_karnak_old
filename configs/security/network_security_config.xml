@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Configuration for Amazon Karnak Device
+  
+  This configuration allows cleartext traffic for Amazon Video DRM API calls
+  to prevent crashes during DRM provisioning and license acquisition.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Amazon Video API endpoints -->
+        <domain includeSubdomains="true">api.amazonvideo.com</domain>
+        <domain includeSubdomains="true">abxc3apcastp.na.api.amazonvideo.com</domain>
+        <domain includeSubdomains="true">device-metrics-us.amazon.com</domain>
+        <domain includeSubdomains="true">s3.amazonaws.com</domain>
+        <!-- Amazon DRM endpoints -->
+        <domain includeSubdomains="true">drm.amazonvideo.com</domain>
+        <domain includeSubdomains="true">drmapi.amazon.com</domain>
+        <!-- General Amazon domains for device services -->
+        <domain includeSubdomains="true">device-messaging-na.amazon.com</domain>
+        <domain includeSubdomains="true">kindle-time.amazon.com</domain>
+    </domain-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Trust system certificate authorities -->
+            <certificates src="system"/>
+            <!-- Trust user added certificate authorities -->
+            <certificates src="user"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>
