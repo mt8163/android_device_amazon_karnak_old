@@ -316,7 +316,7 @@ vendor/bin/btmac
 vendor/bin/gsm0710muxd
 vendor/bin/hw/fireos.hardware.connectivity.networkpower@1.0-service
 vendor/bin/hw/fireos.hardware.fireosdha@1.0-service
-vendor/bin/hw/fireos.hardware.idme@1.0-service
+vendor/bin/hw/fireos.hardware.idme@1.1-service
 vendor/bin/hw/rilproxy
 vendor/bin/idme
 vendor/bin/mtkcam-debug
@@ -360,7 +360,7 @@ vendor/etc/init/btmac.rc
 vendor/etc/init/camerahalserver.rc
 vendor/etc/init/fireos.hardware.connectivity.networkpower@1.0-service.rc
 vendor/etc/init/fireos.hardware.fireosdha@1.0-service.rc
-vendor/etc/init/fireos.hardware.idme@1.0-service.rc
+vendor/etc/init/fireos.hardware.idme@1.1-service.rc
 vendor/etc/init/gsm0710muxd.rc
 vendor/etc/init/init.bt_drv.rc
 vendor/etc/init/init.wipe_fos_flags.rc
