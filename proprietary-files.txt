@@ -436,7 +436,7 @@ vendor/lib/libjpeg-alpha_vendor.so
 vendor/lib/libJpgDecPipe.so
 vendor/lib/libJpgEncPipe.so
 vendor/lib/libkmsetkey.so
-vendor/lib/libksensor.so
+-vendor/lib/libksensor.so
 vendor/lib/liblineartransform_vendor.so
 vendor/lib/libm4u.so
 vendor/lib/libmhalImageCodec.so
