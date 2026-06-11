@@ -188,6 +188,14 @@ vendor/firmware/SMicBin_rt5518_mode24.dat
 vendor/firmware/WIFI_RAM_CODE_8163
 vendor/firmware/WMT_SOC.cfg
 
+# Kernel modules
+vendor/lib/modules/bt_drv.ko
+vendor/lib/modules/hid_ftv_bleremote.ko
+vendor/lib/modules/perfinfo.ko
+vendor/lib/modules/wlan_drv_gen2.ko
+vendor/lib/modules/wmt_chrdev_wifi.ko
+vendor/lib/modules/wmt_drv.ko
+
 # Gatekeeper
 vendor/lib/hw/gatekeeper.mt8163.so
 vendor/lib/hw/libSoftGatekeeper.so
