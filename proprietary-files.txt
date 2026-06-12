@@ -107,6 +107,7 @@ vendor/etc/audio_param/Volume_ParamUnitDesc.xml
 
 # Audio-Hardware
 vendor/lib/hw/audio.primary.mt8163.so
+vendor/lib/hw/fireos.hardware.audio@4.0-impl.so
 
 # Bluetooth
 vendor/lib/libbluetoothem_mtk.so
