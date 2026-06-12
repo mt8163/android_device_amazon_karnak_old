@@ -2,7 +2,8 @@
 # 2017/9/16: daniel_hk(danielhk@github.com)
 allow hal_audio_default ccci_device:chr_file { ioctl open read write };
 allow hal_audio_default nvram_device:blk_file { open read write };
-allow hal_audio_default nvram_data_file:file { getattr open read };
+allow hal_audio_default nvram_data_file:file { getattr open read write };
+allow hal_audio_default nvram_data_file:dir rw_dir_perms;
 allow hal_audio_default sysfs:file { open read };
 allow hal_audio_default sysfs_boot_mode:file { open read };
 allow hal_audio_default kernel:system { module_request };
