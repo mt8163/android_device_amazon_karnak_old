@@ -59,6 +59,14 @@ if [ -z "${SRC}" ]; then
     SRC=adb
 fi
 
+function blob_fixup() {
+    case "$1" in
+        vendor/lib/libnvram.so | vendor/bin/nvram_daemon | vendor/lib/hw/android.hardware.camera.provider@2.4-impl-mediatek.so | vendor/lib/hw/audio.primary.mt8163.so)
+            "${PATCHELF}" --add-needed "libshim_nvram.so" "${2}"
+            ;;
+    esac
+}
+
 # Initialize the helper
 setup_vendor "${DEVICE}" "${VENDOR}" "${LINEAGE_ROOT}" false "${CLEAN_VENDOR}"
 
