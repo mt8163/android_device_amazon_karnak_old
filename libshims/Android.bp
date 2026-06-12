@@ -50,3 +50,18 @@ cc_library_shared {
     ],
     proprietary: true,
 }
+
+cc_library_shared {
+    name: "libshim_gui",
+    srcs: [
+        "egl/callstack.cpp",
+        "gui/GraphicBuffer.cpp",
+    ],
+
+    shared_libs: [
+        "libutilscallstack",
+        "libutils",
+        "libui",
+    ],
+    proprietary: true,
+}
