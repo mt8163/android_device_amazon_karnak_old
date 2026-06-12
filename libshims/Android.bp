@@ -23,6 +23,10 @@ cc_library_shared {
         "misc/nvram.cpp",
     ],
 
+    shared_libs: [
+        "libbase",
+    ],
+
     proprietary: true,
 }
 
