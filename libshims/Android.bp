@@ -65,3 +65,16 @@ cc_library_shared {
     ],
     proprietary: true,
 }
+
+cc_library_shared {
+    name: "libshim_mtkcam",
+    vendor_available: true,
+    srcs: [
+        "libinput/PropertyMap.cpp",
+    ],
+    local_include_dirs: ["include"],
+    shared_libs: [
+        "libutils",
+        "liblog",
+    ],
+}
