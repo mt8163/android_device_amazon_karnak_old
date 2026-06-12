@@ -46,7 +46,6 @@ cc_library_shared {
     shared_libs: [
         "libutilscallstack",
         "libutils",
-        "libgui_vendor",
         "libui",
     ],
     proprietary: true,
