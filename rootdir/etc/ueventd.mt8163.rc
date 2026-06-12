@@ -84,6 +84,9 @@
 # BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
 /dev/ebc                  0660   media      media
 
+# Headset detection used by the MTK audio HAL
+/dev/accdet               0660   system     audio
+
 # SMI
 /dev/MTK_SMI              0666   media      media
 
