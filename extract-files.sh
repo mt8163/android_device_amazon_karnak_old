@@ -68,6 +68,12 @@ function blob_fixup() {
             "${PATCHELF}" --add-needed "libshim_keymaster.so" "${2}"
             "${PATCHELF}" --replace-needed "libkeymaster_messages.so" "libkeymaster_messages-v28.so" "${2}"
             ;;
+        vendor/lib/libcam.client.so)
+            "${PATCHELF}" --add-needed "libshim_gui.so" "${2}"
+            ;;
+        vendor/lib/libMtkOmxVdecEx.so)
+            "${PATCHELF}" --add-needed "libshim_gui.so" "${2}"
+            ;;
     esac
 }
 
