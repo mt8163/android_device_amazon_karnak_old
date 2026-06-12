@@ -207,7 +207,8 @@ PRODUCT_COPY_FILES += \
 # Protobuf
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
-    libprotobuf-cpp-lite-vendorcompat
+    libprotobuf-cpp-lite-vendorcompat \
+    libkeymaster_messages-v28
 
 # Libshims
 PRODUCT_PACKAGES += \
