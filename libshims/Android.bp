@@ -31,6 +31,12 @@ cc_library_shared {
 }
 
 cc_library_shared {
+    name: "libshim_keymaster",
+    srcs: ["libshim_keymaster.cpp"],
+    proprietary: true,
+}
+
+cc_library_shared {
     name: "libshim_graphic_buffer",
     srcs: [
         "egl/callstack.cpp",
