@@ -293,7 +293,6 @@ vendor/lib/fireos.hardware.amazonthermal@1.0.so
 vendor/lib/hw/fireos.hardware.amazonthermal@1.0-impl.so
 
 # WiFi
-bin/iwpriv
 vendor/bin/iwpriv
 
 # rootdir
