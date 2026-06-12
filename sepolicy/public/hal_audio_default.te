@@ -23,6 +23,8 @@ allow hal_audio_default wmt_prop:file { getattr open read };
 set_prop(hal_audio_default, af_rf_mode_prop );
 set_prop(hal_audio_default, af_modem_status_prop );
 
+set_prop(hal_audio_default, audiohal_prop)
+
 #allow hal_audio_default hal_audio_hwservice:hwservice_manager { find add };
 #allow hal_audio_default hidl_base_hwservice:hwservice_manager { add };
 #allow hal_audio_default wmt_prop:file { getattr open read };
