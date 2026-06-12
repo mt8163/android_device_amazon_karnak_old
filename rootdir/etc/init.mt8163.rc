@@ -601,7 +601,7 @@ on property:vendor.hwc.video_mode=0
     chmod 0444 /dev/mtk_disp
 
     #VOW
-    chmod 0640 /dev/vow
+    chmod 0660 /dev/vow
     chown media media /dev/vow
 
 	#RRC
